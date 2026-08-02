@@ -52,4 +52,48 @@
          <loc>https://sigilipelli.github.io/php-mastery-path/level-1/10-project-todo-app/</loc>
          <lastmod>2026-08-02</lastmod>
     </url>
+    <url>
+         <loc>https://sigilipelli.github.io/php-mastery-path/level-2/</loc>
+         <lastmod>2026-08-02</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/php-mastery-path/level-2/01-oop-deep-dive/</loc>
+         <lastmod>2026-08-02</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/php-mastery-path/level-2/02-error-handling-advanced/</loc>
+         <lastmod>2026-08-02</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/php-mastery-path/level-2/03-databases-pdo/</loc>
+         <lastmod>2026-08-02</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/php-mastery-path/level-2/04-sessions-forms/</loc>
+         <lastmod>2026-08-02</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/php-mastery-path/level-2/05-phpunit-testing/</loc>
+         <lastmod>2026-08-02</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/php-mastery-path/level-2/06-json-apis/</loc>
+         <lastmod>2026-08-02</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/php-mastery-path/level-2/07-autoloading-psr/</loc>
+         <lastmod>2026-08-02</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/php-mastery-path/level-2/08-file-uploads-validation/</loc>
+         <lastmod>2026-08-02</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/php-mastery-path/level-2/09-working-with-dates/</loc>
+         <lastmod>2026-08-02</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/php-mastery-path/level-2/10-project-crud-app/</loc>
+         <lastmod>2026-08-02</lastmod>
+    </url>
 </urlset>
