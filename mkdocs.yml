@@ -62,8 +62,19 @@ nav:
       - "08 · Error Handling Basics": level-1/08-error-handling.md
       - "09 · Composer & Package Basics": level-1/09-composer-basics.md
       - "10 · Project — CLI To-Do App": level-1/10-project-todo-app.md
+  - "Level 2 · Intermediate":
+      - Overview: level-2/index.md
+      - "01 · OOP Deep Dive": level-2/01-oop-deep-dive.md
+      - "02 · Error Handling Advanced": level-2/02-error-handling-advanced.md
+      - "03 · Working with Databases (PDO)": level-2/03-databases-pdo.md
+      - "04 · Sessions & Forms": level-2/04-sessions-forms.md
+      - "05 · Testing with PHPUnit": level-2/05-phpunit-testing.md
+      - "06 · Working with JSON/APIs": level-2/06-json-apis.md
+      - "07 · Autoloading & PSR Standards": level-2/07-autoloading-psr.md
+      - "08 · File Uploads & Validation": level-2/08-file-uploads-validation.md
+      - "09 · Working with Dates": level-2/09-working-with-dates.md
+      - "10 · Project — CRUD Web App with SQLite": level-2/10-project-crud-app.md
 # --- auto-pruned stub levels (see AdSense low-value-content fix) ---
 exclude_docs: |
-  level-2/*.md
   level-3/*.md
   level-4/*.md
