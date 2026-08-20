@@ -1,234 +1,215 @@
 # 06 · API Versioning & Documentation
 
-The [REST API project](../level-3/10-project-rest-api.md) returns whatever
-shape `TaskRepository::hydrate()` produces. That's fine for one client you
-control. The moment other teams or external clients depend on your API's
-response shape, changing a field name breaks them the instant you deploy —
-unless the change ships as a new, deliberately versioned response instead
-of a silent mutation of the old one.
+An API with real clients can't just change shape whenever the backend needs
+to — a mobile app on last year's release still expects last year's response
+format. **Versioning** lets old and new response shapes coexist, and
+**generated documentation** keeps the description of an API from silently
+drifting away from what the code actually does.
 
-## Why versioning exists: a field rename is a breaking change
+## Content-negotiated versioning
 
-Renaming `is_done` to `done`, or adding a required field, looks like a
-harmless refactor from inside your codebase. To every client parsing the
-JSON response, it's a breaking change — code that reads `$response['is_done']`
-gets `null` (or a fatal error, in a strictly-typed client) the instant the
-old field disappears. Versioning lets both shapes exist simultaneously:
-existing clients keep working against `v1`, new clients opt into `v2`.
-
-## URL-based versioning with a transformer per version
-
-The cleanest way to support multiple response shapes is to keep exactly one
-internal domain object (`Task`) and use a small **transformer** per version
-to decide how it's serialized — the domain model itself never has version
-branches baked into it.
+There's more than one way to version an API (`/v1/users` in the URL,
+`?version=2` in the query string), but header-based negotiation via the
+`Accept` header keeps URLs stable while still letting a client pin an exact
+version:
 
 ```php
 <?php
-// Task.php + transformers
 declare(strict_types=1);
 
-final class Task
+interface ApiVersion {
+    public function transform(array $data): array;
+}
+
+final class V1Response implements ApiVersion {
+    public function transform(array $data): array {
+        return ['id' => $data['id'], 'name' => $data['full_name']];
+    }
+}
+
+final class V2Response implements ApiVersion {
+    public function transform(array $data): array {
+        return [
+            'id' => $data['id'],
+            'name' => ['first' => explode(' ', $data['full_name'])[0], 'full' => $data['full_name']],
+            'meta' => ['version' => 2],
+        ];
+    }
+}
+```
+
+Each version's `transform()` maps the *same* internal data (`$data`) to a
+*different* public shape. Nothing about how the user is stored or fetched
+changes between versions — only how it's presented, which is exactly the
+separation that lets v1 clients keep working while v2 is developed.
+
+```php
+<?php
+final class Router {
+    private array $versions = [];
+    public function register(string $version, ApiVersion $handler): void {
+        $this->versions[$version] = $handler;
+    }
+    public function handle(string $acceptHeader, array $data): array {
+        // Accept: application/vnd.myapi.v2+json
+        if (!preg_match('/vnd\.myapi\.(v\d+)\+json/', $acceptHeader, $m)) {
+            throw new InvalidArgumentException("Unrecognized Accept header: $acceptHeader");
+        }
+        $version = $m[1];
+        if (!isset($this->versions[$version])) {
+            throw new RuntimeException("Unsupported API version: $version");
+        }
+        return $this->versions[$version]->transform($data);
+    }
+}
+
+$router = new Router();
+$router->register('v1', new V1Response());
+$router->register('v2', new V2Response());
+
+$user = ['id' => 42, 'full_name' => 'Ada Lovelace'];
+
+echo json_encode($router->handle('application/vnd.myapi.v1+json', $user), JSON_PRETTY_PRINT) . "\n";
+echo json_encode($router->handle('application/vnd.myapi.v2+json', $user), JSON_PRETTY_PRINT) . "\n";
+
+try {
+    $router->handle('application/vnd.myapi.v9+json', $user);
+} catch (RuntimeException $e) {
+    echo "Caught: " . $e->getMessage() . "\n";
+}
+```
+
+```text
 {
+    "id": 42,
+    "name": "Ada Lovelace"
+}
+{
+    "id": 42,
+    "name": {
+        "first": "Ada",
+        "full": "Ada Lovelace"
+    },
+    "meta": {
+        "version": 2
+    }
+}
+Caught: Unsupported API version: v9
+```
+
+A vendor-specific media type (`application/vnd.myapi.v2+json`, rather than a
+raw `application/json`) makes version negotiation explicit and cacheable at
+the HTTP layer — proxies and CDNs can key on it, unlike a custom header that
+generic HTTP infrastructure doesn't know to look at.
+
+## Generating docs from the code, not beside it
+
+Hand-written API docs (a wiki page, a separate Markdown file) rot the moment
+someone changes an endpoint and forgets to update the doc. PHP 8's
+**attributes** let documentation live as metadata directly on the code that
+implements it, so a doc generator can read it back via `Reflection` — the
+same mechanism [Level 3's DI module](../level-3/08-dependency-injection.md)
+used to inspect constructors.
+
+```php
+<?php
+declare(strict_types=1);
+
+#[Attribute]
+final class RouteDoc {
     public function __construct(
-        public int $id,
-        public string $title,
-        public bool $done,
-        public string $createdAt,
+        public string $method,
+        public string $path,
+        public string $summary,
     ) {}
 }
 
-interface TaskTransformer
-{
-    public function transform(Task $t): array;
-}
+final class UserController {
+    #[RouteDoc('GET', '/users/{id}', 'Fetch a single user by id')]
+    public function show(int $id): array { return ['id' => $id]; }
 
-final class TaskTransformerV1 implements TaskTransformer
-{
-    public function transform(Task $t): array
-    {
-        // v1 shipped with an integer flag and no timestamp -- frozen forever.
-        return ['id' => $t->id, 'title' => $t->title, 'is_done' => $t->done ? 1 : 0];
-    }
-}
-
-final class TaskTransformerV2 implements TaskTransformer
-{
-    public function transform(Task $t): array
-    {
-        // v2: boolean instead of 0/1, plus created_at -- the CURRENT shape.
-        return ['id' => $t->id, 'title' => $t->title, 'done' => $t->done, 'created_at' => $t->createdAt];
-    }
+    #[RouteDoc('POST', '/users', 'Create a new user')]
+    public function store(array $data): array { return $data; }
 }
 ```
 
 ```php
 <?php
-// demo.php
-declare(strict_types=1);
-
-final class JsonResponse
-{
-    public function __construct(public int $status, public array $body) {}
-}
-
-function respondWithVersion(Task $task, string $version): JsonResponse
-{
-    $transformer = match ($version) {
-        'v1' => new TaskTransformerV1(),
-        'v2' => new TaskTransformerV2(),
-        default => throw new InvalidArgumentException("Unknown API version: $version"),
-    };
-    return new JsonResponse(200, $transformer->transform($task));
-}
-
-$task = new Task(1, 'Write docs', true, '2026-08-18T10:00:00+00:00');
-
-$v1 = respondWithVersion($task, 'v1');
-echo "v1: " . json_encode($v1->body) . "\n";
-
-$v2 = respondWithVersion($task, 'v2');
-echo "v2: " . json_encode($v2->body) . "\n";
-```
-
-```text
-v1: {"id":1,"title":"Write docs","is_done":1}
-v2: {"id":1,"title":"Write docs","done":true,"created_at":"2026-08-18T10:00:00+00:00"}
-```
-
-In a real routed application, `$version` comes from the URL path
-(`/v1/tasks/1` vs `/v2/tasks/1`, the most discoverable and cacheable
-option) or an `Accept` header (`Accept: application/vnd.acme.v2+json`, more
-"correct" per HTTP content negotiation but harder for clients to get right
-and harder to test with a plain browser URL). Path-based versioning is the
-pragmatic default for most APIs; header-based versioning shows up more in
-API-first companies with strict HTTP discipline.
-
-## Deprecation, not deletion
-
-A version isn't retired the moment a new one ships — clients need time to
-migrate. The practical pattern is: ship `v2`, keep `v1` working unchanged,
-add a deprecation signal, and only remove `v1` after an announced date.
-
-```php
-<?php
-declare(strict_types=1);
-
-final class DeprecationHeader
-{
-    public static function forVersion(string $version): array
-    {
-        return match ($version) {
-            'v1' => [
-                'Deprecation' => 'true',
-                'Sunset' => 'Wed, 31 Dec 2026 23:59:59 GMT',
-                'Link' => '</docs/migrating-v1-to-v2>; rel="deprecation"',
-            ],
-            default => [],
-        };
+function generateDocs(string $class): array {
+    $reflection = new ReflectionClass($class);
+    $docs = [];
+    foreach ($reflection->getMethods() as $method) {
+        foreach ($method->getAttributes(RouteDoc::class) as $attr) {
+            $route = $attr->newInstance();
+            $docs[] = [
+                'method' => $route->method,
+                'path' => $route->path,
+                'summary' => $route->summary,
+                'handler' => $method->getName(),
+            ];
+        }
     }
+    return $docs;
 }
 
-$headers = DeprecationHeader::forVersion('v1');
-foreach ($headers as $name => $value) {
-    echo "$name: $value\n";
+foreach (generateDocs(UserController::class) as $entry) {
+    printf("%-5s %-15s %-30s -> %s()\n", $entry['method'], $entry['path'], $entry['summary'], $entry['handler']);
 }
 ```
 
 ```text
-Deprecation: true
-Sunset: Wed, 31 Dec 2026 23:59:59 GMT
-Link: </docs/migrating-v1-to-v2>; rel="deprecation"
+GET   /users/{id}     Fetch a single user by id      -> show()
+POST  /users          Create a new user              -> store()
 ```
 
-`Deprecation` and `Sunset` are real, standardized HTTP response headers
-(RFC 8594 / the Deprecation HTTP header draft) — a well-behaved client
-library can detect them automatically and log a warning, giving consumers
-advance notice through their own tooling rather than requiring them to read
-a changelog.
-
-## Documenting the API: OpenAPI as the source of truth
-
-Hand-written prose documentation drifts from the actual API the moment
-someone changes a field and forgets to update the docs page. **OpenAPI**
-(formerly Swagger) describes an API as structured YAML/JSON that both
-humans and tools can read — tools can generate interactive docs (Swagger UI,
-Redoc), client SDKs, and even test-suite request validation from the same
-file.
-
-```yaml
-# openapi.yaml (excerpt, describing the v2 task endpoints)
-openapi: 3.0.3
-info:
-  title: Task API
-  version: "2.0"
-paths:
-  /v2/tasks/{id}:
-    get:
-      summary: Fetch a single task
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema: { type: integer }
-      responses:
-        "200":
-          description: The task
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id: { type: integer }
-                  title: { type: string }
-                  done: { type: boolean }
-                  created_at: { type: string, format: date-time }
-        "404":
-          description: Task not found
-```
-
-Keeping this file in the same repository as the API code (and reviewing it
-in the same pull request as an endpoint change) is what keeps documentation
-from drifting — it's a diffable, testable artifact, not a separate wiki
-page someone has to remember to update.
+`$attr->newInstance()` actually constructs a real `RouteDoc` object from the
+attribute's declared arguments — attributes aren't just string metadata,
+they're instantiable classes, so the doc generator gets typed, validated
+data rather than parsing a docblock comment with regex. This is the same
+mechanism behind real tools like `zircote/swagger-php`, which walk attributes
+like this one to emit a full OpenAPI JSON/YAML spec.
 
 ## PHP traps
 
-**A transformer that silently falls through to a default version hides
-client bugs.** `respondWithVersion()` above throws on an unknown version
-rather than quietly defaulting to `v2` — a client that mistypes
-`/v3/tasks/1` should get a clear 4xx error, not a response shape it never
-asked for and may not know how to parse.
+**Attribute arguments are evaluated once, at `newInstance()` time, not at
+class-load time.** Declaring `#[RouteDoc('GET', '/users/{id}', SOME_CONST)]`
+works fine because PHP resolves constants when it builds the instance — but
+attributes cannot run arbitrary expressions or call functions in their
+argument list, only literals, constants, and (as of PHP 8.1) enum cases.
+Trying `#[RouteDoc(strtoupper('get'), ...)]` is a compile error.
 
-**Sharing one transformer instance across requests can leak state if it
-isn't stateless.** The transformers above hold no properties and are safe
-to reuse, but the moment a transformer accumulates any per-request state
-(a counter, a cache of resolved data), reusing the same instance across
-concurrent requests in a long-running worker (not a fresh PHP-per-request
-model) becomes a data-leak risk between unrelated requests.
+**A version transformer that mutates the original data breaks the *other*
+version's transformer.** If `V1Response::transform()` did
+`$data['name'] = $data['full_name']; unset($data['full_name']);` and `$data`
+were passed by reference elsewhere, a second call for `V2Response` on the
+same underlying data would find `full_name` already gone. Keeping
+`transform()` pure — read `$data`, return a new array, never mutate the
+input — is what makes registering multiple version handlers against the same
+source data safe.
 
-**Versioning the URL but not the OpenAPI spec's `info.version`** leaves
-generated documentation and client SDKs pointing at the wrong contract —
-treat the spec file itself as versioned alongside the code, not as a
-one-time document.
+**Forgetting to update the `Accept` regex when adding v10+ silently breaks
+matching.** `(v\d+)` handles `v1` through `v99` correctly, but a version
+scheme that switches to letters or dates (`v2024-01`) needs the pattern
+updated — an easy thing to miss since the code keeps "working" for existing
+versions and only the new one 404s.
 
 ## Versioning & docs cheat sheet
 
-| Concept | Purpose |
-|---|---|
-| URL versioning (`/v1/...`, `/v2/...`) | Simple, cacheable, discoverable in a browser |
-| Header versioning (`Accept: ...+json`) | "Correct" per HTTP content negotiation, harder to test casually |
-| Transformer per version | One domain model, multiple serialized shapes |
-| `Deprecation` / `Sunset` headers | Machine-readable notice before removing an old version |
-| OpenAPI spec | Structured, diffable source of truth; generates docs + SDKs |
-| Throwing on unknown version | Surfaces client mistakes instead of guessing |
+| Concept | Mechanism | Example |
+|---|---|---|
+| Header-based versioning | `Accept: application/vnd.*.vN+json` | `V1Response` vs. `V2Response` |
+| Version isolation | Each version has its own pure `transform()` | Same `$data`, different shape out |
+| Unsupported version | Fail with a clear error, not a silent default | `RuntimeException` in `handle()` |
+| Docs as metadata | PHP 8 attributes (`#[RouteDoc(...)]`) | Read via `Reflection` |
+| Doc generation | `getAttributes()` + `newInstance()` | `generateDocs()` |
+| Real-world equivalent | `zircote/swagger-php`, OpenAPI spec generation | Attributes -> JSON/YAML spec |
 
 ## Exercise
 
-Add a `TaskTransformerV3` that includes a nested `meta` object
-(`['meta' => ['api_version' => 'v3', 'generated_at' => date(DATE_ATOM)]]`
-alongside the existing `id`/`title`/`done`/`created_at` fields), wire it
-into `respondWithVersion()`, and write a small script that requests all
-three versions for the same `Task` and prints each response body — confirm
-`v1`'s `is_done` is an integer (`1`/`0`, not `true`/`false`) while `v2` and
-`v3` use real booleans, and that only `v3`'s output contains a `meta` key.
+Add a `V3Response` that includes a `links` field
+(`['self' => "/users/{$data['id']}"]`) alongside the `V2Response` shape, and
+register it under `'v3'`. Then extend `RouteDoc` with an optional
+`deprecated: bool = false` constructor parameter, mark `UserController::show()`
+as `#[RouteDoc('GET', '/users/{id}', 'Fetch a single user by id',
+deprecated: true)]`, and update `generateDocs()` to print `[DEPRECATED]`
+before any entry where `deprecated` is `true`.
