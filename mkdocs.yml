@@ -1,8 +1,8 @@
 site_name: PHP Mastery Path
 site_description: A structured, module-wise PHP training program from entry level to master level.
-site_url: https://sigilipelli.github.io/php-mastery-path/
-repo_url: https://github.com/SIGILIPELLI/php-mastery-path
-repo_name: php-mastery-path
+site_url: https://sigilipelli.github.io/php-skillmastery/
+repo_url: https://github.com/SIGILIPELLI/php-skillmastery
+repo_name: php-skillmastery
 
 theme:
   name: material
