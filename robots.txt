@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sigilipelli.github.io/php-mastery-path/sitemap.xml
+Sitemap: https://sigilipelli.github.io/php-skillmastery/sitemap.xml
