@@ -245,6 +245,9 @@ Knowing how `dispatch()` works under the hood is what lets you read Slim's
 source, debug a routing mismatch, or write a router for a constrained
 environment where pulling in a framework isn't an option.
 
+## How It Actually Works
+
+A front controller works because of how a web server (Nginx/Apache) is configured to route *every* request to one PHP file, regardless of the URL path — the server's rewrite rule sets `$_SERVER['REQUEST_URI']` to the original path but still invokes the same `index.php`, meaning PHP's own compile-and-run lifecycle happens exactly once per request, on the same file, and it's your routing code (not the server) that inspects the URI string to decide which handler logic to execute. This differs fundamentally from something like a Java servlet container, which keeps route-to-handler mappings resident in memory across requests — in PHP, the router array or match statement you write is rebuilt from scratch, compiled fresh, every single request, because nothing survives between them. Route ordering matters for the same reason `switch`/`match` evaluate top-to-bottom: a router doing sequential pattern matching (rather than a compiled trie or hash lookup) will match the *first* pattern that fits, so a greedy or ambiguous earlier route silently shadows a more specific one later, an artifact of how the matching loop is written, not a PHP-engine quirk. Content negotiation by reading `Accept` headers works because `$_SERVER` is populated directly from parsed HTTP request headers before your script runs, the same superglobal-population step that fills `$_GET`/`$_POST`, so inspecting `$_SERVER['HTTP_ACCEPT']` is reading data the SAPI layer already extracted for you.
 ## Exercise
 
 Extend the hand-rolled `Router` with a `PUT /books/{id}` route that reads a

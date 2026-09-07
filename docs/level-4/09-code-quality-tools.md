@@ -263,6 +263,9 @@ assertion at all.
 | Baseline | How to adopt strict analysis on old code | `phpstan analyse --generate-baseline` |
 | CI wiring | What makes any of this non-optional | `composer check` run in the pipeline |
 
+## How It Actually Works
+
+PHPStan performs **static analysis** — it parses your source into an AST (much like the Zend Engine's own compiler does) but never executes a single opcode; instead it walks the AST building up a model of every variable's possible types at each point in the code, flagging places where an operation is inconsistent with that inferred type (calling a method that doesn't exist on a possible type, passing a nullable value where a non-nullable parameter is declared) — this is fundamentally different from PHP's own runtime type checking, which only catches a type mismatch the instant that specific line actually executes with that specific bad value; PHPStan catches classes of mismatches across every possible code path, without running any of them. PHP-CS-Fixer also works purely on the AST/token stream (via PHP's tokenizer, the same lexer stage the Zend Engine itself uses to tokenize source before parsing), rewriting whitespace, brace placement, and other purely syntactic properties without altering the resulting opcode array at all — formatting is provably behavior-preserving because it only touches token-stream properties the compiler discards entirely once it reaches the opcode-generation stage. PHPUnit's coverage reporting, layered on top of PHPStan and CS-Fixer here, once again depends on Xdebug/PCOV's opcode-execution hooks — meaning "quality" in this lesson spans three genuinely distinct engine touchpoints: pre-execution AST analysis (PHPStan), pre-execution token rewriting (CS-Fixer), and execution-time instrumentation (coverage) — each operating at a different stage of PHP's compile pipeline.
 ## Exercise
 
 Add types to `Messy::add()` — `int $a, int $b): int` — rerun

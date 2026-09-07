@@ -629,6 +629,9 @@ PHPUnit 11.x by Sebastian Bergmann and contributors.
 OK (6 tests, 10 assertions)
 ```
 
+## How It Actually Works
+
+This project stitches together the shared-nothing lifecycle with PDO's prepared-statement protocol at a larger scale: every page (`index.php`, `create.php`, `edit.php`, ...) is its own independent PHP process invocation, re-establishing a fresh PDO connection to the database on every single request via `Database.php` — there is no persistent connection pool the way a long-running server process would maintain, so `NoteRepository`'s job is entirely about efficient, minimal round-trips within that one connection's short lifetime. Session-based login (`Auth.php`) is the one piece of state PHP will let survive between these otherwise-independent processes, because `session_start()` reads the previously-serialized `$_SESSION` blob back off disk (or wherever your session handler stores it) using the session-ID cookie as the lookup key — this is why login state persists across page loads even though each page load is, under the hood, a completely fresh process with no memory of the last one. The `_bootstrap.php` shared-setup file works by simple `require`-time execution order: PHP executes its opcodes top-to-bottom exactly once per request that includes it, meaning any side effects (starting the session, opening the DB connection) happen deterministically before the including page's own code runs, since `require` doesn't defer or parallelize anything — it's synchronous, blocking inclusion of another file's compiled opcode array into the current execution.
 ## Stretch goals
 
 - Add a `tags` column (comma-separated or a proper join table) and a filter

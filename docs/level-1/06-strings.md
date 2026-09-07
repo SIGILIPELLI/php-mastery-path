@@ -222,6 +222,9 @@ over their plain counterparts.
 | `str_pad($s, $len, $pad)` | Pad to a target length | `str_pad("7",3,"0",STR_PAD_LEFT)` → `"007"` |
 | `mb_strlen($s)` | Character count (multibyte-safe) | `mb_strlen("José")` → `4` |
 
+## How It Actually Works
+
+PHP strings are refcounted, length-prefixed byte buffers (`zend_string`) — not null-terminated C strings, even though a null terminator is also stored for interop with C library functions. This is why `strlen()` is O(1) (it reads a stored length field) rather than scanning for a terminator, and why PHP strings can safely contain null bytes. Single-quoted strings are compiled almost verbatim into the opcode array as a single constant; double-quoted strings with interpolation compile into a *sequence* of opcodes — literal fragments concatenated with `ZEND_CONCAT` against the interpolated variable's string representation, computed at runtime, which is precisely why interpolation happens on every execution and single-quoted strings are marginally cheaper to compile (there's nothing to scan for `$` at parse time). Heredoc/Nowdoc share this same distinction — Nowdoc is the exact equivalent of single quotes for multi-line text. Multibyte (`mb_*`) functions exist because the byte-oriented core string functions (`strlen`, `substr`, etc.) count and slice *bytes*, not Unicode codepoints; a UTF-8 character like "é" occupies two bytes, so `strlen("café")` returns 5, not 4, unless you use `mb_strlen()`, which walks the byte stream applying UTF-8's multi-byte decoding rules to count actual characters.
 ## Exercise
 
 Write a function `slugify(string $title): string` that turns a title into a

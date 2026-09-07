@@ -200,6 +200,9 @@ constraint violation, a lost connection — surfaces as a catchable
 | `->beginTransaction()` / `->commit()` / `->rollBack()` | Group statements atomically |
 | `$stmt->fetch()` / `->fetchAll()` / `->fetchColumn()` | Read query results |
 
+## How It Actually Works
+
+`PDO::prepare()` doesn't build a SQL string in PHP and send it to the database — for drivers with native support (MySQL, PostgreSQL), it sends the query *with placeholders still in it* to the database server, which parses and compiles a query execution plan **once**, referencing the placeholder positions symbolically. When you call `execute([$id])`, PDO sends only the parameter values over the wire in a separate protocol message; the server substitutes them into its already-compiled plan without ever re-parsing SQL text. This is structurally, not just conventionally, why prepared statements defeat SQL injection: user input is transmitted as *data* in a value slot of the wire protocol, never concatenated into anything the SQL parser interprets as syntax — there is no code path by which a malicious string can become part of the query's grammar. Reusing a prepared statement in a loop is faster than calling `prepare()` each iteration precisely because that plan-compilation step only happens once; every `execute()` call afterward reuses the cached plan. Transactions (`beginTransaction()`/`commit()`/`rollBack()`) work by having PDO tell the database driver to suspend its default auto-commit mode, buffering all subsequent statements' effects until you explicitly commit — the atomicity guarantee comes entirely from the database engine's own transaction log, not from anything PHP does in-process.
 ## Exercise
 
 Create an in-memory SQLite database with a `products` table (`id`, `name`,

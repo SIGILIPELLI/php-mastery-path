@@ -178,6 +178,9 @@ the way) avoids this even if a bad file ends up stored.
 | `move_uploaded_file()`, never `rename()` | Verifies the source was a genuine PHP upload |
 | Store outside the web root | A validation gap can't become remote code execution |
 
+## How It Actually Works
+
+An uploaded file never touches your PHP script directly during transfer — the SAPI layer (built into PHP's request-handling C code, before any of your opcodes run) parses the multipart/form-data request body, streams each file part to a temporary file on disk (usually under the system temp directory), and only *then* populates `$_FILES` with metadata pointing at that temp path plus the client-supplied original name, MIME type, and an `error` code. This is exactly why you must check `$_FILES[...]['error']` first: that field reflects what the SAPI layer observed during the upload itself (partial upload, exceeded `upload_max_filesize`, etc.) — a check no user-level validation of the file's *content* can substitute for, because a failed upload might leave you with an empty or truncated temp file that "validates" as reasonable by size alone. The client-supplied MIME type and filename are pure request metadata — attacker-controlled strings echoed back from the multipart headers with no verification behind them — which is why real content-type checking calls `finfo_file()` (or `mime_content_type()`), a function that opens the temp file and inspects its actual leading bytes (magic numbers) against known file-format signatures, entirely independent of what the browser claimed. `move_uploaded_file()` (rather than a plain `rename()` or `copy()`) additionally verifies the source path was genuinely created by PHP's own upload machinery in this request, closing off a path-traversal trick where a value crafted to *look* like an upload path points somewhere else on disk.
 ## Exercise
 
 Write a function `handleAvatarUpload(array $file): string` (accepting one

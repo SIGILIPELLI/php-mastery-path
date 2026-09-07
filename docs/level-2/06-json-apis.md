@@ -234,6 +234,9 @@ having to parse the error message text.
 | `CURLOPT_RETURNTRANSFER` | Return the response body instead of printing it |
 | `http_response_code()` | Set the HTTP status code of your own response |
 
+## How It Actually Works
+
+`json_encode()` walks your PHP value's internal representation recursively — for an array it's the `HashTable` bucket-by-bucket, for an object it's the visible (public, or all if you implement `JsonSerializable`) property table — building a JSON text string as it goes, using an internal string buffer that grows dynamically rather than repeated concatenation (avoiding the O(n²) cost naive string-building would incur). `json_decode()` runs a real recursive-descent JSON parser that tokenizes the input and builds either `stdClass` objects or associative arrays (`true` for the second argument) depending on how you call it; because that parser is strict about JSON grammar, malformed input doesn't throw by default — it returns `null` and sets an internal error code retrievable via `json_last_error()`, which is exactly why "always check for decode failure" is not optional advice but a consequence of PHP's error-signaling design for this specific function. When you implement `JsonSerializable`, `json_encode()` checks for that interface *before* falling back to default property-walking, calling your `jsonSerialize()` method and encoding whatever array or scalar it returns instead — a compile-time interface check translated into a runtime dispatch decision. Consuming an API with cURL involves a real TCP handshake, TLS negotiation, and HTTP request/response cycle handled by libcurl (a C library PHP's cURL extension binds to) entirely outside the Zend Engine — `curl_exec()` blocks the current process until the full response is read, which is why a slow upstream API stalls your entire PHP process for that request's duration.
 ## Exercise
 
 Write a function `fetchJsonSafely(string $url): array` that wraps

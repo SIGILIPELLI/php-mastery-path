@@ -233,6 +233,9 @@ echo 5 <=> 3, "\n";                  // 1  -- spaceship operator: -1, 0, or 1
 | Concatenation | `.` | `"a" . "b"` → `"ab"` |
 | Spaceship | `<=>` | `5 <=> 3` → `1` |
 
+## How It Actually Works
+
+Every PHP value is stored in a `zval` (Zend value) container, not as a raw machine value: a `zval` bundles a type tag with either the value itself (for integers, booleans, doubles) or a pointer to a heap-allocated structure (for strings, arrays, objects). When you assign `$b = $a`, PHP doesn't necessarily copy the underlying data — it uses **copy-on-write (COW)**: the new variable's `zval` points at the same refcounted value and only a real copy is made, lazily, the instant either variable is *mutated*. `var_dump()` and `gettype()` read the type tag straight off the `zval` rather than inspecting the raw bytes, which is why they're always accurate even though PHP is dynamically typed. Type juggling (`"5" + 3`) works because arithmetic opcodes like `ZEND_ADD` check the operand `zval` types at runtime and coerce one side before performing the operation — there's no compile-time type resolution the way there is in Java or C, so the coercion rule is evaluated fresh on every execution of that opcode.
 ## Exercise
 
 Write `profile.php` that:

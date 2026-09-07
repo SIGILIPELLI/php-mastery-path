@@ -277,6 +277,9 @@ A single class often combines all three: `implements` one or more
 interfaces, `extends` at most one (possibly abstract) parent, and `use`s any
 number of traits.
 
+## How It Actually Works
+
+Interfaces, abstract classes, and traits are all compiled into `zend_class_entry` structures, but the engine treats them very differently at link time (the step, right after compilation, where class hierarchies actually get resolved). An interface contributes only a set of *required method signatures* to a class entry's function table — checked once, when the implementing class is linked, by verifying every interface method has a concrete match; it adds zero method bodies. An abstract class contributes real compiled method bodies *plus* placeholders that must be overridden — the engine refuses to instantiate any class entry still carrying an unresolved abstract method, checked at the `new` opcode. Traits are fundamentally different: `use TraitName;` triggers a **compile-time copy** of the trait's compiled opcodes directly into the using class's method table, as if you'd hand-pasted the method bodies in — this is why two traits with a method of the same name in one class produce a *compile error* (an actual name collision at link time), not a runtime override, and why `insteadof`/`as` exist as compiler directives to resolve that collision before linking can succeed.
 ## Exercise
 
 Define an interface `Notifiable` with one method, `notify(string $message):

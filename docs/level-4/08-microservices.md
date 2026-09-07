@@ -226,6 +226,9 @@ throw at all.
 | Per-dependency breaker | One breaker per downstream service, not shared globally |
 | Client-side timeout | What actually makes a hung call throw so the breaker can react |
 
+## How It Actually Works
+
+Modeling service boundaries as separate PHP applications means each service is its own completely independent set of PHP-FPM worker processes, with its own OPcache shared-memory segment, its own class entries, its own everything — there is no shared memory or shared object graph between services the way there might be between classes within one application, which is precisely why inter-service communication has to happen over the network (HTTP, gRPC, a message queue) rather than a plain method call. This is what makes cascading failure a real risk: a network call from one service to another is a blocking operation on the calling PHP-FPM worker — that worker sits idle, holding its slot in the finite worker pool, for the full duration of the call (or until timeout), and if the downstream service is slow, enough concurrent requests each blocking on it can exhaust the caller's entire worker pool, even though the caller's own code has no bug. A circuit breaker fixes this by tracking failure/timeout counts (typically in shared storage like Redis, since PHP-FPM workers don't share memory with each other) and, once a threshold trips, short-circuiting future calls to the failing service immediately — returning a fallback or error *without* attempting the network call at all — which is what actually stops a slow downstream service from draining the caller's worker pool, converting a slow failure into a fast, cheap one.
 ## Exercise
 
 Add a half-open state to `CircuitBreaker`: a `cooldownSeconds` constructor

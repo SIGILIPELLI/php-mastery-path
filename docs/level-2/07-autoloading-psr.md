@@ -184,6 +184,9 @@ hand in dev).
 | `composer dump-autoload` | Regenerate the autoloader after structural changes |
 | `composer dump-autoload -o` | Production-optimized, pre-computed class map |
 
+## How It Actually Works
+
+`spl_autoload_register()` inserts your callback into a queue the engine consults only when a class reference can't be resolved through classes already compiled and linked in the current request — this queue check happens inside the `ZEND_NEW`/`ZEND_INSTANCEOF` opcode handling itself, as a fallback path, not as a general "check every class name" mechanism, so already-loaded classes never trigger it. PSR-4 works because Composer precomputes, at `composer dump-autoload` time, a static PHP array mapping namespace prefixes to base directories; your registered autoload callback does simple string manipulation (strip the prefix, replace `\` with `/`. append `.php`) against that array and calls `require` on the resulting path — there's no filesystem scanning at request time, which is what makes autoloading fast even in projects with thousands of classes. Multiple autoloading strategies coexist because `spl_autoload_register()` maintains an ordered *list* of callbacks, not a single slot — PHP tries each one in registration order until one of them successfully defines the class (checked via `class_exists()` internally after each attempt), which is why autoloader ordering can matter when two strategies could both plausibly resolve the same class name. `--optimize-autoloader` (or `-o`) collapses PSR-4's dynamic prefix-matching logic into one flat classmap array at build time, trading disk space and a build step for eliminating the runtime string-manipulation work on every single class load — a meaningful win at scale, negligible for a ten-class project.
 ## Exercise
 
 Create a project with `src/Http/Request.php` declaring `namespace

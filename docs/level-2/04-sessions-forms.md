@@ -206,6 +206,9 @@ time by measuring how long comparisons take.
 | `password_hash()` / `password_verify()` | Safely store and check passwords |
 | `hash_equals()` | Timing-safe string comparison, e.g. for CSRF tokens |
 
+## How It Actually Works
+
+`$_GET` and `$_POST` are superglobal arrays that PHP populates once, at the very start of the request, by parsing the raw HTTP request line's query string and (for POST) the request body according to its `Content-Type` header — this parsing happens in the SAPI layer before your script's first opcode even runs, which is why these arrays are already filled by the time execution reaches line one. `session_start()` is where PHP's shared-nothing lifecycle gets its one deliberate escape hatch: it reads a session ID from a cookie (or generates a new one), then loads a serialized blob from a session store (by default, a file in `/tmp` named `sess_<id>`) into the `$_SESSION` superglobal — this is disk I/O happening synchronously on every request that touches sessions, restoring state that would otherwise be lost the instant the previous request's process exited. Escaping output with `htmlspecialchars()` prevents XSS because it operates on the *string level*, converting characters like `<` and `&` into HTML entities before they're ever written to the response body, so the browser's HTML parser can never interpret injected text as markup — CSRF tokens work by a similar wire-level trick: a per-session secret value embedded in the form is compared against `$_SESSION` on submit, and because that value never reaches a cross-origin attacker's page (same-origin policy blocks reading the token via JavaScript or a forged form), a forged request from another site can't reproduce it.
 ## Exercise
 
 Build a two-file login demo: `login_form.php` renders a form with username,

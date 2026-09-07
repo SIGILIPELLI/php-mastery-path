@@ -214,6 +214,9 @@ than fixing the session bug, silently reopening the hole.
 | Password storage | `password_hash()` / `password_verify()` | Never store or log plaintext |
 | Aging hashes | `password_needs_rehash()` | Check and upgrade on successful login |
 
+## How It Actually Works
+
+Secrets kept out of source and loaded from environment variables (`getenv()` or `$_ENV`) work because those values are injected into the process's environment block by the OS or process manager (PHP-FPM's pool config, a container runtime, a `.env` loader) *before* PHP even starts compiling your script — by the time your code runs, they're just OS-level key-value pairs the engine reads via a syscall wrapper, entirely outside anything version control ever touches, which is the actual mechanism (not just convention) that keeps them out of your git history. CSRF protection at scale still rests on the same session-bound-token mechanism from the sessions lesson, but "at scale" it must also account for PHP-FPM's multi-worker-process model: because each worker is a separate OS process with no shared memory, the token has to live somewhere every worker can read it back — the session store — rather than in any process-local variable, which would only be visible to whichever single worker happened to handle the form-rendering request. Password hashing "at scale" is the same bcrypt primitive as before, but the cost-factor tuning matters more here because bcrypt's slowness is deliberately CPU-bound and synchronous — a fleet of PHP-FPM workers all hashing passwords at too high a cost factor under real login-traffic volume can genuinely exhaust worker availability, since each hash operation blocks its worker process for its full computed duration with no way to yield mid-computation.
 ## Exercise
 
 Extend `EnvSecrets` with a `mask(string $key): string` method that returns

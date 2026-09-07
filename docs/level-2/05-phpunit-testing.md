@@ -242,6 +242,9 @@ coding against interfaces pays off beyond just testing.
 | `$this->createMock(Interface::class)` | Create a fake collaborator for isolated testing |
 | `phpunit.xml` | Config file: test suite locations, bootstrap file, coverage settings |
 
+## How It Actually Works
+
+PHPUnit doesn't statically analyze your source — it uses PHP's own **reflection API** (`ReflectionClass`) at runtime to discover which methods on a `TestCase` subclass are actual tests, by scanning for method names beginning with `test` or carrying a `#[Test]` attribute. For every single test method, PHPUnit constructs a *brand-new instance* of your test class before invoking it, meaning `setUp()` runs fresh for each test with no state bleeding between them — this instance-per-test-method design is a deliberate mirror of PHP's own shared-nothing request model. Assertions like `assertEquals()` don't throw a generic error on failure; they throw a `PHPUnit\Framework\ExpectationFailedException`, a real `Throwable`, which is caught by PHPUnit's own test-runner loop (using the exact try/catch mechanics from the error-handling lessons) and recorded as a failure rather than propagating out and crashing the whole suite. Data providers work by reflection too: PHPUnit calls your provider method once, iterates the returned array/generator, and invokes the test method once per row, passing each row's elements as separate arguments — so one test method with a five-row provider genuinely becomes five independent test executions, each getting its own fresh instance per the rule above.
 ## Exercise
 
 Write a `StringHelper` class with a method `slugify(string $text): string`

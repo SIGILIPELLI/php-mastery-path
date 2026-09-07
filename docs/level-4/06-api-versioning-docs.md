@@ -204,6 +204,9 @@ versions and only the new one 404s.
 | Doc generation | `getAttributes()` + `newInstance()` | `generateDocs()` |
 | Real-world equivalent | `zircote/swagger-php`, OpenAPI spec generation | Attributes -> JSON/YAML spec |
 
+## How It Actually Works
+
+Content-negotiated versioning works by branching on the same `$_SERVER['HTTP_ACCEPT']` (or a custom header) string inspection used for content negotiation elsewhere — there's no special "version" concept in HTTP or PHP, just a router reading a header value and dispatching to different handler code paths based on a string match, exactly like any other conditional routing decision. Generating docs from code rather than beside it typically means using PHP's reflection API (or parsing PHPDoc-style comment blocks attached to methods, which the engine preserves as retrievable metadata via `ReflectionMethod::getDocComment()`) to build an OpenAPI/Swagger spec programmatically at build time or on-demand — because this walks the *actual compiled class structure* rather than a hand-maintained separate document, the generated docs can never drift out of sync with real method signatures the way hand-written docs inevitably do, since a signature change is reflected the next time the generator runs its reflection pass, with no separate synchronization step to forget.
 ## Exercise
 
 Add a `V3Response` that includes a `links` field

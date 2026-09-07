@@ -190,6 +190,9 @@ instead of disappearing or looping forever.
 | Give up | move to `failed/` | dead-letter queue/exchange |
 | Worker wakes on new job | polling (must check repeatedly) | blocking pop / push notification |
 
+## How It Actually Works
+
+A file-based queue works around PHP's shared-nothing lifecycle by using the filesystem as the one piece of state that outlives any single process: the producer script runs, appends (or atomically renames in) a new job file, and exits completely — there is no producer process waiting around, because PHP processes don't persist. A separate worker process, run as its own long-lived loop (`while (true) { ... sleep(...); }`) or invoked repeatedly by cron, is what actually provides continuity — each iteration of that loop is still bound by normal PHP execution rules, but the *loop itself*, not any single request, is what makes the queue feel continuous. File-based locking (`flock()`) matters here because two worker processes polling the same directory can otherwise both read the same job file before either deletes it, executing the same job twice — `flock()` asks the OS kernel to grant exclusive access to a file descriptor, a guarantee enforced outside PHP entirely, which is why it works correctly across genuinely separate PHP processes with no shared memory. A real broker (Redis, RabbitMQ, SQS) replaces this file-polling pattern with a purpose-built server process that holds queue state in memory (or its own durable log) and pushes/pops jobs atomically via its own wire protocol — solving the exact race condition described above at the infrastructure level instead of via filesystem locking primitives, and adding acknowledgment/retry semantics that a bare file queue has no way to express.
 ## Exercise
 
 Add a `FileQueue::stats(): array` method returning

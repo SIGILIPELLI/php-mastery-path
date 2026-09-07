@@ -153,6 +153,9 @@ php todo.php list
 # [ ] 2. Review Level 2 outline
 ```
 
+## How It Actually Works
+
+Because each CLI invocation of `todo.php` is its own separate PHP process, there is no shared memory between runs — `TaskStorage`'s job of reading and rewriting a JSON (or similar) file on disk *is* your persistence layer precisely because PHP's shared-nothing lifecycle gives you nothing else to persist state in. Every time you run the script, the engine starts cold: lexes, parses, and compiles `todo.php` and every file it `require`s into a fresh opcode array, executes it top to bottom, and then the whole process — including every `zval`, object, and array you built — is torn down and freed. `json_encode()`/`json_decode()` round-trip your task list through PHP's array/object representation into a byte-serialized JSON string and back, walking the `HashTable` structure recursively; this is a genuinely different data lifecycle from a long-running server that keeps a task list in memory, and it's why file-locking (or at least careful read-then-write ordering) matters the moment two invocations could ever overlap — PHP gives you zero built-in protection against two of these short-lived processes racing to write the same file.
 ## Stretch goals
 
 - Add a `priority` field (`low`/`medium`/`high`) and sort the list by it.

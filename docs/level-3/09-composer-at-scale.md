@@ -182,6 +182,9 @@ package you touched.
 | `composer install --no-dev --optimize-autoloader` | Production install: no dev deps, static class map |
 | `composer show` | List installed packages and versions |
 
+## How It Actually Works
+
+`composer.lock` exists because dependency resolution is genuinely expensive and non-deterministic across time: `composer.json`'s `^2.1` constraint describes a *range* of acceptable versions, and running the SAT-style resolver against that range on two different days (as new versions get published) can legitimately produce two different resolved sets — `composer.lock` freezes the exact resolved commit/version of every package (direct and transitive) the moment `install`/`update` succeeds, so `composer install` on a locked project skips resolution entirely and just fetches the exact locked versions, guaranteeing byte-for-byte reproducible dependency trees across machines and CI runs. `composer validate` catches schema mistakes by checking your `composer.json` against Composer's own JSON Schema *before* attempting resolution — a fast, purely structural check that catches a malformed version constraint or a missing required field without ever hitting the package registry over the network. `--optimize-autoloader`'s performance effect ties directly back into the autoloading lesson: at scale, PSR-4's dynamic prefix-matching means the autoload callback does more string manipulation per class as your namespace tree grows, so collapsing that into one static classmap array trades a larger, precomputed lookup table (more disk/memory) for eliminating that per-class-load computation — a tradeoff that only pays off once a project has enough classes for the computation to matter.
 ## Exercise
 
 Create a fresh `composer.json` for a package `acme/text-utils` with a

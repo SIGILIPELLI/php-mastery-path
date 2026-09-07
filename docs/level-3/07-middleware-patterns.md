@@ -202,6 +202,9 @@ then auth, then anything that assumes an authenticated user.
 | `array_reduce` + `array_reverse` | Standard trick for building a nested chain from a flat list |
 | Mutating `$request->attributes` | How inner layers see data set by outer layers (e.g. the authenticated user) |
 
+## How It Actually Works
+
+A middleware pipeline is a chain of closures (or objects) where each one holds a reference to "the next" callable and decides whether to invoke it — building this pipeline is nothing more than nested function composition, resolved once when you wire up the stack (`array_reduce` over your middleware list is the typical mechanism), producing a single outer closure whose body, when called, invokes the layers in order. Each middleware's ability to run code *before* calling `$next($request)` and *after* it returns comes directly from ordinary PHP call-stack semantics: code before the `$next()` call executes on the way "in," and code after it executes on the way "out," once the inner call returns — this is the same call/return mechanism as any nested function call, just structured so each layer explicitly passes control forward. Because each middleware closure captures its `use`d dependencies (a logger, an auth checker) at pipeline-construction time via PHP's closure-capture-by-value-or-reference rules, the pipeline itself is immutable state built once per request bootstrap — but since PHP has no persistent process, that pipeline is rebuilt from scratch on literally every incoming request, meaning "expensive to construct" middleware stacks are a genuine per-request cost, not a one-time startup cost the way they'd be in a long-running Node.js or Java server.
 ## Exercise
 
 Write a `RateLimitMiddleware` that tracks request counts per

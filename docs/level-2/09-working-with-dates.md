@@ -191,6 +191,9 @@ off-by-one-hour (or off-by-a-day, near midnight) bugs.
 | `DateTimeZone` | Represents a named time zone (`"UTC"`, `"Asia/Kolkata"`) |
 | `->setTimezone($tz)` | Return the same instant, viewed in a different time zone |
 
+## How It Actually Works
+
+`DateTime` and `DateTimeImmutable` wrap the same underlying C-level `timelib` datetime structure (an absolute point in time plus timezone data), but they differ in exactly one behavior baked into their compiled method implementations: every mutating method on `DateTime` (`modify()`, `add()`, `sub()`) changes that internal structure in place and returns `$this`, while the same-named methods on `DateTimeImmutable` allocate a brand-new object with the modified structure and leave the original untouched — this is why `$a->modify('+1 day')` silently mutates `$a` itself but `$b = $a->modify('+1 day')` on an immutable instance requires capturing the return value, and it's the single most common bug source this lesson exists to prevent. `createFromFormat()` runs `timelib`'s format-directive parser strictly against your format string; unlike the loose constructor (which tries many heuristics to guess a date string's meaning), `createFromFormat` fails explicitly (returning `false` and populating `DateTime::getLastErrors()`) the moment the input doesn't match your directives character-for-character, which is exactly why it's the right tool for parsing user-submitted or external date strings you can't otherwise trust. `DateInterval` arithmetic isn't simple integer math on a timestamp — adding "+1 month" to January 31st goes through calendar-aware date-component arithmetic in `timelib` that can produce March 3rd (because February has no 31st), a genuine calendar-rule computation, not a fixed offset in seconds.
 ## Exercise
 
 Write a function `daysUntil(DateTimeImmutable $target, ?DateTimeImmutable

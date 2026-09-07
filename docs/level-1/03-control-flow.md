@@ -238,6 +238,9 @@ echo ($value ?: "default") . "\n";   // default -- same result here, but
 | `?:` | Short ternary, falls back on falsy values |
 | `??` | Null coalescing, falls back only on null/unset |
 
+## How It Actually Works
+
+Every branch you write compiles down to conditional-jump opcodes. An `if` becomes a `ZEND_JMPZ` (jump if zero/false) opcode pointing at an offset later in the opcode array; `else`/`elseif` chains are just multiple jump targets stitched together by the compiler. A `switch` statement compiles to a *sequence of equality comparisons and jumps* — it is not a jump table — which is why a `switch` with many cases has no algorithmic speed advantage over an equivalent `if/elseif` chain in PHP (unlike C, where the compiler can build a real jump table for dense integer cases). `match`, introduced in PHP 8, is compiler-recognized differently: it uses strict (`===`) comparisons internally and the engine can special-case it, but more importantly it's an *expression* that produces a `ZEND_QM_ASSIGN`-style value rather than a statement, which is why you can assign its result directly. `foreach` over an array doesn't walk raw memory — it uses an internal array pointer and a hash-table iterator (`zend_hash_get_current_data_ex`) that the engine advances each pass, iterating the array's ordered hash-table buckets rather than a contiguous C array.
 ## Exercise
 
 Write `fizzbuzz.php` that loops from 1 to 30 with a `for` loop and, for each

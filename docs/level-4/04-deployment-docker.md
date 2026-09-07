@@ -166,6 +166,9 @@ of full filesystem access inside the container.
 | `USER www-data` | Run the PHP process as an unprivileged user, not root |
 | `docker compose up --build` | Builds and starts both services on one shared network |
 
+## How It Actually Works
+
+`php -S` runs PHP's built-in development server, a genuinely single-threaded, single-process server intended for local testing — it handles one request at a time, sequentially, with no worker pool at all, which is exactly why it's unsuitable for anything beyond `php artisan serve`-style local development. PHP-FPM (FastCGI Process Manager) is the real production mechanism: it maintains a pool of persistent PHP worker processes, each one independently running the full compile-and-execute lifecycle described throughout this course for whichever request it's handed, while Nginx sits in front purely as an HTTP server and reverse proxy, forwarding requests to an available FPM worker over the FastCGI protocol (a binary protocol distinct from raw HTTP) via a Unix socket or TCP port. This division of labor is why the Dockerfile builds a PHP-FPM image and the Nginx config is a *separate* file — Nginx efficiently handles static assets, TLS termination, and connection buffering (things it's purpose-built for), while FPM workers are reserved exclusively for actually executing PHP opcodes, and Docker Compose's job is simply wiring both containers onto a shared network so Nginx's `fastcgi_pass` directive can reach FPM's socket by container hostname rather than a hardcoded IP.
 ## Stretch goals
 
 *(This module has no runnable PHP demo since it's infrastructure

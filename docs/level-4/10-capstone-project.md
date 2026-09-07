@@ -475,6 +475,9 @@ assertion that the first id is `1` depend on test execution order.
 | `handle()` in `app.php` | Map exceptions to HTTP status | Contain business logic |
 | Tests | Exercise each layer through a real SQLite DB | Mock away the SQL they're proving works |
 
+## How It Actually Works
+
+Tracing one request through this capstone end to end: the SAPI layer parses the incoming HTTP request into `$_SERVER`/`$_GET`/`$_POST` before your code runs at all, then the front-controller-style router (from the routing section) does sequential pattern matching against `REQUEST_URI` to find a handler, opening a fresh PDO connection scoped to just this request for the domain object's persistence needs — every prepared statement in that persistence layer sends parameterized queries over the wire so user input never becomes SQL syntax, and once the response is written, the entire process (every object, every `zval`, the PDO connection, OPcache's *cached compiled opcodes* aside) is torn down, with nothing carried forward except whatever got explicitly written to the SQLite file or session store. This project makes the shared-nothing model's real cost and real benefit both visible at once: the cost is that "testing it" must genuinely re-exercise the full compile-connect-query-render cycle for every scenario, since there's no in-memory shortcut PHP will give you between test cases; the benefit is that this exact model is what makes PHP-FPM's multi-worker-process architecture trivially safe under concurrency — because no request-scoped state survives past its own request, there's no shared mutable state between concurrent workers to race on, aside from whatever you've deliberately persisted to the database or session store yourself.
 ## Stretch goals
 
 Extend the capstone in any of these directions — each pulls in a concept

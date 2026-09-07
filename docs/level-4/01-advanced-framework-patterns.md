@@ -252,6 +252,9 @@ strictly to declaring bindings.
 | `static::` (late static binding) | Resolves against the calling class, not the defining one |
 | `new static()` | Instantiate the actual subclass, not the base class |
 
+## How It Actually Works
+
+Service providers organize container registration by deferring actual object construction: a provider's `register()` method typically stores *closures* (factory recipes) in the container rather than eagerly building objects, so registering fifty services costs almost nothing until each is actually resolved — the container only invokes a given closure the first time something asks for that service, exploiting the same call-when-needed laziness as autoloading. A minimal ORM built on magic methods leans on PHP's `__get`/`__set`/`__call` hooks, which the engine invokes automatically whenever code accesses a property or method that doesn't exist on the object's class entry — this is a genuine fallback mechanism checked by the property/method-access opcodes themselves (`ZEND_FETCH_OBJ_R` and friends check for a defined property first, then fall back to `__get` only if the lookup fails), which is exactly why magic-method-based ORMs feel like plain property access syntactically but are secretly routing every single access through a method call, with the corresponding per-access overhead and the loss of IDE/static-analysis visibility that comes from properties that don't really exist on the class.
 ## Exercise
 
 Add a `QueueServiceProvider` that binds a `Queue` interface (reuse the

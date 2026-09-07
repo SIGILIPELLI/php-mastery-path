@@ -215,6 +215,9 @@ assumed.
 | Slow `JOIN` | Fixing N+1 introduces a new slow query | Check `EXPLAIN`/`EXPLAIN QUERY PLAN`; add indexes on join columns |
 | Generator reused | `Cannot rewind a generator` exception | Call the generator function again, or materialize once into an array |
 
+## How It Actually Works
+
+The N+1 query problem is a direct consequence of PDO's request-scoped connection: each `execute()` call is a full network round-trip to the database server, so looping over N parent rows and issuing one query per row for related data means N+1 separate round-trips, each paying full network latency, query-plan lookup, and result-marshaling overhead — the fix (a single `JOIN` or a batched `WHERE id IN (...)`) collapses that into one round-trip because the *database engine* does the join work internally, which is vastly cheaper than N+1 trips through PHP's own PDO layer. Generators solve a different, memory-focused problem: a normal function returning an array must build the *entire* array in memory before returning it, but a function using `yield` compiles to special coroutine-like opcodes — the engine suspends the function's execution state (its local variables, its exact bytecode instruction pointer) right at the `yield`, hands one value back to the calling `foreach`, and only resumes execution (picking up exactly where it left off) when the next value is requested. This is why a generator iterating a million-row result set holds only *one row* in memory at a time rather than all million, and combining a generator with a paginated query (fetching rows in batches of, say, 500, yielding them one at a time) bounds both the PHP-side memory *and* the size of any single database round-trip simultaneously.
 ## Exercise
 
 Add a `countBooksByAuthorLazily(PDO $pdo): Generator` that yields

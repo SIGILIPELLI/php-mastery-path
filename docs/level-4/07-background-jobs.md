@@ -242,6 +242,9 @@ problem queues exist to solve.
 | `ScheduledTask::isDue()` | Interval check driving cron-style recurring work |
 | Single cron entry + per-task `isDue()` | One `* * * * *` line can drive many independent schedules |
 
+## How It Actually Works
+
+Modeling jobs as classes rather than raw payloads means each job is a real PHP object with a `handle()` method — when the dispatcher needs to hand it to a worker, it must first *serialize* that object (via `serialize()`, storing the class name plus its property values) into a string that can be written to a queue backend, and the worker process later `unserialize()`s it back into a live object before calling `handle()`; this round-trip is exactly why job classes must avoid holding un-serializable state (open database handles, closures over resources) as properties — those can't survive the serialize/unserialize boundary between the dispatching process and the (often entirely separate) worker process. The dispatcher's application-facing API (`dispatch($job)`) typically just pushes that serialized payload onto a queue and returns immediately — a deliberately non-blocking design that decouples the web request's process lifetime (which must stay short) from the job's actual execution time, which might happen seconds or minutes later in a completely different, long-running worker process. Scheduled cron-style tasks work through an OS-level mechanism entirely outside PHP: `cron` (or a container-level scheduler) starts a fresh `php` process at the configured interval, and because each invocation is once again a full compile-and-run cycle in an independent process, a "recurring task" in PHP is really just "the OS repeatedly launching a short-lived process," not a persistent in-process timer the way `setInterval` works in a long-running Node.js server.
 ## Exercise
 
 Add a `RetryableJob` interface extending `Job` with a
