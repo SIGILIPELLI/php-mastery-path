@@ -1620,6 +1620,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2643,6 +2665,8 @@ you refactor even though behavior is unchanged. Mock at the boundary
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>PHPUnit's mock objects aren't your class with some methods swapped out — <code>createMock()</code> uses PHP's runtime class-generation capability (<code>eval()</code>-based or opcode-cache-friendly code generation, depending on version) to synthesize a brand-new class at test-run time that extends or implements your target, overriding every method with a generated body that records the call (arguments, call count) into an internal expectation-tracking object and returns whatever you configured via <code>willReturn()</code>. This is why you can mock an interface with no implementation at all — the generated class only needs the interface's method signatures to satisfy PHP's normal class-linking rules, and its method bodies do nothing but bookkeeping. Stubs and mocks differ in <em>when</em> PHPUnit checks their configured behavior: a stub's <code>willReturn()</code> value is just consulted every call with no expectation tracking, whereas a <code>expects($this-&gt;once())</code>-style mock configuration is verified only in the test's teardown phase, when PHPUnit walks through every mock's recorded call log and throws an <code>ExpectationFailedException</code> if any didn't match — a genuinely deferred assertion, not one checked at call time. This generated-class mechanism is also the root of PHP's specific mocking traps: <code>final</code> classes and methods can't have generated subclasses at all (a compile-time restriction the class-generation approach can't bypass), and static methods can't be intercepted this way either, since static calls resolve directly to the class entry's method table rather than through an object instance that a mock's <code>__call</code>-style dispatch could intercept.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Add an <code>InventoryService</code> interface with <code>reserve(string $sku, int $qty): bool</code>
 and inject it into <code>OrderService</code> so <code>placeOrder()</code> reserves stock <em>before</em>

@@ -1041,6 +1041,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2349,6 +2360,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2615,6 +2637,8 @@ to regenerate the class map.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Composer's autoloader isn't magic — <code>require 'vendor/autoload.php'</code> registers a callback with <code>spl_autoload_register()</code>, and the engine only invokes that callback the <em>first time</em> an unresolved class name is referenced (in a <code>new</code>, <code>extends</code>, <code>instanceof</code>, or static call). At that moment PHP calls your registered function with the class name as a string, and Composer's generated autoloader (built from the <code>psr-4</code> mapping in <code>composer.json</code>) turns the namespace into a file path and does a plain <code>require</code>. This lazy, on-demand loading is why adding an unused <code>require</code> for a class you never instantiate costs nothing beyond parsing the mapping array — the actual class file is never opened. <code>composer.json</code> version constraints (<code>^</code>, <code>~</code>) aren't enforced at runtime at all; they're resolved once, when you run <code>composer install</code> or <code>update</code>, by Composer's own dependency-resolution algorithm (a SAT-style constraint solver) which picks the highest set of package versions satisfying every constraint and <em>locks</em> that exact resolution into <code>composer.lock</code> — after that, PHP itself has no idea what "^2.0" meant, it just requires whatever file the autoloader map points at.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Create a new folder, run <code>composer init</code> (or hand-write a minimal
 <code>composer.json</code> targeting <code>php &gt;= 8.2</code>), then run <code>composer require

@@ -1799,6 +1799,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stretch-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2305,6 +2316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stretch-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2736,6 +2758,8 @@ Nothing about the <em>shape</em> of the code changes for any of that — the
 repository/controller split is exactly what makes swapping SQLite for
 MySQL, or adding auth middleware in front of the controller, additive
 rather than a rewrite.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>This project's persistence and HTTP layers each rely on mechanisms already covered but now combined under load: the router matches on <code>$_SERVER['REQUEST_URI']</code> sequentially (so route-ordering traps from the front-controller lesson apply directly here), and every matched handler that touches the database opens its own PDO connection scoped to that single request's process lifetime — meaning "testing against a real database" genuinely exercises the full compile-connect-query-disconnect cycle your production deployment will run on every request, not a mocked-out approximation. Prepared statements throughout the persistence layer are what make it safe to build a REST API accepting arbitrary JSON bodies as input: <code>json_decode()</code>'s parser has no awareness of SQL at all, so a malicious JSON payload's string values are inert data all the way through decode, and PDO's parameterized-query wire protocol keeps them inert all the way into the database — the entire request/response cycle has exactly one place (the prepared statement's bound parameters) where untrusted text is allowed to cross into a different language's grammar, and it's designed specifically not to. The "what's missing for real production use" section matters because a PHP-FPM/Nginx deployment (rather than <code>php -S</code> or the CLI server) is what actually lets multiple requests execute concurrently in the first place — PHP-FPM manages a pool of persistent worker <em>processes</em> (not threads) that each independently run this same compile-and-run cycle per request, recycling periodically, which is the real infrastructure layer that turns this single-file mental model into something that can serve real concurrent traffic.</p>
 <h2 id="stretch-goals">Stretch goals<a class="headerlink" href="#stretch-goals" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Add a <code>PATCH /tasks/{id}</code> endpoint (<code>TaskController::update()</code>) that

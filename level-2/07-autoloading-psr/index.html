@@ -1339,6 +1339,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2305,6 +2316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2571,6 +2593,8 @@ hand in dev).</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>spl_autoload_register()</code> inserts your callback into a queue the engine consults only when a class reference can't be resolved through classes already compiled and linked in the current request — this queue check happens inside the <code>ZEND_NEW</code>/<code>ZEND_INSTANCEOF</code> opcode handling itself, as a fallback path, not as a general "check every class name" mechanism, so already-loaded classes never trigger it. PSR-4 works because Composer precomputes, at <code>composer dump-autoload</code> time, a static PHP array mapping namespace prefixes to base directories; your registered autoload callback does simple string manipulation (strip the prefix, replace <code>\</code> with <code>/</code>. append <code>.php</code>) against that array and calls <code>require</code> on the resulting path — there's no filesystem scanning at request time, which is what makes autoloading fast even in projects with thousands of classes. Multiple autoloading strategies coexist because <code>spl_autoload_register()</code> maintains an ordered <em>list</em> of callbacks, not a single slot — PHP tries each one in registration order until one of them successfully defines the class (checked via <code>class_exists()</code> internally after each attempt), which is why autoloader ordering can matter when two strategies could both plausibly resolve the same class name. <code>--optimize-autoloader</code> (or <code>-o</code>) collapses PSR-4's dynamic prefix-matching logic into one flat classmap array at build time, trading disk space and a build step for eliminating the runtime string-manipulation work on every single class load — a meaningful win at scale, negligible for a ten-class project.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Create a project with <code>src/Http/Request.php</code> declaring <code>namespace
 App\Http; class Request { ... }</code> and a <code>composer.json</code> mapping <code>"App\\":

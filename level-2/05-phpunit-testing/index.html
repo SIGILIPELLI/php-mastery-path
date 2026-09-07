@@ -1283,6 +1283,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2305,6 +2316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2602,6 +2624,8 @@ coding against interfaces pays off beyond just testing.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>PHPUnit doesn't statically analyze your source — it uses PHP's own <strong>reflection API</strong> (<code>ReflectionClass</code>) at runtime to discover which methods on a <code>TestCase</code> subclass are actual tests, by scanning for method names beginning with <code>test</code> or carrying a <code>#[Test]</code> attribute. For every single test method, PHPUnit constructs a <em>brand-new instance</em> of your test class before invoking it, meaning <code>setUp()</code> runs fresh for each test with no state bleeding between them — this instance-per-test-method design is a deliberate mirror of PHP's own shared-nothing request model. Assertions like <code>assertEquals()</code> don't throw a generic error on failure; they throw a <code>PHPUnit\Framework\ExpectationFailedException</code>, a real <code>Throwable</code>, which is caught by PHPUnit's own test-runner loop (using the exact try/catch mechanics from the error-handling lessons) and recorded as a failure rather than propagating out and crashing the whole suite. Data providers work by reflection too: PHPUnit calls your provider method once, iterates the returned array/generator, and invokes the test method once per row, passing each row's elements as separate arguments — so one test method with a five-row provider genuinely becomes five independent test executions, each getting its own fresh instance per the rule above.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a <code>StringHelper</code> class with a method <code>slugify(string $text): string</code>
 that lowercases text, replaces runs of non-alphanumeric characters with a

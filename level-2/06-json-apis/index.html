@@ -1322,6 +1322,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2327,6 +2338,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2591,6 +2613,8 @@ having to parse the error message text.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>json_encode()</code> walks your PHP value's internal representation recursively — for an array it's the <code>HashTable</code> bucket-by-bucket, for an object it's the visible (public, or all if you implement <code>JsonSerializable</code>) property table — building a JSON text string as it goes, using an internal string buffer that grows dynamically rather than repeated concatenation (avoiding the O(n²) cost naive string-building would incur). <code>json_decode()</code> runs a real recursive-descent JSON parser that tokenizes the input and builds either <code>stdClass</code> objects or associative arrays (<code>true</code> for the second argument) depending on how you call it; because that parser is strict about JSON grammar, malformed input doesn't throw by default — it returns <code>null</code> and sets an internal error code retrievable via <code>json_last_error()</code>, which is exactly why "always check for decode failure" is not optional advice but a consequence of PHP's error-signaling design for this specific function. When you implement <code>JsonSerializable</code>, <code>json_encode()</code> checks for that interface <em>before</em> falling back to default property-walking, calling your <code>jsonSerialize()</code> method and encoding whatever array or scalar it returns instead — a compile-time interface check translated into a runtime dispatch decision. Consuming an API with cURL involves a real TCP handshake, TLS negotiation, and HTTP request/response cycle handled by libcurl (a C library PHP's cURL extension binds to) entirely outside the Zend Engine — <code>curl_exec()</code> blocks the current process until the full response is read, which is why a slow upstream API stalls your entire PHP process for that request's duration.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a function <code>fetchJsonSafely(string $url): array</code> that wraps
 <code>file_get_contents()</code> with a stream context (5-second timeout), returns

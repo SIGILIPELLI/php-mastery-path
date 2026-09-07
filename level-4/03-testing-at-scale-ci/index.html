@@ -1968,6 +1968,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2515,6 +2537,8 @@ cross-test pollution that's very hard to reproduce locally.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>phpunit.xml</code> replaces command-line flags because PHPUnit reads and parses this file once, at test-runner bootstrap, building the exact same configuration object internally that flags would populate — the file just makes the configuration inspectable and versionable instead of scattered across CI scripts. Grouping tests with <code>@group</code> (or the <code>#[Group]</code> attribute) works via the same reflection-based discovery mechanism as basic test discovery: PHPUnit reads each test method's attached group metadata during its discovery pass and filters the run set <em>before</em> executing anything, so a <code>--group fast</code> run genuinely never even instantiates the excluded test classes' <code>setUp()</code> — the filtering happens at discovery, not by running and then discarding results. Code coverage relies on a completely different mechanism than either of those: it needs Xdebug or PCOV, extensions that hook into the Zend Engine's opcode-execution loop itself, recording which specific lines' opcodes were actually executed during the run — this is why coverage reporting has real overhead (every executed opcode triggers a coverage-recording callback) and why it requires a specific extension rather than being a pure-PHPUnit feature; PHPUnit only aggregates and renders the raw line-hit data the extension collected. Running the suite in CI on every push works because a CI runner does nothing PHP-specific at all — it just executes <code>php vendor/bin/phpunit</code> as a fresh process in a fresh container, meaning your CI environment is subject to the exact same compile-per-invocation cost as any other PHP execution, just on someone else's machine, on a schedule triggered by your VCS webhook.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Add a <code>#[Group('slow')]</code> test to the <a href="../../level-3/10-project-rest-api/">REST API project</a>'s
 <code>TaskApiTest</code> that creates 50 tasks in a loop and asserts <code>index()</code> returns

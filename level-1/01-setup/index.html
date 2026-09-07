@@ -784,6 +784,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2439,6 +2461,8 @@ PHP's dependency manager (similar to <code>npm</code> for Node or <code>pip</cod
 Everything through <a href="../08-error-handling/">Module 8</a> only uses plain PHP with
 no dependencies, so you don't need it yet — Composer gets its own full
 treatment in <a href="../09-composer-basics/">Module 9 · Composer &amp; Package Basics</a>.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Running <code>php script.php</code> doesn't interpret your source text line by line the way a shell script does. The Zend Engine first runs your file through a <strong>lexer</strong> (tokenizing <code>&lt;?php ... ?&gt;</code> into tokens like <code>T_ECHO</code> or <code>T_VARIABLE</code>), then a <strong>parser</strong> builds an abstract syntax tree, and a <strong>compiler</strong> walks that tree emitting <strong>Zend opcodes</strong> — a low-level bytecode (<code>ZEND_ECHO</code>, <code>ZEND_ADD</code>, <code>ZEND_ASSIGN</code>, and so on). Only that opcode array is actually executed, by a virtual machine loop inside the engine. This is why a PHP syntax error is caught before any output happens at all, even output on a line before the bad one: compilation is a separate pass that completes (or fails) before execution starts. When you use <code>php -S</code> for local serving, each incoming HTTP request still triggers this same compile-then-execute cycle from scratch in a fresh process/request context — PHP has no in-memory server process holding your classes between requests the way a Node.js or Java app does, which is the foundational "shared-nothing" design that shapes almost everything else in this course.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Create a file <code>greet.php</code> that:</p>
 <ol>

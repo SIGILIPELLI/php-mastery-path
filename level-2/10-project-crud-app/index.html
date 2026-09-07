@@ -1522,6 +1522,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stretch-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2503,6 +2514,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stretch-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3109,6 +3131,8 @@ with each other or with the real <code>data/notes.sqlite</code> file.</p>
 <a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
 <a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>OK (6 tests, 10 assertions)
 </code></pre></div>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>This project stitches together the shared-nothing lifecycle with PDO's prepared-statement protocol at a larger scale: every page (<code>index.php</code>, <code>create.php</code>, <code>edit.php</code>, ...) is its own independent PHP process invocation, re-establishing a fresh PDO connection to the database on every single request via <code>Database.php</code> — there is no persistent connection pool the way a long-running server process would maintain, so <code>NoteRepository</code>'s job is entirely about efficient, minimal round-trips within that one connection's short lifetime. Session-based login (<code>Auth.php</code>) is the one piece of state PHP will let survive between these otherwise-independent processes, because <code>session_start()</code> reads the previously-serialized <code>$_SESSION</code> blob back off disk (or wherever your session handler stores it) using the session-ID cookie as the lookup key — this is why login state persists across page loads even though each page load is, under the hood, a completely fresh process with no memory of the last one. The <code>_bootstrap.php</code> shared-setup file works by simple <code>require</code>-time execution order: PHP executes its opcodes top-to-bottom exactly once per request that includes it, meaning any side effects (starting the session, opening the DB connection) happen deterministically before the including page's own code runs, since <code>require</code> doesn't defer or parallelize anything — it's synchronous, blocking inclusion of another file's compiled opcode array into the current execution.</p>
 <h2 id="stretch-goals">Stretch goals<a class="headerlink" href="#stretch-goals" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Add a <code>tags</code> column (comma-separated or a proper join table) and a filter

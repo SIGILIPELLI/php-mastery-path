@@ -873,6 +873,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2349,6 +2360,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2653,6 +2675,8 @@ preferred loop for arrays in idiomatic PHP, reached for far more often than
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Every branch you write compiles down to conditional-jump opcodes. An <code>if</code> becomes a <code>ZEND_JMPZ</code> (jump if zero/false) opcode pointing at an offset later in the opcode array; <code>else</code>/<code>elseif</code> chains are just multiple jump targets stitched together by the compiler. A <code>switch</code> statement compiles to a <em>sequence of equality comparisons and jumps</em> — it is not a jump table — which is why a <code>switch</code> with many cases has no algorithmic speed advantage over an equivalent <code>if/elseif</code> chain in PHP (unlike C, where the compiler can build a real jump table for dense integer cases). <code>match</code>, introduced in PHP 8, is compiler-recognized differently: it uses strict (<code>===</code>) comparisons internally and the engine can special-case it, but more importantly it's an <em>expression</em> that produces a <code>ZEND_QM_ASSIGN</code>-style value rather than a statement, which is why you can assign its result directly. <code>foreach</code> over an array doesn't walk raw memory — it uses an internal array pointer and a hash-table iterator (<code>zend_hash_get_current_data_ex</code>) that the engine advances each pass, iterating the array's ordered hash-table buckets rather than a contiguous C array.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write <code>fizzbuzz.php</code> that loops from 1 to 30 with a <code>for</code> loop and, for each
 number <code>$i</code>:</p>

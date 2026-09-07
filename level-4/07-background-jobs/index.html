@@ -2069,6 +2069,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2254,6 +2265,17 @@
     <span class="md-ellipsis">
       
         Background jobs cheat sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
       
     </span>
   </a>
@@ -2529,6 +2551,8 @@ problem queues exist to solve.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Modeling jobs as classes rather than raw payloads means each job is a real PHP object with a <code>handle()</code> method — when the dispatcher needs to hand it to a worker, it must first <em>serialize</em> that object (via <code>serialize()</code>, storing the class name plus its property values) into a string that can be written to a queue backend, and the worker process later <code>unserialize()</code>s it back into a live object before calling <code>handle()</code>; this round-trip is exactly why job classes must avoid holding un-serializable state (open database handles, closures over resources) as properties — those can't survive the serialize/unserialize boundary between the dispatching process and the (often entirely separate) worker process. The dispatcher's application-facing API (<code>dispatch($job)</code>) typically just pushes that serialized payload onto a queue and returns immediately — a deliberately non-blocking design that decouples the web request's process lifetime (which must stay short) from the job's actual execution time, which might happen seconds or minutes later in a completely different, long-running worker process. Scheduled cron-style tasks work through an OS-level mechanism entirely outside PHP: <code>cron</code> (or a container-level scheduler) starts a fresh <code>php</code> process at the configured interval, and because each invocation is once again a full compile-and-run cycle in an independent process, a "recurring task" in PHP is really just "the OS repeatedly launching a short-lived process," not a persistent in-process timer the way <code>setInterval</code> works in a long-running Node.js server.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Add a <code>RetryableJob</code> interface extending <code>Job</code> with a
 <code>maxAttempts(): int</code> method, and a <code>FlakyReportJob implements RetryableJob</code>

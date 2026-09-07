@@ -1637,6 +1637,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2513,6 +2535,8 @@ in-process array.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>OPcache directly targets the exact compile-then-execute pipeline covered in the setup lesson: by default, PHP recompiles a script's source into a fresh opcode array on <em>every single request</em>, throwing that opcode array away the moment the request ends — a genuine, measurable amount of CPU work repeated identically thousands of times a day for a file that never changes. OPcache intercepts this by storing the compiled opcode array (plus resolved class entries and static data) in a <strong>shared memory segment</strong> that persists across requests and even across separate PHP-FPM worker processes, keyed by file path; on a cache hit, the engine skips lexing, parsing, and compiling entirely and jumps straight to executing the already-compiled opcodes, which is why enabling OPcache is typically the single biggest performance win available to a PHP application with zero code changes. It caches <em>compiled code</em>, never your application's data or output — a <code>remember()</code>-style cache (typically backed by APCu's in-memory key-value store, Redis, or a file) is a completely separate layer you build yourself, storing the <em>result</em> of an expensive computation (a DB query, an API call) keyed by some cache key, checked before doing the expensive work and populated after. Cache invalidation is hard precisely because OPcache and an application-level cache have no way to know your underlying data changed — OPcache only detects source-file changes via filesystem timestamp checks (often disabled in production for speed, requiring an explicit <code>opcache_reset()</code> on deploy), and a <code>remember()</code> cache has no idea the database row it cached has since been updated unless your code explicitly deletes or overwrites that key.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Extend <code>FileCache</code> with a <code>forget(string $key): void</code> method that deletes a
 key's cache file if it exists (reuse the <code>path()</code> logic). Then write a small

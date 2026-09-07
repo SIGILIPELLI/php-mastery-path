@@ -1255,6 +1255,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2305,6 +2316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2540,6 +2562,8 @@ time by measuring how long comparisons take.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>$_GET</code> and <code>$_POST</code> are superglobal arrays that PHP populates once, at the very start of the request, by parsing the raw HTTP request line's query string and (for POST) the request body according to its <code>Content-Type</code> header — this parsing happens in the SAPI layer before your script's first opcode even runs, which is why these arrays are already filled by the time execution reaches line one. <code>session_start()</code> is where PHP's shared-nothing lifecycle gets its one deliberate escape hatch: it reads a session ID from a cookie (or generates a new one), then loads a serialized blob from a session store (by default, a file in <code>/tmp</code> named <code>sess_&lt;id&gt;</code>) into the <code>$_SESSION</code> superglobal — this is disk I/O happening synchronously on every request that touches sessions, restoring state that would otherwise be lost the instant the previous request's process exited. Escaping output with <code>htmlspecialchars()</code> prevents XSS because it operates on the <em>string level</em>, converting characters like <code>&lt;</code> and <code>&amp;</code> into HTML entities before they're ever written to the response body, so the browser's HTML parser can never interpret injected text as markup — CSRF tokens work by a similar wire-level trick: a per-session secret value embedded in the form is compared against <code>$_SESSION</code> on submit, and because that value never reaches a cross-origin attacker's page (same-origin policy blocks reading the token via JavaScript or a forged form), a forged request from another site can't reproduce it.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Build a two-file login demo: <code>login_form.php</code> renders a form with username,
 password, and a hidden CSRF token stored in <code>$_SESSION</code>; <code>login.php</code> handles

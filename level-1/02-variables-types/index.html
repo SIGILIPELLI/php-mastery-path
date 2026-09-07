@@ -856,6 +856,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2371,6 +2382,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2670,6 +2692,8 @@ runtime (e.g., <code>define('BUILD_TIME', time())</code>) and works in any scope
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Every PHP value is stored in a <code>zval</code> (Zend value) container, not as a raw machine value: a <code>zval</code> bundles a type tag with either the value itself (for integers, booleans, doubles) or a pointer to a heap-allocated structure (for strings, arrays, objects). When you assign <code>$b = $a</code>, PHP doesn't necessarily copy the underlying data — it uses <strong>copy-on-write (COW)</strong>: the new variable's <code>zval</code> points at the same refcounted value and only a real copy is made, lazily, the instant either variable is <em>mutated</em>. <code>var_dump()</code> and <code>gettype()</code> read the type tag straight off the <code>zval</code> rather than inspecting the raw bytes, which is why they're always accurate even though PHP is dynamically typed. Type juggling (<code>"5" + 3</code>) works because arithmetic opcodes like <code>ZEND_ADD</code> check the operand <code>zval</code> types at runtime and coerce one side before performing the operation — there's no compile-time type resolution the way there is in Java or C, so the coercion rule is evaluated fresh on every execution of that opcode.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write <code>profile.php</code> that:</p>
 <ol>

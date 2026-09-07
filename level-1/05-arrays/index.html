@@ -918,6 +918,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2327,6 +2338,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2506,6 +2528,8 @@ matters.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A PHP array is not really an "array" in the C sense — it's an <strong>ordered hash table</strong> (<code>HashTable</code>) that stores both integer and string keys in insertion order while still giving O(1) average-case lookup by key. Each bucket holds a hash of the key, the key itself, and a <code>zval</code> for the value; iteration order is guaranteed to be insertion order because buckets are also linked in a doubly-linked list threaded through the hash table, which is why <code>foreach</code> always visits elements in the order you added them regardless of key type. Functions like <code>array_merge()</code>, <code>array_slice()</code>, and <code>array_map()</code> build an entirely new <code>HashTable</code> and return it — they never mutate the array you passed in, which is why you must always capture the return value (<code>$new = array_merge($a, $b)</code>, not just <code>array_merge($a, $b);</code>). Copy-on-write applies to arrays too: <code>$copy = $original</code> doesn't duplicate the hash table immediately, it bumps a reference count on the shared <code>HashTable</code> structure, and only when one of the two variables is actually written to does the engine allocate a real independent copy — this is why passing large arrays around "by value" in PHP is cheap until you start mutating them.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Given an indexed array of associative arrays representing products (each with
 <code>name</code> and <code>price</code> keys), write code that: filters to only products under

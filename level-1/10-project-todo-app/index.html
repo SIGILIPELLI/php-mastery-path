@@ -1025,6 +1025,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stretch-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stretch-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2431,6 +2453,8 @@ arrays, strings, classes, error handling, and Composer basics.</p>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># [x] 1. Write Level 1 exercises</span>
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># [ ] 2. Review Level 2 outline</span>
 </code></pre></div>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Because each CLI invocation of <code>todo.php</code> is its own separate PHP process, there is no shared memory between runs — <code>TaskStorage</code>'s job of reading and rewriting a JSON (or similar) file on disk <em>is</em> your persistence layer precisely because PHP's shared-nothing lifecycle gives you nothing else to persist state in. Every time you run the script, the engine starts cold: lexes, parses, and compiles <code>todo.php</code> and every file it <code>require</code>s into a fresh opcode array, executes it top to bottom, and then the whole process — including every <code>zval</code>, object, and array you built — is torn down and freed. <code>json_encode()</code>/<code>json_decode()</code> round-trip your task list through PHP's array/object representation into a byte-serialized JSON string and back, walking the <code>HashTable</code> structure recursively; this is a genuinely different data lifecycle from a long-running server that keeps a task list in memory, and it's why file-locking (or at least careful read-then-write ordering) matters the moment two invocations could ever overlap — PHP gives you zero built-in protection against two of these short-lived processes racing to write the same file.</p>
 <h2 id="stretch-goals">Stretch goals<a class="headerlink" href="#stretch-goals" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Add a <code>priority</code> field (<code>low</code>/<code>medium</code>/<code>high</code>) and sort the list by it.</li>

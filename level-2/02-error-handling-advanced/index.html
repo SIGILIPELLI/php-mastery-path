@@ -1188,6 +1188,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2523,6 +2545,8 @@ details like stack traces or database errors to the end user.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Exception chaining (<code>throw new AppException($msg, 0, $previous)</code>) stores the earlier exception as a real object reference inside the new exception's <code>previous</code> property — the engine does nothing special here beyond ordinary property assignment, but PHP's uncaught-exception handler and <code>getTraceAsString()</code> walk that <code>previous</code> chain recursively, which is why chained exceptions print as "Caused by:" blocks. The <code>finally</code>/<code>return</code> gotcha exists because of <em>when</em> the return value is materialized: the <code>try</code> block's <code>ZEND_RETURN</code> opcode computes and stashes its return value before control transfers to the <code>finally</code> block's opcodes, and if <code>finally</code> executes its <em>own</em> <code>ZEND_RETURN</code>, that opcode overwrites the stashed value outright — the original return is silently discarded, not merged. Converting PHP errors (warnings, notices — which are engine-level diagnostics, not <code>Throwable</code>s) into exceptions works via <code>set_error_handler()</code>, which registers a callback the engine calls instead of its default diagnostic-printing behavior whenever an <code>E_WARNING</code>-class opcode fault occurs; throwing an <code>ErrorException</code> from inside that callback is what makes the fault participate in the normal catch/finally unwinding machinery described above, since a plain PHP error never enters the try/catch table lookup on its own.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Design a small exception hierarchy for a file-processing task: an abstract
 <code>FileProcessingException extends RuntimeException</code>, and two subclasses,

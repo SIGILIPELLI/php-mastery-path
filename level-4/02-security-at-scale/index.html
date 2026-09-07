@@ -1929,6 +1929,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2508,6 +2530,8 @@ than fixing the session bug, silently reopening the hole.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Secrets kept out of source and loaded from environment variables (<code>getenv()</code> or <code>$_ENV</code>) work because those values are injected into the process's environment block by the OS or process manager (PHP-FPM's pool config, a container runtime, a <code>.env</code> loader) <em>before</em> PHP even starts compiling your script — by the time your code runs, they're just OS-level key-value pairs the engine reads via a syscall wrapper, entirely outside anything version control ever touches, which is the actual mechanism (not just convention) that keeps them out of your git history. CSRF protection at scale still rests on the same session-bound-token mechanism from the sessions lesson, but "at scale" it must also account for PHP-FPM's multi-worker-process model: because each worker is a separate OS process with no shared memory, the token has to live somewhere every worker can read it back — the session store — rather than in any process-local variable, which would only be visible to whichever single worker happened to handle the form-rendering request. Password hashing "at scale" is the same bcrypt primitive as before, but the cost-factor tuning matters more here because bcrypt's slowness is deliberately CPU-bound and synchronous — a fleet of PHP-FPM workers all hashing passwords at too high a cost factor under real login-traffic volume can genuinely exhaust worker availability, since each hash operation blocks its worker process for its full computed duration with no way to yield mid-computation.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Extend <code>EnvSecrets</code> with a <code>mask(string $key): string</code> method that returns
 the secret's value with all but the last 4 characters replaced by <code>*</code> (e.g.

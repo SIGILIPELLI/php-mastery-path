@@ -1378,6 +1378,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2327,6 +2338,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2532,6 +2554,8 @@ the way) avoids this even if a bad file ends up stored.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>An uploaded file never touches your PHP script directly during transfer — the SAPI layer (built into PHP's request-handling C code, before any of your opcodes run) parses the multipart/form-data request body, streams each file part to a temporary file on disk (usually under the system temp directory), and only <em>then</em> populates <code>$_FILES</code> with metadata pointing at that temp path plus the client-supplied original name, MIME type, and an <code>error</code> code. This is exactly why you must check <code>$_FILES[...]['error']</code> first: that field reflects what the SAPI layer observed during the upload itself (partial upload, exceeded <code>upload_max_filesize</code>, etc.) — a check no user-level validation of the file's <em>content</em> can substitute for, because a failed upload might leave you with an empty or truncated temp file that "validates" as reasonable by size alone. The client-supplied MIME type and filename are pure request metadata — attacker-controlled strings echoed back from the multipart headers with no verification behind them — which is why real content-type checking calls <code>finfo_file()</code> (or <code>mime_content_type()</code>), a function that opens the temp file and inspects its actual leading bytes (magic numbers) against known file-format signatures, entirely independent of what the browser claimed. <code>move_uploaded_file()</code> (rather than a plain <code>rename()</code> or <code>copy()</code>) additionally verifies the source path was genuinely created by PHP's own upload machinery in this request, closing off a path-traversal trick where a value crafted to <em>look</em> like an upload path points somewhere else on disk.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a function <code>handleAvatarUpload(array $file): string</code> (accepting one
 <code>$_FILES["avatar"]</code>-shaped array) that runs all four validation steps above

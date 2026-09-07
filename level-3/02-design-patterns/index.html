@@ -1564,6 +1564,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2608,6 +2630,8 @@ adds behavior before/after delegating.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Singleton relies on PHP's per-request-static class properties: a <code>private static ?self $instance = null</code> slot lives once per <code>zend_class_entry</code>, not per object, so every call to <code>getInstance()</code> in a given request checks and potentially sets that one shared slot — but because static properties do <strong>not</strong> survive between requests (a fresh process means a fresh, uninitialized class entry each time), a PHP "singleton" is only ever a per-request singleton, unlike in a long-lived Java or C# process where it truly means one instance for the application's whole lifetime. Factory Method and Strategy both lean on the same underlying mechanism: PHP resolves <code>new $className()</code> or a stored <code>callable</code>/closure at runtime by looking up the class entry or invoking the closure's stored opcode pointer, so "choosing which class/algorithm to use" is genuinely a runtime decision with no compile-time binding to a concrete type — there's no vtable-style static dispatch to bypass because PHP method calls are already dynamically resolved via the class entry's method table on every call. Observer works by keeping an array of registered listener callables/objects and looping over it to invoke each one — no special engine support, just ordinary array iteration and dynamic calls (<code>call_user_func</code>), which is also why observer notification order is simply insertion order into that array (the same guaranteed hash-table ordering arrays give you everywhere else). Decorator composes by wrapping one object inside another that implements the same interface, forwarding calls via <code>$this-&gt;wrapped-&gt;method()</code> — each layer is a genuinely separate object with its own handle in the object store, so decorator chains cost one extra method dispatch per layer, not zero.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Add a <code>PushNotification</code> class to the Factory Method example and register
 it as <code>"push"</code> in <code>NotificationFactory::create()</code> — confirm the existing

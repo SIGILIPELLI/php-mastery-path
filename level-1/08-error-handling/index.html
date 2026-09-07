@@ -1002,6 +1002,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2327,6 +2338,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2623,6 +2645,8 @@ message and machine-usable details.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>throw</code> compiles to a <code>ZEND_THROW</code> opcode that doesn't just jump — it walks the current call stack, unwinding each execution frame in turn and checking each frame's compiled <strong>try/catch table</strong> (a small side table the compiler builds during parsing, mapping opcode ranges to catch/finally handlers) for a matching catch block. If no frame's table matches the thrown class (checked via <code>instanceof</code>-style class-hierarchy walking), the engine keeps unwinding all the way to the top and PHP invokes the default fatal-error handler. <code>finally</code> blocks are guaranteed to run because the engine tracks them as a <em>fixed exit point</em> injected into the opcode array for every possible way the try block can end — return, throw, or falling through — rather than relying on a language-level "guarantee" with no mechanism behind it. Building an exception hierarchy is cheap at runtime because <code>instanceof</code> checks and catch-type matching both just walk the class entry's parent-chain pointers (set up once at class-declaration/compile time), an O(depth) operation, not a string comparison. Custom exception classes that extend <code>Exception</code> inherit its constructor's behavior of automatically capturing a <strong>stack trace</strong> via <code>debug_backtrace()</code>-style frame walking at the moment the exception object is constructed — not at the moment it's thrown — which is why re-throwing a caught exception preserves its original trace.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a custom exception class <code>NegativeDepositException extends
 InvalidArgumentException</code> that stores the invalid amount and exposes a

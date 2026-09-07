@@ -2136,6 +2136,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2276,6 +2287,17 @@
     <span class="md-ellipsis">
       
         Code quality cheat sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
       
     </span>
   </a>
@@ -2566,6 +2588,8 @@ assertion at all.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>PHPStan performs <strong>static analysis</strong> — it parses your source into an AST (much like the Zend Engine's own compiler does) but never executes a single opcode; instead it walks the AST building up a model of every variable's possible types at each point in the code, flagging places where an operation is inconsistent with that inferred type (calling a method that doesn't exist on a possible type, passing a nullable value where a non-nullable parameter is declared) — this is fundamentally different from PHP's own runtime type checking, which only catches a type mismatch the instant that specific line actually executes with that specific bad value; PHPStan catches classes of mismatches across every possible code path, without running any of them. PHP-CS-Fixer also works purely on the AST/token stream (via PHP's tokenizer, the same lexer stage the Zend Engine itself uses to tokenize source before parsing), rewriting whitespace, brace placement, and other purely syntactic properties without altering the resulting opcode array at all — formatting is provably behavior-preserving because it only touches token-stream properties the compiler discards entirely once it reaches the opcode-generation stage. PHPUnit's coverage reporting, layered on top of PHPStan and CS-Fixer here, once again depends on Xdebug/PCOV's opcode-execution hooks — meaning "quality" in this lesson spans three genuinely distinct engine touchpoints: pre-execution AST analysis (PHPStan), pre-execution token rewriting (CS-Fixer), and execution-time instrumentation (coverage) — each operating at a different stage of PHP's compile pipeline.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Add types to <code>Messy::add()</code> — <code>int $a, int $b): int</code> — rerun
 <code>phpstan analyse</code> and confirm the 3 errors are gone, then rerun

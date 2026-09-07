@@ -1890,6 +1890,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2239,6 +2250,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2519,6 +2541,8 @@ strictly to declaring bindings.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Service providers organize container registration by deferring actual object construction: a provider's <code>register()</code> method typically stores <em>closures</em> (factory recipes) in the container rather than eagerly building objects, so registering fifty services costs almost nothing until each is actually resolved — the container only invokes a given closure the first time something asks for that service, exploiting the same call-when-needed laziness as autoloading. A minimal ORM built on magic methods leans on PHP's <code>__get</code>/<code>__set</code>/<code>__call</code> hooks, which the engine invokes automatically whenever code accesses a property or method that doesn't exist on the object's class entry — this is a genuine fallback mechanism checked by the property/method-access opcodes themselves (<code>ZEND_FETCH_OBJ_R</code> and friends check for a defined property first, then fall back to <code>__get</code> only if the lookup fails), which is exactly why magic-method-based ORMs feel like plain property access syntactically but are secretly routing every single access through a method call, with the corresponding per-access overhead and the loss of IDE/static-analysis visibility that comes from properties that don't really exist on the class.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Add a <code>QueueServiceProvider</code> that binds a <code>Queue</code> interface (reuse the
 <code>FileQueue</code> idea from <a href="../../level-3/06-working-with-queues/">Working with Queues</a>

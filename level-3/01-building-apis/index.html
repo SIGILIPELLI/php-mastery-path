@@ -1536,6 +1536,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2566,6 +2588,8 @@ objects, and route groups on top of the same core idea shown above:</p>
 <p>Knowing how <code>dispatch()</code> works under the hood is what lets you read Slim's
 source, debug a routing mismatch, or write a router for a constrained
 environment where pulling in a framework isn't an option.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A front controller works because of how a web server (Nginx/Apache) is configured to route <em>every</em> request to one PHP file, regardless of the URL path — the server's rewrite rule sets <code>$_SERVER['REQUEST_URI']</code> to the original path but still invokes the same <code>index.php</code>, meaning PHP's own compile-and-run lifecycle happens exactly once per request, on the same file, and it's your routing code (not the server) that inspects the URI string to decide which handler logic to execute. This differs fundamentally from something like a Java servlet container, which keeps route-to-handler mappings resident in memory across requests — in PHP, the router array or match statement you write is rebuilt from scratch, compiled fresh, every single request, because nothing survives between them. Route ordering matters for the same reason <code>switch</code>/<code>match</code> evaluate top-to-bottom: a router doing sequential pattern matching (rather than a compiled trie or hash lookup) will match the <em>first</em> pattern that fits, so a greedy or ambiguous earlier route silently shadows a more specific one later, an artifact of how the matching loop is written, not a PHP-engine quirk. Content negotiation by reading <code>Accept</code> headers works because <code>$_SERVER</code> is populated directly from parsed HTTP request headers before your script runs, the same superglobal-population step that fills <code>$_GET</code>/<code>$_POST</code>, so inspecting <code>$_SERVER['HTTP_ACCEPT']</code> is reading data the SAPI layer already extracted for you.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Extend the hand-rolled <code>Router</code> with a <code>PUT /books/{id}</code> route that reads a
 JSON body and updates the matching book's title (return a <code>404</code> JSON body

@@ -1592,6 +1592,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2574,6 +2596,8 @@ destructor, or magic method from the original class ever executes. Prefer
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>password_hash()</code> doesn't compute a hash directly the way <code>md5()</code> does — by default it runs the <strong>bcrypt</strong> algorithm (a deliberately slow, tunable key-derivation function built on the Blowfish cipher's key schedule), embedding a random salt and the chosen cost factor directly into the returned string, which is why the same password hashed twice produces two different-looking outputs that <code>password_verify()</code> can still both validate. <code>hash_equals()</code> exists because a naive <code>===</code> string comparison on hashes short-circuits at the first differing byte — an attacker measuring response-time differences over many requests can use that timing leak to guess a secret one byte at a time; <code>hash_equals()</code> is implemented to always compare every byte of both strings regardless of where they diverge, keeping execution time constant relative to input content rather than input similarity. <code>unserialize()</code> on untrusted input is dangerous because PHP's serialization format can encode arbitrary objects, including their exact class name — deserializing invokes that class's <code>__wakeup()</code> or <code>__destruct()</code> magic methods automatically as part of reconstructing the object, and if any class reachable in your autoloader has such a method with a dangerous side effect (deleting files, executing a command), an attacker who controls the serialized bytes can trigger it without ever calling that method directly — a genuine "object injection" vulnerability rooted in how deserialization is wired to the engine's magic-method dispatch. SQL injection defenses beyond prepared statements matter because things like table/column names and <code>ORDER BY</code> directions can't be parameterized in the wire protocol at all (only values can) — those must be validated against a fixed allow-list before ever reaching string interpolation, since no amount of "prepared statement" protects a query where the <em>structure</em>, not a value, is attacker-influenced.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a function <code>validateSortColumn(string $column): string</code> that
 allowlists <code>["title", "created_at", "id"]</code> (throwing <code>InvalidArgumentException</code>

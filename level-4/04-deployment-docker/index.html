@@ -1996,6 +1996,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stretch-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stretch-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2486,6 +2508,8 @@ of full filesystem access inside the container.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>php -S</code> runs PHP's built-in development server, a genuinely single-threaded, single-process server intended for local testing — it handles one request at a time, sequentially, with no worker pool at all, which is exactly why it's unsuitable for anything beyond <code>php artisan serve</code>-style local development. PHP-FPM (FastCGI Process Manager) is the real production mechanism: it maintains a pool of persistent PHP worker processes, each one independently running the full compile-and-execute lifecycle described throughout this course for whichever request it's handed, while Nginx sits in front purely as an HTTP server and reverse proxy, forwarding requests to an available FPM worker over the FastCGI protocol (a binary protocol distinct from raw HTTP) via a Unix socket or TCP port. This division of labor is why the Dockerfile builds a PHP-FPM image and the Nginx config is a <em>separate</em> file — Nginx efficiently handles static assets, TLS termination, and connection buffering (things it's purpose-built for), while FPM workers are reserved exclusively for actually executing PHP opcodes, and Docker Compose's job is simply wiring both containers onto a shared network so Nginx's <code>fastcgi_pass</code> directive can reach FPM's socket by container hostname rather than a hardcoded IP.</p>
 <h2 id="stretch-goals">Stretch goals<a class="headerlink" href="#stretch-goals" title="Permanent link">&para;</a></h2>
 <p><em>(This module has no runnable PHP demo since it's infrastructure
 configuration — practice the concepts as stretch goals instead of an

@@ -935,6 +935,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2305,6 +2316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2585,6 +2607,8 @@ over their plain counterparts.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>PHP strings are refcounted, length-prefixed byte buffers (<code>zend_string</code>) — not null-terminated C strings, even though a null terminator is also stored for interop with C library functions. This is why <code>strlen()</code> is O(1) (it reads a stored length field) rather than scanning for a terminator, and why PHP strings can safely contain null bytes. Single-quoted strings are compiled almost verbatim into the opcode array as a single constant; double-quoted strings with interpolation compile into a <em>sequence</em> of opcodes — literal fragments concatenated with <code>ZEND_CONCAT</code> against the interpolated variable's string representation, computed at runtime, which is precisely why interpolation happens on every execution and single-quoted strings are marginally cheaper to compile (there's nothing to scan for <code>$</code> at parse time). Heredoc/Nowdoc share this same distinction — Nowdoc is the exact equivalent of single quotes for multi-line text. Multibyte (<code>mb_*</code>) functions exist because the byte-oriented core string functions (<code>strlen</code>, <code>substr</code>, etc.) count and slice <em>bytes</em>, not Unicode codepoints; a UTF-8 character like "é" occupies two bytes, so <code>strlen("café")</code> returns 5, not 4, unless you use <code>mb_strlen()</code>, which walks the byte stream applying UTF-8's multi-byte decoding rules to count actual characters.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a function <code>slugify(string $title): string</code> that turns a title into a
 URL-friendly slug: trim whitespace, lowercase it, replace any run of

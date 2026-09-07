@@ -1721,6 +1721,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2491,6 +2513,8 @@ domain classes.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Constructor injection is just ordinary function-call argument passing — there is no special engine support for "injecting" a dependency, it's the same argument-binding mechanism covered in the functions lesson, applied to a constructor instead of a free function; the "dependency injection" pattern is entirely a <em>design discipline</em> about who's responsible for constructing those arguments, not a distinct language feature. A minimal autowiring container works by using PHP's reflection API at runtime: <code>ReflectionClass::getConstructor()-&gt;getParameters()</code> inspects a class's constructor parameter list — including each parameter's declared type — without ever instantiating the class, and the container recursively resolves each typed parameter (by looking it up or recursively autowiring it) before finally calling <code>$reflectionClass-&gt;newInstanceArgs($resolvedArgs)</code>, all of which is genuinely runtime introspection of compiled class metadata, not compile-time code generation the way some statically-typed DI frameworks work. This is precisely why autowiring can't resolve scalar/primitive constructor parameters (an <code>int $timeout</code>) automatically — reflection can tell the container a parameter is typed <code>int</code>, but there's no object graph to recursively construct for a primitive, only a value to supply, which is why real DI containers require explicit configuration for those cases. The performance cost of reflection-based autowiring (walking the constructor signature via reflection on every resolution) is also why production-grade containers precompile the resolution plan once and cache it, rather than reflecting on every single object construction.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Add a <code>NullLogger implements Logger</code> (a <code>log()</code> that does nothing) and a
 <code>FixedClock implements Clock</code> whose constructor takes a <code>DateTimeImmutable</code>

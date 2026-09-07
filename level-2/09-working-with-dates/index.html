@@ -1406,6 +1406,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2327,6 +2338,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2595,6 +2617,8 @@ off-by-one-hour (or off-by-a-day, near midnight) bugs.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>DateTime</code> and <code>DateTimeImmutable</code> wrap the same underlying C-level <code>timelib</code> datetime structure (an absolute point in time plus timezone data), but they differ in exactly one behavior baked into their compiled method implementations: every mutating method on <code>DateTime</code> (<code>modify()</code>, <code>add()</code>, <code>sub()</code>) changes that internal structure in place and returns <code>$this</code>, while the same-named methods on <code>DateTimeImmutable</code> allocate a brand-new object with the modified structure and leave the original untouched — this is why <code>$a-&gt;modify('+1 day')</code> silently mutates <code>$a</code> itself but <code>$b = $a-&gt;modify('+1 day')</code> on an immutable instance requires capturing the return value, and it's the single most common bug source this lesson exists to prevent. <code>createFromFormat()</code> runs <code>timelib</code>'s format-directive parser strictly against your format string; unlike the loose constructor (which tries many heuristics to guess a date string's meaning), <code>createFromFormat</code> fails explicitly (returning <code>false</code> and populating <code>DateTime::getLastErrors()</code>) the moment the input doesn't match your directives character-for-character, which is exactly why it's the right tool for parsing user-submitted or external date strings you can't otherwise trust. <code>DateInterval</code> arithmetic isn't simple integer math on a timestamp — adding "+1 month" to January 31st goes through calendar-aware date-component arithmetic in <code>timelib</code> that can produce March 3rd (because February has no 31st), a genuine calendar-rule computation, not a fixed offset in seconds.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a function <code>daysUntil(DateTimeImmutable $target, ?DateTimeImmutable
 $from = null): int</code> that returns how many whole days remain until <code>$target</code>

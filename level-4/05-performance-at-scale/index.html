@@ -2013,6 +2013,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2254,6 +2265,17 @@
     <span class="md-ellipsis">
       
         Performance-at-scale cheat sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
       
     </span>
   </a>
@@ -2509,6 +2531,8 @@ assumed.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>The N+1 query problem is a direct consequence of PDO's request-scoped connection: each <code>execute()</code> call is a full network round-trip to the database server, so looping over N parent rows and issuing one query per row for related data means N+1 separate round-trips, each paying full network latency, query-plan lookup, and result-marshaling overhead — the fix (a single <code>JOIN</code> or a batched <code>WHERE id IN (...)</code>) collapses that into one round-trip because the <em>database engine</em> does the join work internally, which is vastly cheaper than N+1 trips through PHP's own PDO layer. Generators solve a different, memory-focused problem: a normal function returning an array must build the <em>entire</em> array in memory before returning it, but a function using <code>yield</code> compiles to special coroutine-like opcodes — the engine suspends the function's execution state (its local variables, its exact bytecode instruction pointer) right at the <code>yield</code>, hands one value back to the calling <code>foreach</code>, and only resumes execution (picking up exactly where it left off) when the next value is requested. This is why a generator iterating a million-row result set holds only <em>one row</em> in memory at a time rather than all million, and combining a generator with a paginated query (fetching rows in batches of, say, 500, yielding them one at a time) bounds both the PHP-side memory <em>and</em> the size of any single database round-trip simultaneously.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Add a <code>countBooksByAuthorLazily(PDO $pdo): Generator</code> that yields
 <code>['author' =&gt; $name, 'count' =&gt; $n]</code> pairs using a single <code>GROUP BY</code> query

@@ -1771,6 +1771,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2305,6 +2316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2542,6 +2564,8 @@ package you touched.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>composer.lock</code> exists because dependency resolution is genuinely expensive and non-deterministic across time: <code>composer.json</code>'s <code>^2.1</code> constraint describes a <em>range</em> of acceptable versions, and running the SAT-style resolver against that range on two different days (as new versions get published) can legitimately produce two different resolved sets — <code>composer.lock</code> freezes the exact resolved commit/version of every package (direct and transitive) the moment <code>install</code>/<code>update</code> succeeds, so <code>composer install</code> on a locked project skips resolution entirely and just fetches the exact locked versions, guaranteeing byte-for-byte reproducible dependency trees across machines and CI runs. <code>composer validate</code> catches schema mistakes by checking your <code>composer.json</code> against Composer's own JSON Schema <em>before</em> attempting resolution — a fast, purely structural check that catches a malformed version constraint or a missing required field without ever hitting the package registry over the network. <code>--optimize-autoloader</code>'s performance effect ties directly back into the autoloading lesson: at scale, PSR-4's dynamic prefix-matching means the autoload callback does more string manipulation per class as your namespace tree grows, so collapsing that into one static classmap array trades a larger, precomputed lookup table (more disk/memory) for eliminating that per-class-load computation — a tradeoff that only pays off once a project has enough classes for the computation to matter.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Create a fresh <code>composer.json</code> for a package <code>acme/text-utils</code> with a
 <code>Acme\TextUtils\</code> PSR-4 mapping to <code>src/</code>, <code>require-dev</code> on

@@ -2030,6 +2030,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2232,6 +2243,17 @@
     <span class="md-ellipsis">
       
         Versioning &amp; docs cheat sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
       
     </span>
   </a>
@@ -2481,6 +2503,8 @@ versions and only the new one 404s.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Content-negotiated versioning works by branching on the same <code>$_SERVER['HTTP_ACCEPT']</code> (or a custom header) string inspection used for content negotiation elsewhere — there's no special "version" concept in HTTP or PHP, just a router reading a header value and dispatching to different handler code paths based on a string match, exactly like any other conditional routing decision. Generating docs from code rather than beside it typically means using PHP's reflection API (or parsing PHPDoc-style comment blocks attached to methods, which the engine preserves as retrievable metadata via <code>ReflectionMethod::getDocComment()</code>) to build an OpenAPI/Swagger spec programmatically at build time or on-demand — because this walks the <em>actual compiled class structure</em> rather than a hand-maintained separate document, the generated docs can never drift out of sync with real method signatures the way hand-written docs inevitably do, since a signature change is reflected the next time the generator runs its reflection pass, with no separate synchronization step to forget.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Add a <code>V3Response</code> that includes a <code>links</code> field
 (<code>['self' =&gt; "/users/{$data['id']}"]</code>) alongside the <code>V2Response</code> shape, and

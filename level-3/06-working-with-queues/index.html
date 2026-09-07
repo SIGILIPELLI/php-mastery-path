@@ -1665,6 +1665,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2496,6 +2518,8 @@ instead of disappearing or looping forever.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A file-based queue works around PHP's shared-nothing lifecycle by using the filesystem as the one piece of state that outlives any single process: the producer script runs, appends (or atomically renames in) a new job file, and exits completely — there is no producer process waiting around, because PHP processes don't persist. A separate worker process, run as its own long-lived loop (<code>while (true) { ... sleep(...); }</code>) or invoked repeatedly by cron, is what actually provides continuity — each iteration of that loop is still bound by normal PHP execution rules, but the <em>loop itself</em>, not any single request, is what makes the queue feel continuous. File-based locking (<code>flock()</code>) matters here because two worker processes polling the same directory can otherwise both read the same job file before either deletes it, executing the same job twice — <code>flock()</code> asks the OS kernel to grant exclusive access to a file descriptor, a guarantee enforced outside PHP entirely, which is why it works correctly across genuinely separate PHP processes with no shared memory. A real broker (Redis, RabbitMQ, SQS) replaces this file-polling pattern with a purpose-built server process that holds queue state in memory (or its own durable log) and pushes/pops jobs atomically via its own wire protocol — solving the exact race condition described above at the infrastructure level instead of via filesystem locking primitives, and adding acknowledgment/retry semantics that a bare file queue has no way to express.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Add a <code>FileQueue::stats(): array</code> method returning
 <code>['pending' =&gt; n, 'processing' =&gt; n, 'done' =&gt; n, 'failed' =&gt; n]</code> by counting

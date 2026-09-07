@@ -2206,6 +2206,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stretch-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2362,6 +2373,17 @@
     <span class="md-ellipsis">
       
         Capstone architecture cheat sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
       
     </span>
   </a>
@@ -2857,6 +2879,8 @@ assertion that the first id is <code>1</code> depend on test execution order.</p
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Tracing one request through this capstone end to end: the SAPI layer parses the incoming HTTP request into <code>$_SERVER</code>/<code>$_GET</code>/<code>$_POST</code> before your code runs at all, then the front-controller-style router (from the routing section) does sequential pattern matching against <code>REQUEST_URI</code> to find a handler, opening a fresh PDO connection scoped to just this request for the domain object's persistence needs — every prepared statement in that persistence layer sends parameterized queries over the wire so user input never becomes SQL syntax, and once the response is written, the entire process (every object, every <code>zval</code>, the PDO connection, OPcache's <em>cached compiled opcodes</em> aside) is torn down, with nothing carried forward except whatever got explicitly written to the SQLite file or session store. This project makes the shared-nothing model's real cost and real benefit both visible at once: the cost is that "testing it" must genuinely re-exercise the full compile-connect-query-render cycle for every scenario, since there's no in-memory shortcut PHP will give you between test cases; the benefit is that this exact model is what makes PHP-FPM's multi-worker-process architecture trivially safe under concurrency — because no request-scoped state survives past its own request, there's no shared mutable state between concurrent workers to race on, aside from whatever you've deliberately persisted to the database or session store yourself.</p>
 <h2 id="stretch-goals">Stretch goals<a class="headerlink" href="#stretch-goals" title="Permanent link">&para;</a></h2>
 <p>Extend the capstone in any of these directions — each pulls in a concept
 from an earlier module in this path:</p>

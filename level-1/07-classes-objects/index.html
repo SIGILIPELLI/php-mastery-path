@@ -963,6 +963,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2305,6 +2316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2620,6 +2642,8 @@ members, class constants, and <code>parent::</code>/<code>self::</code> calls.</
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Objects in PHP are represented internally by a small <strong>handle</strong> into an object store, not by the <code>zval</code> holding the data directly — when you write <code>$b = $a</code> for two objects, both variables get a <code>zval</code> containing the <em>same</em> object handle, so both point at the identical object in memory (unlike arrays, objects are reference-like by default, which is why mutating <code>$b-&gt;prop</code> is visible through <code>$a</code> too, without needing <code>&amp;</code>). Method calls dispatch through the object's class entry (<code>zend_class_entry</code>), which holds the compiled method table; a call to <code>$obj-&gt;method()</code> looks up <code>method</code> in that table (walking up through parent classes if not found locally) and executes its opcodes with <code>$this</code> bound in the new call frame's symbol table. Visibility (<code>public</code>/<code>private</code>/<code>protected</code>) is enforced by the engine at the <em>opcode</em> level during compilation and at call time — it checks the calling scope's class against the declaring class, not by hiding memory, so reflection (<code>ReflectionClass</code>) can always see private properties because it bypasses that visibility opcode check entirely. Static properties live once per class entry, not per object — accessing <code>self::$count</code> reads a slot attached to the <code>zend_class_entry</code> itself, shared by every instance and even by code that never instantiates the class at all.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a <code>Book</code> class with private properties <code>title</code>, <code>author</code>, and
 <code>pagesRead</code> (starting at <code>0</code>), a constructor taking <code>title</code> and <code>author</code>
