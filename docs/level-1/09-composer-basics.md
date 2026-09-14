@@ -1,5 +1,9 @@
 # 09 · Composer & Package Basics
 
+## 🎥 Video walkthrough
+
+<iframe width="100%" height="400" style="max-width:720px;aspect-ratio:16/9;height:auto;" src="https://www.youtube.com/embed/jJLm3v_GN_M" title="Video walkthrough" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 Real PHP projects rarely write everything from scratch — they pull in
 well-tested libraries for logging, HTTP requests, date handling, and more.
 **Composer** is PHP's dependency manager: it downloads the packages your

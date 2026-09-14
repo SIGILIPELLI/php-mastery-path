@@ -1,5 +1,9 @@
 # 05 · Arrays
 
+## 🎥 Video walkthrough
+
+<iframe width="100%" height="400" style="max-width:720px;aspect-ratio:16/9;height:auto;" src="https://www.youtube.com/embed/fiyECEEdHLU" title="Video walkthrough" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 PHP has one array type that flexibly acts as both a list (indexed array) and
 a dictionary (associative array) — a huge amount of everyday PHP code is just
 array manipulation.
