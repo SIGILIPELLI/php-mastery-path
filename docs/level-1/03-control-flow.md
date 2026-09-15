@@ -1,3 +1,7 @@
+---
+description: "Control Flow — Control flow statements decide which code runs, and how many times. PHP's if/loops look close to C/Java/JavaScript, plus a modern match…"
+---
+
 # 03 · Control Flow
 
 Control flow statements decide which code runs, and how many times. PHP's
@@ -241,6 +245,12 @@ echo ($value ?: "default") . "\n";   // default -- same result here, but
 ## How It Actually Works
 
 Every branch you write compiles down to conditional-jump opcodes. An `if` becomes a `ZEND_JMPZ` (jump if zero/false) opcode pointing at an offset later in the opcode array; `else`/`elseif` chains are just multiple jump targets stitched together by the compiler. A `switch` statement compiles to a *sequence of equality comparisons and jumps* — it is not a jump table — which is why a `switch` with many cases has no algorithmic speed advantage over an equivalent `if/elseif` chain in PHP (unlike C, where the compiler can build a real jump table for dense integer cases). `match`, introduced in PHP 8, is compiler-recognized differently: it uses strict (`===`) comparisons internally and the engine can special-case it, but more importantly it's an *expression* that produces a `ZEND_QM_ASSIGN`-style value rather than a statement, which is why you can assign its result directly. `foreach` over an array doesn't walk raw memory — it uses an internal array pointer and a hash-table iterator (`zend_hash_get_current_data_ex`) that the engine advances each pass, iterating the array's ordered hash-table buckets rather than a contiguous C array.
+## 🔀 See this in another language
+
+- [Swift — Control Flow](https://sigilipelli.github.io/swift-mastery-path/level-1/03-control-flow/)
+- [SQL — Filtering with WHERE](https://sigilipelli.github.io/sql-mastery-path/level-1/03-filtering-where/)
+- [TypeScript — Control Flow with Types](https://sigilipelli.github.io/typescript-mastery-path/level-1/03-control-flow/)
+
 ## Exercise
 
 Write `fizzbuzz.php` that loops from 1 to 30 with a `for` loop and, for each

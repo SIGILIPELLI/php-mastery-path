@@ -1,3 +1,7 @@
+---
+description: "Performance Optimization at Scale — Level 3's caching module covered OPcache and application-level caching. At scale, two more patterns matter more than…"
+---
+
 # 05 · Performance Optimization at Scale
 
 [Level 3's caching module](../level-3/05-performance-caching.md) covered

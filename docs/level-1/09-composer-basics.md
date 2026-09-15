@@ -1,3 +1,7 @@
+---
+description: "Composer & Package Basics — Without a dependency manager you'd have to manually download library code, track which version you have, resolve conflicts…"
+---
+
 # 09 · Composer & Package Basics
 
 ## 🎥 Video walkthrough
@@ -209,6 +213,12 @@ to regenerate the class map.
 ## How It Actually Works
 
 Composer's autoloader isn't magic — `require 'vendor/autoload.php'` registers a callback with `spl_autoload_register()`, and the engine only invokes that callback the *first time* an unresolved class name is referenced (in a `new`, `extends`, `instanceof`, or static call). At that moment PHP calls your registered function with the class name as a string, and Composer's generated autoloader (built from the `psr-4` mapping in `composer.json`) turns the namespace into a file path and does a plain `require`. This lazy, on-demand loading is why adding an unused `require` for a class you never instantiate costs nothing beyond parsing the mapping array — the actual class file is never opened. `composer.json` version constraints (`^`, `~`) aren't enforced at runtime at all; they're resolved once, when you run `composer install` or `update`, by Composer's own dependency-resolution algorithm (a SAT-style constraint solver) which picks the highest set of package versions satisfying every constraint and *locks* that exact resolution into `composer.lock` — after that, PHP itself has no idea what "^2.0" meant, it just requires whatever file the autoloader map points at.
+## 🔀 See this in another language
+
+- [Swift — Closures Intro](https://sigilipelli.github.io/swift-mastery-path/level-1/09-closures-intro/)
+- [SQL — Inserting, Updating, Deleting Data](https://sigilipelli.github.io/sql-mastery-path/level-1/09-insert-update-delete/)
+- [TypeScript — Modules & tsconfig Deep Dive](https://sigilipelli.github.io/typescript-mastery-path/level-1/09-modules-tsconfig/)
+
 ## Exercise
 
 Create a new folder, run `composer init` (or hand-write a minimal

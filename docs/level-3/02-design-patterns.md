@@ -1,3 +1,7 @@
+---
+description: "Design Patterns in PHP — A design pattern is a named, reusable solution to a recurring design problem — not a library you install, but a shape of code you…"
+---
+
 # 02 · Design Patterns in PHP
 
 A **design pattern** is a named, reusable solution to a recurring design

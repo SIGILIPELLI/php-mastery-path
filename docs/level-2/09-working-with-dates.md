@@ -1,3 +1,7 @@
+---
+description: "Working with Dates — Dates look simple until you have to add days across a month boundary, compare two timestamps in different time zones, or format one…"
+---
+
 # 09 · Working with Dates
 
 Dates look simple until you have to add days across a month boundary, compare

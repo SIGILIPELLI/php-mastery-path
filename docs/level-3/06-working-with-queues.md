@@ -1,3 +1,7 @@
+---
+description: "Working with Queues — Some work doesn't need to finish before you respond to the user: sending a welcome email, resizing an uploaded image, generating a…"
+---
+
 # 06 · Working with Queues
 
 Some work doesn't need to finish before you respond to the user: sending a

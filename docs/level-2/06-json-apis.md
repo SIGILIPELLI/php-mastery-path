@@ -1,3 +1,7 @@
+---
+description: "Working with JSON/APIs — JSON is the de facto data format for web APIs — lightweight, human-readable, and natively supported by PHP's…"
+---
+
 # 06 · Working with JSON/APIs
 
 JSON is the de facto data format for web APIs — lightweight, human-readable,

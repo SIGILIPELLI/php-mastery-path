@@ -1,3 +1,7 @@
+---
+description: "API Versioning & Documentation — An API with real clients can't just change shape whenever the backend needs to — a mobile app on last year's release…"
+---
+
 # 06 · API Versioning & Documentation
 
 An API with real clients can't just change shape whenever the backend needs

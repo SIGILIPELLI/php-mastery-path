@@ -1,3 +1,7 @@
+---
+description: "Middleware Patterns — Every framework request cycle needs cross-cutting concerns handled before and after the actual route logic runs: authentication…"
+---
+
 # 07 · Middleware Patterns
 
 Every framework request cycle needs cross-cutting concerns handled before

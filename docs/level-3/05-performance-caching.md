@@ -1,3 +1,7 @@
+---
+description: "Performance & Caching — Most PHP performance problems aren't about the language being slow — they're about doing the same expensive work over and over. A…"
+---
+
 # 05 · Performance & Caching
 
 Most PHP performance problems aren't about the language being slow — they're

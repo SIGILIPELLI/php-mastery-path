@@ -1,3 +1,7 @@
+---
+description: "Working with Microservices in PHP — Every project in this path so far has been a monolith — one codebase, one database, one deploy. A microservices…"
+---
+
 # 08 · Working with Microservices in PHP
 
 Every project in this path so far has been a **monolith** — one codebase,

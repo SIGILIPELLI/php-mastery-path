@@ -1,3 +1,7 @@
+---
+description: "Background Job Processing — Working with Queues built the transport — pushing raw job data onto a queue and popping it off in a worker. This module covers…"
+---
+
 # 07 · Background Job Processing
 
 [Working with Queues](../level-3/06-working-with-queues.md) built the

@@ -1,3 +1,7 @@
+---
+description: "Functions — Add declare(strict_types=1); as the very first line of a file to make PHP reject mismatched types instead of silently coercing them …"
+---
+
 # 04 · Functions
 
 ## 🎥 Video walkthrough
@@ -153,6 +157,12 @@ This is a deliberate design choice that avoids accidental variable leakage.
 ## How It Actually Works
 
 Every function call allocates a new **execution context** (an `execute_data`/call frame) on PHP's internal call stack, with its own symbol table mapping variable names to `zval` slots — this is why variables inside a function are invisible outside it without `global` or closures. Type declarations on parameters aren't erased at compile time the way TypeScript's are: the engine inserts a runtime type-check opcode before the call frame is even entered, coercing or rejecting the argument (throwing `TypeError` in strict mode) *before* your function body runs a single line. Passing by reference (`&$arg`) changes what gets bound in the callee's symbol table: instead of the callee getting its own `zval` pointing at a (possibly COW-shared) value, its symbol table slot points at the *same* zval reference as the caller's variable, so writes are visible on both sides immediately — no copy is ever made. Closures capture the surrounding scope by creating a `Closure` object that snapshots the `use`d variables into its own internal property array at closure-creation time (by value, unless you write `use (&$var)`, which stores a reference instead) — the closure does not keep a live pointer into the enclosing function's now-destroyed stack frame.
+## 🔀 See this in another language
+
+- [Swift — Functions](https://sigilipelli.github.io/swift-mastery-path/level-1/04-functions/)
+- [SQL — Sorting & Limiting Results](https://sigilipelli.github.io/sql-mastery-path/level-1/04-sorting-limiting/)
+- [TypeScript — Functions & Type Annotations](https://sigilipelli.github.io/typescript-mastery-path/level-1/04-functions-type-annotations/)
+
 ## Exercise
 
 Write a function `formatCurrency(float $amount, string $symbol = "$"): string`

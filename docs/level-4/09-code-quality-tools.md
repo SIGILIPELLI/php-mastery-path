@@ -1,3 +1,7 @@
+---
+description: "Code Quality Tools — Every module in this path has been about making code work. This one is about the tools that check whether code that already works is…"
+---
+
 # 09 · Code Quality Tools
 
 Every module in this path has been about making code *work*. This one is

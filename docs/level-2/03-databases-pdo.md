@@ -1,3 +1,7 @@
+---
+description: "Working with Databases (PDO) — Almost every real web application needs to store and query data in a database. PDO (PHP Data Objects) is PHP's built-in…"
+---
+
 # 03 · Working with Databases (PDO)
 
 Almost every real web application needs to store and query data in a

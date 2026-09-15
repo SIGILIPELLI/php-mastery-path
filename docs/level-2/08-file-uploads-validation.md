@@ -1,3 +1,7 @@
+---
+description: "File Uploads & Validation — Letting visitors upload files — profile pictures, documents, CSVs — is one of the riskiest things a web app does: the file's…"
+---
+
 # 08 · File Uploads & Validation
 
 Letting visitors upload files — profile pictures, documents, CSVs — is one

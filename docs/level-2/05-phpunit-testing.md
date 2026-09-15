@@ -1,3 +1,7 @@
+---
+description: "Testing with PHPUnit — Manually running a script and eyeballing the output doesn't scale — it's slow, easy to forget, and tells you nothing about whether…"
+---
+
 # 05 · Testing with PHPUnit
 
 Manually running a script and eyeballing the output doesn't scale — it's

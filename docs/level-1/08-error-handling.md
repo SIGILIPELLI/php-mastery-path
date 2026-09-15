@@ -1,3 +1,7 @@
+---
+description: "Error Handling Basics — throw new SomeException('message') immediately stops normal execution and unwinds the call stack until a matching catch is found…"
+---
+
 # 08 · Error Handling Basics
 
 ## 🎥 Video walkthrough
@@ -241,6 +245,12 @@ message and machine-usable details.
 ## How It Actually Works
 
 `throw` compiles to a `ZEND_THROW` opcode that doesn't just jump — it walks the current call stack, unwinding each execution frame in turn and checking each frame's compiled **try/catch table** (a small side table the compiler builds during parsing, mapping opcode ranges to catch/finally handlers) for a matching catch block. If no frame's table matches the thrown class (checked via `instanceof`-style class-hierarchy walking), the engine keeps unwinding all the way to the top and PHP invokes the default fatal-error handler. `finally` blocks are guaranteed to run because the engine tracks them as a *fixed exit point* injected into the opcode array for every possible way the try block can end — return, throw, or falling through — rather than relying on a language-level "guarantee" with no mechanism behind it. Building an exception hierarchy is cheap at runtime because `instanceof` checks and catch-type matching both just walk the class entry's parent-chain pointers (set up once at class-declaration/compile time), an O(depth) operation, not a string comparison. Custom exception classes that extend `Exception` inherit its constructor's behavior of automatically capturing a **stack trace** via `debug_backtrace()`-style frame walking at the moment the exception object is constructed — not at the moment it's thrown — which is why re-throwing a caught exception preserves its original trace.
+## 🔀 See this in another language
+
+- [Swift — Enums](https://sigilipelli.github.io/swift-mastery-path/level-1/08-enums/)
+- [SQL — Creating Tables](https://sigilipelli.github.io/sql-mastery-path/level-1/08-creating-tables/)
+- [TypeScript — Enums](https://sigilipelli.github.io/typescript-mastery-path/level-1/08-enums/)
+
 ## Exercise
 
 Write a custom exception class `NegativeDepositException extends

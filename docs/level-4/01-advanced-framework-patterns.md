@@ -1,3 +1,7 @@
+---
+description: "Advanced Framework Patterns — Laravel, Symfony, and every other mature PHP framework are built from patterns already covered in this path — dependency…"
+---
+
 # 01 · Advanced Framework Patterns
 
 Laravel, Symfony, and every other mature PHP framework are built from

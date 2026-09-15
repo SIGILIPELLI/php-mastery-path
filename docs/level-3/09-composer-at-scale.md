@@ -1,3 +1,7 @@
+---
+description: "Working with Composer Packages at Scale — Every PHP project so far has used Composer for autoloading and a handful of dependencies. At the scale of a real…"
+---
+
 # 09 · Working with Composer Packages at Scale
 
 Every PHP project so far has used Composer for autoloading and a handful of

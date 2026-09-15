@@ -1,3 +1,7 @@
+---
+description: "Classes & Objects Basics — A class is a blueprint; an object is an instance created from that blueprint. PHP's object model will feel familiar if you've…"
+---
+
 # 07 · Classes & Objects Basics
 
 A class is a blueprint; an object is an instance created from that blueprint.
@@ -263,6 +267,12 @@ members, class constants, and `parent::`/`self::` calls.
 ## How It Actually Works
 
 Objects in PHP are represented internally by a small **handle** into an object store, not by the `zval` holding the data directly — when you write `$b = $a` for two objects, both variables get a `zval` containing the *same* object handle, so both point at the identical object in memory (unlike arrays, objects are reference-like by default, which is why mutating `$b->prop` is visible through `$a` too, without needing `&`). Method calls dispatch through the object's class entry (`zend_class_entry`), which holds the compiled method table; a call to `$obj->method()` looks up `method` in that table (walking up through parent classes if not found locally) and executes its opcodes with `$this` bound in the new call frame's symbol table. Visibility (`public`/`private`/`protected`) is enforced by the engine at the *opcode* level during compilation and at call time — it checks the calling scope's class against the declaring class, not by hiding memory, so reflection (`ReflectionClass`) can always see private properties because it bypasses that visibility opcode check entirely. Static properties live once per class entry, not per object — accessing `self::$count` reads a slot attached to the `zend_class_entry` itself, shared by every instance and even by code that never instantiates the class at all.
+## 🔀 See this in another language
+
+- [Swift — Structs & Classes Basics](https://sigilipelli.github.io/swift-mastery-path/level-1/07-structs-classes/)
+- [SQL — Working with NULL](https://sigilipelli.github.io/sql-mastery-path/level-1/07-working-with-null/)
+- [TypeScript — Classes Basics](https://sigilipelli.github.io/typescript-mastery-path/level-1/07-classes-basics/)
+
 ## Exercise
 
 Write a `Book` class with private properties `title`, `author`, and

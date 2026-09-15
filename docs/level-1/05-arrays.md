@@ -1,3 +1,7 @@
+---
+description: "Arrays — array_filter keeps the original keys, which often leaves gaps in numeric indexing — call array_values() afterward if you need a clean, re-indexed…"
+---
+
 # 05 · Arrays
 
 ## 🎥 Video walkthrough
@@ -146,6 +150,12 @@ foreach ($students as $student) {
 ## How It Actually Works
 
 A PHP array is not really an "array" in the C sense — it's an **ordered hash table** (`HashTable`) that stores both integer and string keys in insertion order while still giving O(1) average-case lookup by key. Each bucket holds a hash of the key, the key itself, and a `zval` for the value; iteration order is guaranteed to be insertion order because buckets are also linked in a doubly-linked list threaded through the hash table, which is why `foreach` always visits elements in the order you added them regardless of key type. Functions like `array_merge()`, `array_slice()`, and `array_map()` build an entirely new `HashTable` and return it — they never mutate the array you passed in, which is why you must always capture the return value (`$new = array_merge($a, $b)`, not just `array_merge($a, $b);`). Copy-on-write applies to arrays too: `$copy = $original` doesn't duplicate the hash table immediately, it bumps a reference count on the shared `HashTable` structure, and only when one of the two variables is actually written to does the engine allocate a real independent copy — this is why passing large arrays around "by value" in PHP is cheap until you start mutating them.
+## 🔀 See this in another language
+
+- [Swift — Optionals Basics](https://sigilipelli.github.io/swift-mastery-path/level-1/05-optionals-basics/)
+- [SQL — Aggregate Functions & GROUP BY](https://sigilipelli.github.io/sql-mastery-path/level-1/05-aggregates-group-by/)
+- [TypeScript — Interfaces & Type Aliases](https://sigilipelli.github.io/typescript-mastery-path/level-1/05-interfaces-type-aliases/)
+
 ## Exercise
 
 Given an indexed array of associative arrays representing products (each with

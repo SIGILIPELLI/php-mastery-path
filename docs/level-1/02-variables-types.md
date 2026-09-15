@@ -1,3 +1,7 @@
+---
+description: "Variables & Types — PHP variables always start with a $ sigil, need no declared type up front, and can hold any type — the type lives with the value, not…"
+---
+
 # 02 · Variables & Types
 
 PHP variables always start with a `$` sigil, need no declared type up front,
@@ -236,6 +240,12 @@ echo 5 <=> 3, "\n";                  // 1  -- spaceship operator: -1, 0, or 1
 ## How It Actually Works
 
 Every PHP value is stored in a `zval` (Zend value) container, not as a raw machine value: a `zval` bundles a type tag with either the value itself (for integers, booleans, doubles) or a pointer to a heap-allocated structure (for strings, arrays, objects). When you assign `$b = $a`, PHP doesn't necessarily copy the underlying data — it uses **copy-on-write (COW)**: the new variable's `zval` points at the same refcounted value and only a real copy is made, lazily, the instant either variable is *mutated*. `var_dump()` and `gettype()` read the type tag straight off the `zval` rather than inspecting the raw bytes, which is why they're always accurate even though PHP is dynamically typed. Type juggling (`"5" + 3`) works because arithmetic opcodes like `ZEND_ADD` check the operand `zval` types at runtime and coerce one side before performing the operation — there's no compile-time type resolution the way there is in Java or C, so the coercion rule is evaluated fresh on every execution of that opcode.
+## 🔀 See this in another language
+
+- [Swift — Variables & Types](https://sigilipelli.github.io/swift-mastery-path/level-1/02-variables-types/)
+- [SQL — SELECT Basics & Data Types](https://sigilipelli.github.io/sql-mastery-path/level-1/02-select-basics-data-types/)
+- [TypeScript — Basic Types](https://sigilipelli.github.io/typescript-mastery-path/level-1/02-basic-types/)
+
 ## Exercise
 
 Write `profile.php` that:

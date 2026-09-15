@@ -1,3 +1,7 @@
+---
+description: "Project — REST API Service — This project pulls together everything from Level 3: a layered service (repository → controller), dependency injection…"
+---
+
 # 10 · Project — REST API Service
 
 This project pulls together everything from Level 3: a layered service

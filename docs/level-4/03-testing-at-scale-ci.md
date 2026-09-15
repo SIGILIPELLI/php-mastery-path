@@ -1,3 +1,7 @@
+---
+description: "Testing at Scale & CI — A handful of tests run in a fraction of a second, as every example so far in this path has shown. Hundreds or thousands of tests…"
+---
+
 # 03 · Testing at Scale & CI
 
 A handful of tests run in a fraction of a second, as every example so far

@@ -1,3 +1,7 @@
+---
+description: "Building APIs — Level 2's JSON/APIs module covered encoding and decoding JSON payloads one script at a time. A real API needs more than that: it needs to…"
+---
+
 # 01 · Building APIs
 
 Level 2's [JSON/APIs module](../level-2/06-json-apis.md) covered encoding

@@ -1,3 +1,7 @@
+---
+description: "Deployment (Docker for PHP-FPM + Nginx) — Every module so far ran PHP directly from the command line. Production PHP web applications usually run behind…"
+---
+
 # 04 · Deployment (Docker for PHP-FPM + Nginx)
 
 Every module so far ran PHP directly from the command line. Production PHP

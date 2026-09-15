@@ -1,3 +1,7 @@
+---
+description: "Capstone Project — Every module in this path has taught one idea in isolation. This one ties several of them together into a single small service — a…"
+---
+
 # 10 · Capstone Project
 
 Every module in this path has taught one idea in isolation. This one ties

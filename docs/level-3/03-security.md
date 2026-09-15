@@ -1,3 +1,7 @@
+---
+description: "Security — Level 2 already introduced two essential defenses — escaping output to prevent XSS and CSRF tokens — and PDO with bound parameters to prevent…"
+---
+
 # 03 · Security
 
 Level 2 already introduced two essential defenses — escaping output to

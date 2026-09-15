@@ -1,3 +1,7 @@
+---
+description: "Project — CRUD Web App with SQLite — A capstone project combining everything from Level 2: OOP (interfaces stay implicit here, but classes, encapsulation…"
+---
+
 # 10 · Project — CRUD Web App with SQLite
 
 A capstone project combining everything from Level 2: [OOP](01-oop-deep-dive.md)

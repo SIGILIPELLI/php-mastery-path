@@ -1,3 +1,7 @@
+---
+description: "Autoloading & PSR Standards — Level 1's Composer module showed the practical side: add a psr-4 block to composer.json, run composer dump-autoload, and…"
+---
+
 # 07 · Autoloading & PSR Standards
 
 [Level 1's Composer module](../level-1/09-composer-basics.md) showed the

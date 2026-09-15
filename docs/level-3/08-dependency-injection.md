@@ -1,3 +1,7 @@
+---
+description: "Dependency Injection Basics — A class that reaches inside itself to create its own collaborators (new MysqlLogger() buried in a constructor) is welded to…"
+---
+
 # 08 · Dependency Injection Basics
 
 A class that reaches inside itself to create its own collaborators

@@ -1,3 +1,7 @@
+---
+description: "Security at Scale — Level 3's security module covered SQL injection, XSS, and password hashing for a single application. At scale — multiple environments…"
+---
+
 # 02 · Security at Scale
 
 [Level 3's security module](../level-3/03-security.md) covered SQL

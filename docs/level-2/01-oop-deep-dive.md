@@ -1,3 +1,7 @@
+---
+description: "OOP Deep Dive — Level 1 covered classes, properties, and visibility. Real applications need more than single classes with no shared contract — they need…"
+---
+
 # 01 · OOP Deep Dive
 
 [Level 1](../level-1/07-classes-objects.md) covered classes, properties, and

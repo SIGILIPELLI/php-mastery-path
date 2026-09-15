@@ -1,3 +1,7 @@
+---
+description: "Project — CLI To-Do App — Completing this project means you're ready for Level 2 · Intermediate."
+---
+
 # 10 · Project — CLI To-Do App
 
 ## 🎥 Video walkthrough
@@ -168,3 +172,9 @@ Because each CLI invocation of `todo.php` is its own separate PHP process, there
   with PHPUnit in [Level 2](../level-2/05-phpunit-testing.md)).
 
 Completing this project means you're ready for **Level 2 · Intermediate**.
+
+## 🔀 See this in another language
+
+- [Swift — Project — CLI To-Do App](https://sigilipelli.github.io/swift-mastery-path/level-1/10-project-todo-cli/)
+- [SQL — Project — Library/Bookstore Database](https://sigilipelli.github.io/sql-mastery-path/level-1/10-project-library-database/)
+- [TypeScript — Project — Typed CLI To-Do App](https://sigilipelli.github.io/typescript-mastery-path/level-1/10-project-todo-cli/)

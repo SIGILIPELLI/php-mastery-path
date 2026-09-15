@@ -1,3 +1,7 @@
+---
+description: "Testing Advanced (Mocking) — Level 2's PHPUnit module tested pure functions — give it inputs, assert on the return value. Real services aren't pure: they…"
+---
+
 # 04 · Testing Advanced (Mocking)
 
 [Level 2's PHPUnit module](../level-2/05-phpunit-testing.md) tested pure

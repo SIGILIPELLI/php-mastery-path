@@ -1,3 +1,7 @@
+---
+description: "Error Handling Advanced — Level 1 covered try/catch/finally, throwing built-in exceptions, and writing one custom exception class. In a real application…"
+---
+
 # 02 · Error Handling Advanced
 
 [Level 1](../level-1/08-error-handling.md) covered `try`/`catch`/`finally`,

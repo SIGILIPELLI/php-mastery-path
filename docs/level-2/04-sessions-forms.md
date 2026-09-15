@@ -1,3 +1,7 @@
+---
+description: "Sessions & Forms — Web apps are stateless by default — every HTTP request arrives with no memory of the last one. Sessions give a visitor a small pocket…"
+---
+
 # 04 · Sessions & Forms
 
 Web apps are stateless by default — every HTTP request arrives with no
