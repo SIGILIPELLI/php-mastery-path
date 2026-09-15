@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A structured, module-wise PHP training program from entry level to master level.">
+        <meta name="description" content="Composer & Package Basics — Without a dependency manager you'd have to manually download library code, track which version you have, resolve conflicts…">
       
       
       
@@ -67,14 +67,14 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="PHP Mastery Path">
   <meta property="og:title" content="09 · Composer & Package Basics">
-  <meta property="og:description" content="A structured, module-wise PHP training program from entry level to master level — free, with runnable code in every module.">
+  <meta property="og:description" content="Composer & Package Basics — Without a dependency manager you'd have to manually download library code, track which version you have, resolve conflicts…">
   <meta property="og:url" content="https://sigilipelli.github.io/php-mastery-path/level-1/09-composer-basics/">
   <meta property="og:image" content="https://sigilipelli.github.io/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="09 · Composer & Package Basics">
-  <meta name="twitter:description" content="A structured, module-wise PHP training program from entry level to master level — free, with runnable code in every module.">
+  <meta name="twitter:description" content="Composer & Package Basics — Without a dependency manager you'd have to manually download library code, track which version you have, resolve conflicts…">
   <meta name="twitter:image" content="https://sigilipelli.github.io/og-image.png">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9440969811959397"
      crossorigin="anonymous"></script>
@@ -1062,6 +1062,17 @@
     <span class="md-ellipsis">
       
         How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-this-in-another-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔀 See this in another language
       
     </span>
   </a>
@@ -2399,6 +2410,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#see-this-in-another-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔀 See this in another language
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2670,6 +2692,12 @@ to regenerate the class map.</p>
 </table>
 <h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
 <p>Composer's autoloader isn't magic — <code>require 'vendor/autoload.php'</code> registers a callback with <code>spl_autoload_register()</code>, and the engine only invokes that callback the <em>first time</em> an unresolved class name is referenced (in a <code>new</code>, <code>extends</code>, <code>instanceof</code>, or static call). At that moment PHP calls your registered function with the class name as a string, and Composer's generated autoloader (built from the <code>psr-4</code> mapping in <code>composer.json</code>) turns the namespace into a file path and does a plain <code>require</code>. This lazy, on-demand loading is why adding an unused <code>require</code> for a class you never instantiate costs nothing beyond parsing the mapping array — the actual class file is never opened. <code>composer.json</code> version constraints (<code>^</code>, <code>~</code>) aren't enforced at runtime at all; they're resolved once, when you run <code>composer install</code> or <code>update</code>, by Composer's own dependency-resolution algorithm (a SAT-style constraint solver) which picks the highest set of package versions satisfying every constraint and <em>locks</em> that exact resolution into <code>composer.lock</code> — after that, PHP itself has no idea what "^2.0" meant, it just requires whatever file the autoloader map points at.</p>
+<h2 id="see-this-in-another-language">🔀 See this in another language<a class="headerlink" href="#see-this-in-another-language" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://sigilipelli.github.io/swift-mastery-path/level-1/09-closures-intro/">Swift — Closures Intro</a></li>
+<li><a href="https://sigilipelli.github.io/sql-mastery-path/level-1/09-insert-update-delete/">SQL — Inserting, Updating, Deleting Data</a></li>
+<li><a href="https://sigilipelli.github.io/typescript-mastery-path/level-1/09-modules-tsconfig/">TypeScript — Modules &amp; tsconfig Deep Dive</a></li>
+</ul>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Create a new folder, run <code>composer init</code> (or hand-write a minimal
 <code>composer.json</code> targeting <code>php &gt;= 8.2</code>), then run <code>composer require
@@ -2683,6 +2711,9 @@ generates a UUID with <code>Ramsey\Uuid\Uuid::uuid4()</code>, and prints it. Con
 
 
 
+
+  
+  
 
 
 

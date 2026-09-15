@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A structured, module-wise PHP training program from entry level to master level.">
+        <meta name="description" content="Control Flow — Control flow statements decide which code runs, and how many times. PHP's if/loops look close to C/Java/JavaScript, plus a modern match…">
       
       
       
@@ -67,14 +67,14 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="PHP Mastery Path">
   <meta property="og:title" content="03 · Control Flow">
-  <meta property="og:description" content="A structured, module-wise PHP training program from entry level to master level — free, with runnable code in every module.">
+  <meta property="og:description" content="Control Flow — Control flow statements decide which code runs, and how many times. PHP's if/loops look close to C/Java/JavaScript, plus a modern match…">
   <meta property="og:url" content="https://sigilipelli.github.io/php-mastery-path/level-1/03-control-flow/">
   <meta property="og:image" content="https://sigilipelli.github.io/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="03 · Control Flow">
-  <meta name="twitter:description" content="A structured, module-wise PHP training program from entry level to master level — free, with runnable code in every module.">
+  <meta name="twitter:description" content="Control Flow — Control flow statements decide which code runs, and how many times. PHP's if/loops look close to C/Java/JavaScript, plus a modern match…">
   <meta name="twitter:image" content="https://sigilipelli.github.io/og-image.png">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9440969811959397"
      crossorigin="anonymous"></script>
@@ -883,6 +883,17 @@
     <span class="md-ellipsis">
       
         How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-this-in-another-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔀 See this in another language
       
     </span>
   </a>
@@ -2377,6 +2388,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#see-this-in-another-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔀 See this in another language
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2683,6 +2705,12 @@ preferred loop for arrays in idiomatic PHP, reached for far more often than
 </table>
 <h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
 <p>Every branch you write compiles down to conditional-jump opcodes. An <code>if</code> becomes a <code>ZEND_JMPZ</code> (jump if zero/false) opcode pointing at an offset later in the opcode array; <code>else</code>/<code>elseif</code> chains are just multiple jump targets stitched together by the compiler. A <code>switch</code> statement compiles to a <em>sequence of equality comparisons and jumps</em> — it is not a jump table — which is why a <code>switch</code> with many cases has no algorithmic speed advantage over an equivalent <code>if/elseif</code> chain in PHP (unlike C, where the compiler can build a real jump table for dense integer cases). <code>match</code>, introduced in PHP 8, is compiler-recognized differently: it uses strict (<code>===</code>) comparisons internally and the engine can special-case it, but more importantly it's an <em>expression</em> that produces a <code>ZEND_QM_ASSIGN</code>-style value rather than a statement, which is why you can assign its result directly. <code>foreach</code> over an array doesn't walk raw memory — it uses an internal array pointer and a hash-table iterator (<code>zend_hash_get_current_data_ex</code>) that the engine advances each pass, iterating the array's ordered hash-table buckets rather than a contiguous C array.</p>
+<h2 id="see-this-in-another-language">🔀 See this in another language<a class="headerlink" href="#see-this-in-another-language" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://sigilipelli.github.io/swift-mastery-path/level-1/03-control-flow/">Swift — Control Flow</a></li>
+<li><a href="https://sigilipelli.github.io/sql-mastery-path/level-1/03-filtering-where/">SQL — Filtering with WHERE</a></li>
+<li><a href="https://sigilipelli.github.io/typescript-mastery-path/level-1/03-control-flow/">TypeScript — Control Flow with Types</a></li>
+</ul>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write <code>fizzbuzz.php</code> that loops from 1 to 30 with a <code>for</code> loop and, for each
 number <code>$i</code>:</p>
@@ -2699,6 +2727,9 @@ number <code>$i</code>:</p>
 
 
 
+
+  
+  
 
 
 

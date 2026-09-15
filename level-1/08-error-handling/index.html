@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A structured, module-wise PHP training program from entry level to master level.">
+        <meta name="description" content="Error Handling Basics — throw new SomeException('message') immediately stops normal execution and unwinds the call stack until a matching catch is found…">
       
       
       
@@ -67,14 +67,14 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="PHP Mastery Path">
   <meta property="og:title" content="08 · Error Handling Basics">
-  <meta property="og:description" content="A structured, module-wise PHP training program from entry level to master level — free, with runnable code in every module.">
+  <meta property="og:description" content="Error Handling Basics — throw new SomeException('message') immediately stops normal execution and unwinds the call stack until a matching catch is found…">
   <meta property="og:url" content="https://sigilipelli.github.io/php-mastery-path/level-1/08-error-handling/">
   <meta property="og:image" content="https://sigilipelli.github.io/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="08 · Error Handling Basics">
-  <meta name="twitter:description" content="A structured, module-wise PHP training program from entry level to master level — free, with runnable code in every module.">
+  <meta name="twitter:description" content="Error Handling Basics — throw new SomeException('message') immediately stops normal execution and unwinds the call stack until a matching catch is found…">
   <meta name="twitter:image" content="https://sigilipelli.github.io/og-image.png">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9440969811959397"
      crossorigin="anonymous"></script>
@@ -1023,6 +1023,17 @@
     <span class="md-ellipsis">
       
         How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-this-in-another-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔀 See this in another language
       
     </span>
   </a>
@@ -2377,6 +2388,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#see-this-in-another-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔀 See this in another language
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2678,6 +2700,12 @@ message and machine-usable details.</p>
 </table>
 <h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
 <p><code>throw</code> compiles to a <code>ZEND_THROW</code> opcode that doesn't just jump — it walks the current call stack, unwinding each execution frame in turn and checking each frame's compiled <strong>try/catch table</strong> (a small side table the compiler builds during parsing, mapping opcode ranges to catch/finally handlers) for a matching catch block. If no frame's table matches the thrown class (checked via <code>instanceof</code>-style class-hierarchy walking), the engine keeps unwinding all the way to the top and PHP invokes the default fatal-error handler. <code>finally</code> blocks are guaranteed to run because the engine tracks them as a <em>fixed exit point</em> injected into the opcode array for every possible way the try block can end — return, throw, or falling through — rather than relying on a language-level "guarantee" with no mechanism behind it. Building an exception hierarchy is cheap at runtime because <code>instanceof</code> checks and catch-type matching both just walk the class entry's parent-chain pointers (set up once at class-declaration/compile time), an O(depth) operation, not a string comparison. Custom exception classes that extend <code>Exception</code> inherit its constructor's behavior of automatically capturing a <strong>stack trace</strong> via <code>debug_backtrace()</code>-style frame walking at the moment the exception object is constructed — not at the moment it's thrown — which is why re-throwing a caught exception preserves its original trace.</p>
+<h2 id="see-this-in-another-language">🔀 See this in another language<a class="headerlink" href="#see-this-in-another-language" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://sigilipelli.github.io/swift-mastery-path/level-1/08-enums/">Swift — Enums</a></li>
+<li><a href="https://sigilipelli.github.io/sql-mastery-path/level-1/08-creating-tables/">SQL — Creating Tables</a></li>
+<li><a href="https://sigilipelli.github.io/typescript-mastery-path/level-1/08-enums/">TypeScript — Enums</a></li>
+</ul>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a custom exception class <code>NegativeDepositException extends
 InvalidArgumentException</code> that stores the invalid amount and exposes a
@@ -2692,6 +2720,9 @@ printing a friendly message that includes the rejected amount.</p>
 
 
 
+
+  
+  
 
 
 

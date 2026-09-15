@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A structured, module-wise PHP training program from entry level to master level.">
+        <meta name="description" content="Arrays — array_filter keeps the original keys, which often leaves gaps in numeric indexing — call array_values() afterward if you need a clean, re-indexed…">
       
       
       
@@ -67,14 +67,14 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="PHP Mastery Path">
   <meta property="og:title" content="05 · Arrays">
-  <meta property="og:description" content="A structured, module-wise PHP training program from entry level to master level — free, with runnable code in every module.">
+  <meta property="og:description" content="Arrays — array_filter keeps the original keys, which often leaves gaps in numeric indexing — call array_values() afterward if you need a clean, re-indexed…">
   <meta property="og:url" content="https://sigilipelli.github.io/php-mastery-path/level-1/05-arrays/">
   <meta property="og:image" content="https://sigilipelli.github.io/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="05 · Arrays">
-  <meta name="twitter:description" content="A structured, module-wise PHP training program from entry level to master level — free, with runnable code in every module.">
+  <meta name="twitter:description" content="Arrays — array_filter keeps the original keys, which often leaves gaps in numeric indexing — call array_values() afterward if you need a clean, re-indexed…">
   <meta name="twitter:image" content="https://sigilipelli.github.io/og-image.png">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9440969811959397"
      crossorigin="anonymous"></script>
@@ -939,6 +939,17 @@
     <span class="md-ellipsis">
       
         How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-this-in-another-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔀 See this in another language
       
     </span>
   </a>
@@ -2377,6 +2388,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#see-this-in-another-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔀 See this in another language
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2561,6 +2583,12 @@ matters.</p>
 </table>
 <h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
 <p>A PHP array is not really an "array" in the C sense — it's an <strong>ordered hash table</strong> (<code>HashTable</code>) that stores both integer and string keys in insertion order while still giving O(1) average-case lookup by key. Each bucket holds a hash of the key, the key itself, and a <code>zval</code> for the value; iteration order is guaranteed to be insertion order because buckets are also linked in a doubly-linked list threaded through the hash table, which is why <code>foreach</code> always visits elements in the order you added them regardless of key type. Functions like <code>array_merge()</code>, <code>array_slice()</code>, and <code>array_map()</code> build an entirely new <code>HashTable</code> and return it — they never mutate the array you passed in, which is why you must always capture the return value (<code>$new = array_merge($a, $b)</code>, not just <code>array_merge($a, $b);</code>). Copy-on-write applies to arrays too: <code>$copy = $original</code> doesn't duplicate the hash table immediately, it bumps a reference count on the shared <code>HashTable</code> structure, and only when one of the two variables is actually written to does the engine allocate a real independent copy — this is why passing large arrays around "by value" in PHP is cheap until you start mutating them.</p>
+<h2 id="see-this-in-another-language">🔀 See this in another language<a class="headerlink" href="#see-this-in-another-language" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://sigilipelli.github.io/swift-mastery-path/level-1/05-optionals-basics/">Swift — Optionals Basics</a></li>
+<li><a href="https://sigilipelli.github.io/sql-mastery-path/level-1/05-aggregates-group-by/">SQL — Aggregate Functions &amp; GROUP BY</a></li>
+<li><a href="https://sigilipelli.github.io/typescript-mastery-path/level-1/05-interfaces-type-aliases/">TypeScript — Interfaces &amp; Type Aliases</a></li>
+</ul>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Given an indexed array of associative arrays representing products (each with
 <code>name</code> and <code>price</code> keys), write code that: filters to only products under
@@ -2573,6 +2601,9 @@ $20 using <code>array_filter</code>, maps the result to just the names using
 
 
 
+
+  
+  
 
 
 
