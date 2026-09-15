@@ -472,3 +472,9 @@ This project's persistence and HTTP layers each rely on mechanisms already cover
   row, and observe that the second run's `GET /tasks` includes tasks
   created by the first run — then explain in a comment why the test suite
   deliberately keeps using `:memory:` instead.
+
+## 🔀 See this in another language
+
+- [Java — 11 · Project — REST API + Database CRUD Service](https://sigilipelli.github.io/java-mastery-path/level-3/11-project-rest-api-db/)
+- [C# — 10 · Project — REST API Service](https://sigilipelli.github.io/csharp-mastery-path/level-3/10-project-rest-api/)
+- [Ruby — 10 · Project — REST API Service](https://sigilipelli.github.io/ruby-mastery-path/level-3/10-project-rest-api/)

@@ -213,6 +213,12 @@ details like stack traces or database errors to the end user.
 ## How It Actually Works
 
 Exception chaining (`throw new AppException($msg, 0, $previous)`) stores the earlier exception as a real object reference inside the new exception's `previous` property — the engine does nothing special here beyond ordinary property assignment, but PHP's uncaught-exception handler and `getTraceAsString()` walk that `previous` chain recursively, which is why chained exceptions print as "Caused by:" blocks. The `finally`/`return` gotcha exists because of *when* the return value is materialized: the `try` block's `ZEND_RETURN` opcode computes and stashes its return value before control transfers to the `finally` block's opcodes, and if `finally` executes its *own* `ZEND_RETURN`, that opcode overwrites the stashed value outright — the original return is silently discarded, not merged. Converting PHP errors (warnings, notices — which are engine-level diagnostics, not `Throwable`s) into exceptions works via `set_error_handler()`, which registers a callback the engine calls instead of its default diagnostic-printing behavior whenever an `E_WARNING`-class opcode fault occurs; throwing an `ErrorException` from inside that callback is what makes the fault participate in the normal catch/finally unwinding machinery described above, since a plain PHP error never enters the try/catch table lookup on its own.
+## 🔀 See this in another language
+
+- [JavaScript — 07 · Error Handling Advanced](https://sigilipelli.github.io/javascript-mastery-path/level-2/07-error-handling-advanced/)
+- [C — 06 · Error Handling Conventions](https://sigilipelli.github.io/c-mastery-path/level-2/06-error-handling/)
+- [C++ — 08 · Error Handling with Exceptions](https://sigilipelli.github.io/cpp-mastery-path/level-2/08-error-handling-exceptions/)
+
 ## Exercise
 
 Design a small exception hierarchy for a file-processing task: an abstract

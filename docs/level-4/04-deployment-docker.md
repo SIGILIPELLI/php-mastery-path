@@ -194,3 +194,9 @@ exercise.)*
   `/health` endpoint your app exposes, and explain in a comment why a
   container orchestrator (Docker Swarm, Kubernetes) needs this to safely
   replace unhealthy containers during a rolling deploy.
+
+## 🔀 See this in another language
+
+- [TypeScript — 06 · Deployment with Docker](https://sigilipelli.github.io/typescript-mastery-path/level-4/06-deployment-docker/)
+- [C# — 07 · Deployment (Docker for .NET)](https://sigilipelli.github.io/csharp-mastery-path/level-4/07-deployment-docker/)
+- [Go — 06 · Deployment with Docker](https://sigilipelli.github.io/go-mastery-path/level-4/06-deployment-docker/)
