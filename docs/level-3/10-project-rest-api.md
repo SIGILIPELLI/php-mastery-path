@@ -475,6 +475,6 @@ This project's persistence and HTTP layers each rely on mechanisms already cover
 
 ## 🔀 See this in another language
 
-- [Java — 11 · Project — REST API + Database CRUD Service](https://sigilipelli.github.io/java-mastery-path/level-3/11-project-rest-api-db/)
-- [C# — 10 · Project — REST API Service](https://sigilipelli.github.io/csharp-mastery-path/level-3/10-project-rest-api/)
-- [Ruby — 10 · Project — REST API Service](https://sigilipelli.github.io/ruby-mastery-path/level-3/10-project-rest-api/)
+- [Java — 11 · Project — REST API + Database CRUD Service](https://learnmasterypath.com/java-mastery-path/level-3/11-project-rest-api-db/)
+- [C# — 10 · Project — REST API Service](https://learnmasterypath.com/csharp-mastery-path/level-3/10-project-rest-api/)
+- [Ruby — 10 · Project — REST API Service](https://learnmasterypath.com/ruby-mastery-path/level-3/10-project-rest-api/)

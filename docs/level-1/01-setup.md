@@ -142,9 +142,9 @@ treatment in [Module 9 · Composer & Package Basics](09-composer-basics.md).
 Running `php script.php` doesn't interpret your source text line by line the way a shell script does. The Zend Engine first runs your file through a **lexer** (tokenizing `<?php ... ?>` into tokens like `T_ECHO` or `T_VARIABLE`), then a **parser** builds an abstract syntax tree, and a **compiler** walks that tree emitting **Zend opcodes** — a low-level bytecode (`ZEND_ECHO`, `ZEND_ADD`, `ZEND_ASSIGN`, and so on). Only that opcode array is actually executed, by a virtual machine loop inside the engine. This is why a PHP syntax error is caught before any output happens at all, even output on a line before the bad one: compilation is a separate pass that completes (or fails) before execution starts. When you use `php -S` for local serving, each incoming HTTP request still triggers this same compile-then-execute cycle from scratch in a fresh process/request context — PHP has no in-memory server process holding your classes between requests the way a Node.js or Java app does, which is the foundational "shared-nothing" design that shapes almost everything else in this course.
 ## 🔀 See this in another language
 
-- [Swift — Setup & First Program](https://sigilipelli.github.io/swift-mastery-path/level-1/01-setup/)
-- [SQL — Setup & First Queries](https://sigilipelli.github.io/sql-mastery-path/level-1/01-setup-first-queries/)
-- [TypeScript — Setup & First Program](https://sigilipelli.github.io/typescript-mastery-path/level-1/01-setup/)
+- [Swift — Setup & First Program](https://learnmasterypath.com/swift-mastery-path/level-1/01-setup/)
+- [SQL — Setup & First Queries](https://learnmasterypath.com/sql-mastery-path/level-1/01-setup-first-queries/)
+- [TypeScript — Setup & First Program](https://learnmasterypath.com/typescript-mastery-path/level-1/01-setup/)
 
 ## Exercise
 

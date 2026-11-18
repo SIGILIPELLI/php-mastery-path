@@ -175,6 +175,6 @@ Completing this project means you're ready for **Level 2 · Intermediate**.
 
 ## 🔀 See this in another language
 
-- [Swift — Project — CLI To-Do App](https://sigilipelli.github.io/swift-mastery-path/level-1/10-project-todo-cli/)
-- [SQL — Project — Library/Bookstore Database](https://sigilipelli.github.io/sql-mastery-path/level-1/10-project-library-database/)
-- [TypeScript — Project — Typed CLI To-Do App](https://sigilipelli.github.io/typescript-mastery-path/level-1/10-project-todo-cli/)
+- [Swift — Project — CLI To-Do App](https://learnmasterypath.com/swift-mastery-path/level-1/10-project-todo-cli/)
+- [SQL — Project — Library/Bookstore Database](https://learnmasterypath.com/sql-mastery-path/level-1/10-project-library-database/)
+- [TypeScript — Project — Typed CLI To-Do App](https://learnmasterypath.com/typescript-mastery-path/level-1/10-project-todo-cli/)
