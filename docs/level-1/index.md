@@ -1,3 +1,7 @@
+---
+description: "Level 1 (Entry) of the free PHP Mastery Path. Get comfortable reading and writing PHP, understand its core building blocks, and ship a small working program."
+---
+
 # Level 1 · Entry <span class="level-badge">Foundations</span>
 
 Goal: get comfortable reading and writing PHP, understand its core building

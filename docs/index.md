@@ -1,6 +1,6 @@
 ---
 title: "Learn PHP Free: Beginner to Master Course"
-description: "Free PHP course from beginner to advanced -- hands-on lessons with runnable code and real capstone projects. Part of a 37-course free learning library."
+description: "Free PHP course from beginner to advanced -- hands-on lessons with runnable code and real capstone projects. Part of a 100+ course free learning library."
 ---
 
 # PHP Mastery Path

@@ -1,3 +1,7 @@
+---
+description: "Level 2 (Intermediate) of the free PHP Mastery Path. Move from scripts to structured applications — talk to a real database, handle forms and sessions…"
+---
+
 # Level 2 · Intermediate <span class="level-badge">Building real apps</span>
 
 Goal: move from scripts to structured applications — talk to a real database,

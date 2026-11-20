@@ -1,3 +1,7 @@
+---
+description: "Level 3 (Advanced) of the free PHP Mastery Path. Design and secure APIs, apply classic design patterns idiomatically in PHP, and test and scale code the way…"
+---
+
 # Level 3 · Advanced <span class="level-badge">APIs & architecture</span>
 
 Goal: design and secure APIs, apply classic design patterns idiomatically in
