@@ -53,9 +53,11 @@ markdown_extensions:
 extra_css:
   - stylesheets/extra.css
   - stylesheets/progress-tracker.css
+  - stylesheets/final-quiz.css
 
 extra_javascript:
   - javascripts/progress-tracker.js
+  - javascripts/final-quiz.js
 
 
 
@@ -127,3 +129,5 @@ nav:
       - "08 · Working with Microservices in PHP": level-4/08-microservices.md
       - "09 · Code Quality Tools": level-4/09-code-quality-tools.md
       - "10 · Capstone Project": level-4/10-capstone-project.md
+  - "🎯 Final Quiz": quiz.md
+
