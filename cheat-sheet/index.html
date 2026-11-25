@@ -1,0 +1,4839 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A free PHP cheat sheet: 35 quick-reference tables from every level of the PHP Mastery Path, each linked to its full lesson.">
+      
+      
+      
+        <link rel="canonical" href="https://learnmasterypath.com/php-mastery-path/cheat-sheet/">
+      
+      
+        <link rel="prev" href="../interview-questions/">
+      
+      
+        <link rel="next" href="../level-1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
+    
+    
+  
+  <title>PHP Cheat Sheet: Quick Reference, Beginner to Advanced</title>
+
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/progress-tracker.css">
+    
+      <link rel="stylesheet" href="../stylesheets/final-quiz.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-05VBGCXN12"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-05VBGCXN12');
+  </script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mastery Path">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="PHP Cheat Sheet: Quick Reference, Beginner to Advanced">
+  <meta property="og:description" content="A free PHP cheat sheet: 35 quick-reference tables from every level of the PHP Mastery Path, each linked to its full lesson.">
+  <meta property="og:url" content="https://learnmasterypath.com/php-mastery-path/cheat-sheet/">
+  <meta property="og:image" content="https://learnmasterypath.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mastery Path: free structured courses, beginner to master">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PHP Cheat Sheet: Quick Reference, Beginner to Advanced">
+  <meta name="twitter:description" content="A free PHP cheat sheet: 35 quick-reference tables from every level of the PHP Mastery Path, each linked to its full lesson.">
+  <meta name="twitter:image" content="https://learnmasterypath.com/og-image.png">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9440969811959397"
+     crossorigin="anonymous"></script><script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Mastery Path", "item": "https://learnmasterypath.com/"},
+      {"@type": "ListItem", "position": 2, "name": "PHP Mastery Path", "item": "https://learnmasterypath.com/php-mastery-path/"},
+      {"@type": "ListItem", "position": 3, "name": "Cheat Sheet", "item": "https://learnmasterypath.com/php-mastery-path/cheat-sheet/"}
+    ]
+  }
+  </script>
+  <style>
+    .md-banner a:hover { text-decoration: underline !important; }
+    .mp-related { margin-top: 2.4rem; padding-top: 1rem; border-top: 1px solid var(--md-default-fg-color--lightest); font-size: .78rem; }
+    .mp-related h2 { font-size: .9rem; margin: 0 0 .5rem; }
+    .mp-related ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem .9rem; }
+    .mp-related li { margin: 0 !important; }
+  </style>
+  <script type="application/json" id="mp-course-meta">{"home": false, "id": "php-mastery-path", "name": "PHP Mastery Path", "repo": "https://github.com/SIGILIPELLI/php-mastery-path", "src": "cheat-sheet.md", "url": "https://learnmasterypath.com/php-mastery-path/"}</script>
+  <link rel="stylesheet" href="https://learnmasterypath.com/assets/learn.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://learnmasterypath.com/assets/course.css?v=1">
+  <script src="https://learnmasterypath.com/assets/learn.js" defer></script>
+  <script src="https://learnmasterypath.com/assets/signup.js" defer></script>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#php-cheat-sheet" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+  <a href="https://learnmasterypath.com/" style="color: inherit; text-decoration: none;">
+    &larr; Mastery Path &middot; all 100+ free courses
+  </a>
+  <span style="opacity: .6; margin: 0 .6em;">|</span>
+  <a href="https://learnmasterypath.com/search/" style="color: inherit; text-decoration: none;">Search all courses</a>
+  <span style="opacity: .6; margin: 0 .6em;">|</span>
+  <a href="https://learnmasterypath.com/resume/" style="color: inherit; font-weight: 700; text-decoration: none;">
+    Got the skills? Free resume ATS check &rarr;
+  </a>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="PHP Mastery Path" class="md-header__button md-logo" aria-label="PHP Mastery Path" data-md-component="logo">
+      <svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PHP Mastery Path
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PHP Cheat Sheet: Quick Reference, Beginner to Advanced
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SIGILIPELLI/php-mastery-path" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    php-mastery-path
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../interview-questions/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Interview Questions
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cheat Sheet
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-1/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 1 · Entry
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-2/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 2 · Intermediate
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-3/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 3 · Advanced
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-4/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 4 · Master
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../quiz/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Final Quiz
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="PHP Mastery Path" class="md-nav__button md-logo" aria-label="PHP Mastery Path" data-md-component="logo">
+      <svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg>
+    </a>
+    PHP Mastery Path
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SIGILIPELLI/php-mastery-path" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    php-mastery-path
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interview-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#level-1-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 1 · Entry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 1 · Entry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#02-variables-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Variables &amp; Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-control-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Control Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Arrays
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-strings-string-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Strings &amp; String Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-classes-objects-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Classes &amp; Objects Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-error-handling-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Error Handling Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-composer-package-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Composer &amp; Package Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2-intermediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 2 · Intermediate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 2 · Intermediate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#02-error-handling-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Error Handling Advanced
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-working-with-databases-pdo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Working with Databases (PDO)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-sessions-forms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Sessions &amp; Forms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-testing-with-phpunit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Testing with PHPUnit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-working-with-jsonapis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Working with JSON/APIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-autoloading-psr-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Autoloading &amp; PSR Standards
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-file-uploads-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · File Uploads &amp; Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-working-with-dates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Working with Dates
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-3-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 3 · Advanced
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 3 · Advanced">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-building-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Building APIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-design-patterns-in-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Design Patterns in PHP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-testing-advanced-mocking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Testing Advanced (Mocking)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-performance-caching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Performance &amp; Caching
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-working-with-queues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Working with Queues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-middleware-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Middleware Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-dependency-injection-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Dependency Injection Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-working-with-composer-packages-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Working with Composer Packages at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-4-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 4 · Master
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 4 · Master">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-advanced-framework-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Advanced Framework Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-security-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Security at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-testing-at-scale-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Testing at Scale &amp; CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-deployment-docker-for-php-fpm-nginx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Deployment (Docker for PHP-FPM + Nginx)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-performance-optimization-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Performance Optimization at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-api-versioning-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · API Versioning &amp; Documentation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-background-job-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Background Job Processing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-working-with-microservices-in-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Working with Microservices in PHP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-code-quality-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Code Quality Tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-capstone-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Capstone Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-1/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 1 · Entry
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 1 · Entry
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/01-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Setup & First Program
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/02-variables-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Variables & Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/03-control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Control Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/04-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/05-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/06-strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Strings & String Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/07-classes-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Classes & Objects Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/08-error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Error Handling Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/09-composer-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Composer & Package Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/10-project-todo-app/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Project — CLI To-Do App
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-2/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 2 · Intermediate
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 2 · Intermediate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/01-oop-deep-dive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · OOP Deep Dive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/02-error-handling-advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Error Handling Advanced
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/03-databases-pdo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Working with Databases (PDO)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/04-sessions-forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Sessions & Forms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/05-phpunit-testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Testing with PHPUnit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/06-json-apis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Working with JSON/APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/07-autoloading-psr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Autoloading & PSR Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/08-file-uploads-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · File Uploads & Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/09-working-with-dates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Working with Dates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/10-project-crud-app/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Project — CRUD Web App with SQLite
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-3/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 3 · Advanced
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 3 · Advanced
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/01-building-apis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Building APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/02-design-patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Design Patterns in PHP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/03-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/04-testing-advanced-mocking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Testing Advanced (Mocking)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/05-performance-caching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Performance & Caching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/06-working-with-queues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Working with Queues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/07-middleware-patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Middleware Patterns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/08-dependency-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Dependency Injection Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/09-composer-at-scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Working with Composer Packages at Scale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/10-project-rest-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Project — REST API Service
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-4/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 4 · Master
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 4 · Master
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/01-advanced-framework-patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Advanced Framework Patterns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/02-security-at-scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Security at Scale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/03-testing-at-scale-ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Testing at Scale & CI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/04-deployment-docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Deployment (Docker for PHP-FPM + Nginx)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/05-performance-at-scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Performance Optimization at Scale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/06-api-versioning-docs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · API Versioning & Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/07-background-jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Background Job Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/08-microservices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Working with Microservices in PHP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/09-code-quality-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Code Quality Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/10-capstone-project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Capstone Project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quiz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Final Quiz
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#level-1-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 1 · Entry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 1 · Entry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#02-variables-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Variables &amp; Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-control-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Control Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Arrays
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-strings-string-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Strings &amp; String Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-classes-objects-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Classes &amp; Objects Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-error-handling-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Error Handling Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-composer-package-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Composer &amp; Package Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2-intermediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 2 · Intermediate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 2 · Intermediate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#02-error-handling-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Error Handling Advanced
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-working-with-databases-pdo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Working with Databases (PDO)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-sessions-forms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Sessions &amp; Forms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-testing-with-phpunit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Testing with PHPUnit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-working-with-jsonapis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Working with JSON/APIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-autoloading-psr-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Autoloading &amp; PSR Standards
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-file-uploads-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · File Uploads &amp; Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-working-with-dates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Working with Dates
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-3-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 3 · Advanced
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 3 · Advanced">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-building-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Building APIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-design-patterns-in-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Design Patterns in PHP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-testing-advanced-mocking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Testing Advanced (Mocking)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-performance-caching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Performance &amp; Caching
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-working-with-queues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Working with Queues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-middleware-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Middleware Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-dependency-injection-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Dependency Injection Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-working-with-composer-packages-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Working with Composer Packages at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-4-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 4 · Master
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 4 · Master">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-advanced-framework-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Advanced Framework Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-security-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Security at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-testing-at-scale-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Testing at Scale &amp; CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-deployment-docker-for-php-fpm-nginx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Deployment (Docker for PHP-FPM + Nginx)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-performance-optimization-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Performance Optimization at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-api-versioning-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · API Versioning &amp; Documentation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-background-job-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Background Job Processing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-working-with-microservices-in-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Working with Microservices in PHP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-code-quality-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Code Quality Tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-capstone-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Capstone Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+
+
+  
+  
+
+
+<h1 id="php-cheat-sheet">PHP Cheat Sheet<a class="headerlink" href="#php-cheat-sheet" title="Permanent link">&para;</a></h1>
+<p>Quick-reference tables from <strong>35 lessons</strong> of the free PHP Mastery Path, in course order from beginner to advanced. Each section links to the full lesson with explanations and runnable examples.</p>
+<h2 id="level-1-entry">Level 1 · Entry<a class="headerlink" href="#level-1-entry" title="Permanent link">&para;</a></h2>
+<h3 id="02-variables-types"><a href="../level-1/02-variables-types/">02 · Variables &amp; Types</a><a class="headerlink" href="#02-variables-types" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Syntax</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Variable</td>
+<td><code>$name = value;</code></td>
+<td><code>$age = 30;</code></td>
+</tr>
+<tr>
+<td>Integer</td>
+<td><code>int</code></td>
+<td><code>$n = 42;</code></td>
+</tr>
+<tr>
+<td>Float</td>
+<td><code>float</code> / <code>double</code></td>
+<td><code>$pi = 3.14;</code></td>
+</tr>
+<tr>
+<td>String</td>
+<td><code>string</code></td>
+<td><code>$s = "hi";</code></td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td><code>bool</code></td>
+<td><code>$ok = true;</code></td>
+</tr>
+<tr>
+<td>Null</td>
+<td><code>null</code></td>
+<td><code>$x = null;</code></td>
+</tr>
+<tr>
+<td>Check type</td>
+<td><code>gettype($v)</code></td>
+<td><code>"integer"</code></td>
+</tr>
+<tr>
+<td>Debug value + type</td>
+<td><code>var_dump($v)</code></td>
+<td><code>int(42)</code></td>
+</tr>
+<tr>
+<td>Cast</td>
+<td><code>(int)</code>, <code>(float)</code>, <code>(string)</code>, <code>(bool)</code></td>
+<td><code>(int) "42"</code></td>
+</tr>
+<tr>
+<td>Loose equality</td>
+<td><code>==</code></td>
+<td>juggles types</td>
+</tr>
+<tr>
+<td>Strict equality</td>
+<td><code>===</code></td>
+<td>no juggling</td>
+</tr>
+<tr>
+<td>Null coalescing</td>
+<td><code>??</code></td>
+<td><code>$v ?? "default"</code></td>
+</tr>
+<tr>
+<td>Null coalescing assign</td>
+<td><code>??=</code></td>
+<td><code>$v ??= "default"</code></td>
+</tr>
+<tr>
+<td>Constant (compile-time)</td>
+<td><code>const NAME = val;</code></td>
+<td><code>const PI = 3.14;</code></td>
+</tr>
+<tr>
+<td>Constant (runtime)</td>
+<td><code>define('NAME', val);</code></td>
+<td><code>define('PI', 3.14);</code></td>
+</tr>
+<tr>
+<td>Concatenation</td>
+<td><code>.</code></td>
+<td><code>"a" . "b"</code> → <code>"ab"</code></td>
+</tr>
+<tr>
+<td>Spaceship</td>
+<td><code>&lt;=&gt;</code></td>
+<td><code>5 &lt;=&gt; 3</code> → <code>1</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="03-control-flow"><a href="../level-1/03-control-flow/">03 · Control Flow</a><a class="headerlink" href="#03-control-flow" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Construct</th>
+<th>Use when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>if / elseif / else</code></td>
+<td>General branching on any condition</td>
+</tr>
+<tr>
+<td><code>switch</code></td>
+<td>Comparing one value against several possibilities (legacy style)</td>
+</tr>
+<tr>
+<td><code>match</code></td>
+<td>Comparing one value against several possibilities (PHP 8+, strict, expression)</td>
+</tr>
+<tr>
+<td><code>while</code></td>
+<td>Loop while a condition holds, check-first</td>
+</tr>
+<tr>
+<td><code>do-while</code></td>
+<td>Loop at least once, check-last</td>
+</tr>
+<tr>
+<td><code>for</code></td>
+<td>Loop a known number of times with a counter</td>
+</tr>
+<tr>
+<td><code>foreach</code></td>
+<td>Loop over every element of an array (idiomatic default)</td>
+</tr>
+<tr>
+<td><code>break</code></td>
+<td>Exit the current loop (or <code>break N</code> for N levels)</td>
+</tr>
+<tr>
+<td><code>continue</code></td>
+<td>Skip to the next iteration (or <code>continue N</code> for N levels)</td>
+</tr>
+<tr>
+<td><code>?:</code></td>
+<td>Short ternary, falls back on falsy values</td>
+</tr>
+<tr>
+<td><code>??</code></td>
+<td>Null coalescing, falls back only on null/unset</td>
+</tr>
+</tbody>
+</table>
+<h3 id="04-functions"><a href="../level-1/04-functions/">04 · Functions</a><a class="headerlink" href="#04-functions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Basic function</td>
+<td><code>function name($a, $b) { ... return $x; }</code></td>
+</tr>
+<tr>
+<td>Typed params/return</td>
+<td><code>function name(int $a): string { ... }</code></td>
+</tr>
+<tr>
+<td>Default value</td>
+<td><code>function name($a, $b = 10) { ... }</code></td>
+</tr>
+<tr>
+<td>Named argument</td>
+<td><code>name(b: 5)</code></td>
+</tr>
+<tr>
+<td>Variadic</td>
+<td><code>function name(...$args) { ... }</code></td>
+</tr>
+<tr>
+<td>By reference</td>
+<td><code>function name(&amp;$x) { ... }</code></td>
+</tr>
+<tr>
+<td>Anonymous function</td>
+<td><code>$f = function($x) { return $x; };</code></td>
+</tr>
+<tr>
+<td>Arrow function</td>
+<td><code>$f = fn($x) =&gt; $x * 2;</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="05-arrays"><a href="../level-1/05-arrays/">05 · Arrays</a><a class="headerlink" href="#05-arrays" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Count elements</td>
+<td><code>count($arr)</code></td>
+</tr>
+<tr>
+<td>Sort ascending</td>
+<td><code>sort($arr)</code> (indexed) / <code>asort($arr)</code> (assoc, keeps keys)</td>
+</tr>
+<tr>
+<td>Transform each element</td>
+<td><code>array_map($fn, $arr)</code></td>
+</tr>
+<tr>
+<td>Keep matching elements</td>
+<td><code>array_filter($arr, $fn)</code></td>
+</tr>
+<tr>
+<td>Reduce to a single value</td>
+<td><code>array_reduce($arr, $fn, $initial)</code></td>
+</tr>
+<tr>
+<td>Check value exists</td>
+<td><code>in_array($value, $arr)</code></td>
+</tr>
+<tr>
+<td>Check key exists</td>
+<td><code>array_key_exists($key, $arr)</code> / <code>isset($arr[$key])</code></td>
+</tr>
+<tr>
+<td>Merge arrays</td>
+<td><code>array_merge($a, $b)</code></td>
+</tr>
+<tr>
+<td>Re-index after filter</td>
+<td><code>array_values($arr)</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="06-strings-string-functions"><a href="../level-1/06-strings/">06 · Strings &amp; String Functions</a><a class="headerlink" href="#06-strings-string-functions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Purpose</th>
+<th>Example result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>strlen($s)</code></td>
+<td>Byte length</td>
+<td><code>strlen("hi")</code> → <code>2</code></td>
+</tr>
+<tr>
+<td><code>strtolower($s)</code> / <code>strtoupper($s)</code></td>
+<td>Case conversion</td>
+<td><code>strtoupper("hi")</code> → <code>"HI"</code></td>
+</tr>
+<tr>
+<td><code>trim($s)</code></td>
+<td>Strip whitespace from both ends</td>
+<td><code>trim(" hi ")</code> → <code>"hi"</code></td>
+</tr>
+<tr>
+<td><code>str_replace($search, $replace, $s)</code></td>
+<td>Replace all occurrences</td>
+<td><code>str_replace("a","o","cat")</code> → <code>"cot"</code></td>
+</tr>
+<tr>
+<td><code>substr($s, $start, $len)</code></td>
+<td>Extract a substring</td>
+<td><code>substr("hello", 1, 3)</code> → <code>"ell"</code></td>
+</tr>
+<tr>
+<td><code>strpos($s, $needle)</code></td>
+<td>Index of first match, or <code>false</code></td>
+<td><code>strpos("hello","l")</code> → <code>2</code></td>
+</tr>
+<tr>
+<td><code>str_contains($s, $needle)</code></td>
+<td>Does it contain? (PHP 8+)</td>
+<td><code>str_contains("hello","ell")</code> → <code>true</code></td>
+</tr>
+<tr>
+<td><code>explode($sep, $s)</code></td>
+<td>Split into an array</td>
+<td><code>explode(",", "a,b")</code> → <code>["a","b"]</code></td>
+</tr>
+<tr>
+<td><code>implode($sep, $arr)</code></td>
+<td>Join into a string</td>
+<td><code>implode("-", ["a","b"])</code> → <code>"a-b"</code></td>
+</tr>
+<tr>
+<td><code>sprintf($fmt, ...)</code></td>
+<td>Build a formatted string</td>
+<td><code>sprintf("%05d", 7)</code> → <code>"00007"</code></td>
+</tr>
+<tr>
+<td><code>str_pad($s, $len, $pad)</code></td>
+<td>Pad to a target length</td>
+<td><code>str_pad("7",3,"0",STR_PAD_LEFT)</code> → <code>"007"</code></td>
+</tr>
+<tr>
+<td><code>mb_strlen($s)</code></td>
+<td>Character count (multibyte-safe)</td>
+<td><code>mb_strlen("José")</code> → <code>4</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="07-classes-objects-basics"><a href="../level-1/07-classes-objects/">07 · Classes &amp; Objects Basics</a><a class="headerlink" href="#07-classes-objects-basics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Class</td>
+<td>Blueprint / type definition</td>
+</tr>
+<tr>
+<td>Object (instance)</td>
+<td>A concrete value created with <code>new</code></td>
+</tr>
+<tr>
+<td>Property</td>
+<td>A variable that lives on each instance (or on the class, if <code>static</code>)</td>
+</tr>
+<tr>
+<td>Constructor (<code>__construct</code>)</td>
+<td>Special method that initializes a new instance</td>
+</tr>
+<tr>
+<td><code>$this</code></td>
+<td>Reference to the current instance</td>
+</tr>
+<tr>
+<td><code>self::</code></td>
+<td>Reference to the current class (for static members)</td>
+</tr>
+<tr>
+<td><code>public</code> / <code>protected</code> / <code>private</code></td>
+<td>Visibility, from most to least accessible</td>
+</tr>
+<tr>
+<td><code>-&gt;</code></td>
+<td>Access a property/method on an instance</td>
+</tr>
+<tr>
+<td><code>::</code></td>
+<td>Access a static member, class constant, or parent method</td>
+</tr>
+</tbody>
+</table>
+<h3 id="08-error-handling-basics"><a href="../level-1/08-error-handling/">08 · Error Handling Basics</a><a class="headerlink" href="#08-error-handling-basics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Keyword / class</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>try { ... }</code></td>
+<td>Wrap code that might throw</td>
+</tr>
+<tr>
+<td><code>catch (Type $e) { ... }</code></td>
+<td>Handle a specific exception/error type</td>
+</tr>
+<tr>
+<td><code>catch (TypeA \| TypeB $e) { ... }</code></td>
+<td>Handle either of two types the same way</td>
+</tr>
+<tr>
+<td><code>finally { ... }</code></td>
+<td>Always runs, for cleanup</td>
+</tr>
+<tr>
+<td><code>throw new Exception("msg")</code></td>
+<td>Raise an exception</td>
+</tr>
+<tr>
+<td><code>$e-&gt;getMessage()</code></td>
+<td>Retrieve the error message</td>
+</tr>
+<tr>
+<td><code>$e-&gt;getCode()</code></td>
+<td>Retrieve an optional numeric error code</td>
+</tr>
+<tr>
+<td><code>Throwable</code></td>
+<td>Interface implemented by both <code>Exception</code> and <code>Error</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="09-composer-package-basics"><a href="../level-1/09-composer-basics/">09 · Composer &amp; Package Basics</a><a class="headerlink" href="#09-composer-package-basics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>composer init</code></td>
+<td>Interactively create a new <code>composer.json</code></td>
+</tr>
+<tr>
+<td><code>composer require &lt;pkg&gt;</code></td>
+<td>Add and install a production dependency</td>
+</tr>
+<tr>
+<td><code>composer require --dev &lt;pkg&gt;</code></td>
+<td>Add and install a dev-only dependency</td>
+</tr>
+<tr>
+<td><code>composer install</code></td>
+<td>Install exact versions from <code>composer.lock</code></td>
+</tr>
+<tr>
+<td><code>composer update</code></td>
+<td>Resolve and install the newest versions allowed by constraints</td>
+</tr>
+<tr>
+<td><code>composer dump-autoload</code></td>
+<td>Regenerate the autoloader (e.g. after adding a new class)</td>
+</tr>
+<tr>
+<td><code>composer show</code></td>
+<td>List installed packages and their versions</td>
+</tr>
+</tbody>
+</table>
+<h2 id="level-2-intermediate">Level 2 · Intermediate<a class="headerlink" href="#level-2-intermediate" title="Permanent link">&para;</a></h2>
+<h3 id="02-error-handling-advanced"><a href="../level-2/02-error-handling-advanced/">02 · Error Handling Advanced</a><a class="headerlink" href="#02-error-handling-advanced" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>abstract class AppException extends RuntimeException</code></td>
+<td>Root of a custom exception hierarchy</td>
+</tr>
+<tr>
+<td><code>new Foo($msg, previous: $e)</code></td>
+<td>Chain the original exception so context isn't lost</td>
+</tr>
+<tr>
+<td><code>$e-&gt;getPrevious()</code></td>
+<td>Retrieve the chained (wrapped) exception, or <code>null</code></td>
+</tr>
+<tr>
+<td><code>set_error_handler()</code></td>
+<td>Convert PHP warnings/notices into catchable <code>ErrorException</code>s</td>
+</tr>
+<tr>
+<td><code>set_exception_handler()</code></td>
+<td>Last-resort handler for anything left uncaught</td>
+</tr>
+<tr>
+<td><code>restore_error_handler()</code></td>
+<td>Undo a custom <code>set_error_handler()</code> registration</td>
+</tr>
+<tr>
+<td><code>finally</code></td>
+<td>Runs on every path out of <code>try</code>/<code>catch</code> — cleanup only, don't <code>return</code> here</td>
+</tr>
+</tbody>
+</table>
+<h3 id="03-working-with-databases-pdo"><a href="../level-2/03-databases-pdo/">03 · Working with Databases (PDO)</a><a class="headerlink" href="#03-working-with-databases-pdo" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>new PDO($dsn, $user, $pass)</code></td>
+<td>Open a connection</td>
+</tr>
+<tr>
+<td><code>-&gt;prepare($sql)</code></td>
+<td>Compile a parameterized query, returns a <code>PDOStatement</code></td>
+</tr>
+<tr>
+<td><code>-&gt;execute($params)</code></td>
+<td>Run a prepared statement with bound values</td>
+</tr>
+<tr>
+<td><code>-&gt;query($sql)</code></td>
+<td>Run static SQL with no parameters, returns results directly</td>
+</tr>
+<tr>
+<td><code>-&gt;exec($sql)</code></td>
+<td>Run SQL that doesn't return rows (DDL, bulk <code>UPDATE</code>/<code>DELETE</code>)</td>
+</tr>
+<tr>
+<td><code>-&gt;lastInsertId()</code></td>
+<td>ID generated by the most recent <code>INSERT</code></td>
+</tr>
+<tr>
+<td><code>-&gt;beginTransaction()</code> / <code>-&gt;commit()</code> / <code>-&gt;rollBack()</code></td>
+<td>Group statements atomically</td>
+</tr>
+<tr>
+<td><code>$stmt-&gt;fetch()</code> / <code>-&gt;fetchAll()</code> / <code>-&gt;fetchColumn()</code></td>
+<td>Read query results</td>
+</tr>
+</tbody>
+</table>
+<h3 id="04-sessions-forms"><a href="../level-2/04-sessions-forms/">04 · Sessions &amp; Forms</a><a class="headerlink" href="#04-sessions-forms" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$_GET</code>, <code>$_POST</code></td>
+<td>Read query-string vs. request-body input</td>
+</tr>
+<tr>
+<td><code>htmlspecialchars($value)</code></td>
+<td>Escape output to prevent XSS</td>
+</tr>
+<tr>
+<td><code>filter_var($v, FILTER_VALIDATE_EMAIL)</code></td>
+<td>Validate common formats</td>
+</tr>
+<tr>
+<td><code>session_start()</code></td>
+<td>Begin/resume a session (call before any output)</td>
+</tr>
+<tr>
+<td><code>$_SESSION</code></td>
+<td>Server-side, per-visitor storage across requests</td>
+</tr>
+<tr>
+<td><code>session_regenerate_id()</code></td>
+<td>Issue a fresh session ID (call on login)</td>
+</tr>
+<tr>
+<td><code>password_hash()</code> / <code>password_verify()</code></td>
+<td>Safely store and check passwords</td>
+</tr>
+<tr>
+<td><code>hash_equals()</code></td>
+<td>Timing-safe string comparison, e.g. for CSRF tokens</td>
+</tr>
+</tbody>
+</table>
+<h3 id="05-testing-with-phpunit"><a href="../level-2/05-phpunit-testing/">05 · Testing with PHPUnit</a><a class="headerlink" href="#05-testing-with-phpunit" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Command / concept</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vendor/bin/phpunit tests</code></td>
+<td>Run every test in the <code>tests/</code> directory</td>
+</tr>
+<tr>
+<td><code>vendor/bin/phpunit --filter testName</code></td>
+<td>Run only tests matching a name</td>
+</tr>
+<tr>
+<td><code>setUp()</code> / <code>tearDown()</code></td>
+<td>Runs before / after each test method</td>
+</tr>
+<tr>
+<td><code>#[DataProvider("method")]</code></td>
+<td>Run one test body across many input rows</td>
+</tr>
+<tr>
+<td><code>$this-&gt;createMock(Interface::class)</code></td>
+<td>Create a fake collaborator for isolated testing</td>
+</tr>
+<tr>
+<td><code>phpunit.xml</code></td>
+<td>Config file: test suite locations, bootstrap file, coverage settings</td>
+</tr>
+</tbody>
+</table>
+<h3 id="06-working-with-jsonapis"><a href="../level-2/06-json-apis/">06 · Working with JSON/APIs</a><a class="headerlink" href="#06-working-with-jsonapis" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Function / flag</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>json_encode($value, $flags)</code></td>
+<td>PHP value → JSON string</td>
+</tr>
+<tr>
+<td><code>json_decode($json, true, flags: ...)</code></td>
+<td>JSON string → associative array</td>
+</tr>
+<tr>
+<td><code>json_decode($json)</code> (no <code>true</code>)</td>
+<td>JSON string → <code>stdClass</code> object(s)</td>
+</tr>
+<tr>
+<td><code>JSON_THROW_ON_ERROR</code></td>
+<td>Throw <code>JsonException</code> instead of failing silently</td>
+</tr>
+<tr>
+<td><code>JSON_PRETTY_PRINT</code></td>
+<td>Human-readable, indented output</td>
+</tr>
+<tr>
+<td><code>JsonSerializable</code></td>
+<td>Interface to control exactly how an object encodes</td>
+</tr>
+<tr>
+<td><code>CURLOPT_RETURNTRANSFER</code></td>
+<td>Return the response body instead of printing it</td>
+</tr>
+<tr>
+<td><code>http_response_code()</code></td>
+<td>Set the HTTP status code of your own response</td>
+</tr>
+</tbody>
+</table>
+<h3 id="07-autoloading-psr-standards"><a href="../level-2/07-autoloading-psr/">07 · Autoloading &amp; PSR Standards</a><a class="headerlink" href="#07-autoloading-psr-standards" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>spl_autoload_register()</code></td>
+<td>Low-level function Composer's autoloader is built on</td>
+</tr>
+<tr>
+<td>PSR-4 rule</td>
+<td><code>Namespace\Prefix\ClassName</code> → <code>mapped/dir/ClassName.php</code></td>
+</tr>
+<tr>
+<td>One class per file</td>
+<td>Required for PSR-4's mechanical path computation to work</td>
+</tr>
+<tr>
+<td><code>classmap</code></td>
+<td>Scans and indexes classes that don't follow PSR-4</td>
+</tr>
+<tr>
+<td><code>files</code></td>
+<td>Always-loaded plain function files</td>
+</tr>
+<tr>
+<td><code>composer dump-autoload</code></td>
+<td>Regenerate the autoloader after structural changes</td>
+</tr>
+<tr>
+<td><code>composer dump-autoload -o</code></td>
+<td>Production-optimized, pre-computed class map</td>
+</tr>
+</tbody>
+</table>
+<h3 id="08-file-uploads-validation"><a href="../level-2/08-file-uploads-validation/">08 · File Uploads &amp; Validation</a><a class="headerlink" href="#08-file-uploads-validation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$_FILES[...]["error"] === UPLOAD_ERR_OK</code></td>
+<td>Confirms the upload actually completed before touching other fields</td>
+</tr>
+<tr>
+<td>Your own size check</td>
+<td>Enforces a per-form limit, independent of <code>php.ini</code> defaults</td>
+</tr>
+<tr>
+<td><code>finfo::file()</code> on the real bytes</td>
+<td>The client's declared <code>type</code>/extension can be anything</td>
+</tr>
+<tr>
+<td>Generate your own filename</td>
+<td>Avoids path traversal, null bytes, and overwrite collisions</td>
+</tr>
+<tr>
+<td><code>move_uploaded_file()</code>, never <code>rename()</code></td>
+<td>Verifies the source was a genuine PHP upload</td>
+</tr>
+<tr>
+<td>Store outside the web root</td>
+<td>A validation gap can't become remote code execution</td>
+</tr>
+</tbody>
+</table>
+<h3 id="09-working-with-dates"><a href="../level-2/09-working-with-dates/">09 · Working with Dates</a><a class="headerlink" href="#09-working-with-dates" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DateTimeImmutable</code></td>
+<td>Preferred date/time type — every operation returns a new instance</td>
+</tr>
+<tr>
+<td><code>DateTime</code></td>
+<td>Mutable equivalent — <code>modify()</code>/<code>add()</code>/<code>sub()</code> change the object in place</td>
+</tr>
+<tr>
+<td><code>-&gt;format($fmt)</code></td>
+<td>Render as a string using format characters</td>
+</tr>
+<tr>
+<td><code>DateTimeImmutable::createFromFormat($fmt, $str)</code></td>
+<td>Strict parsing of a known input format</td>
+</tr>
+<tr>
+<td><code>DateInterval</code></td>
+<td>A span of time (<code>P1M</code>, <code>P10D</code>, <code>P1W</code>) used with <code>add()</code>/<code>sub()</code></td>
+</tr>
+<tr>
+<td><code>-&gt;diff($other)</code></td>
+<td>Compute the <code>DateInterval</code> between two dates</td>
+</tr>
+<tr>
+<td><code>DateTimeZone</code></td>
+<td>Represents a named time zone (<code>"UTC"</code>, <code>"Asia/Kolkata"</code>)</td>
+</tr>
+<tr>
+<td><code>-&gt;setTimezone($tz)</code></td>
+<td>Return the same instant, viewed in a different time zone</td>
+</tr>
+</tbody>
+</table>
+<h2 id="level-3-advanced">Level 3 · Advanced<a class="headerlink" href="#level-3-advanced" title="Permanent link">&para;</a></h2>
+<h3 id="01-building-apis"><a href="../level-3/01-building-apis/">01 · Building APIs</a><a class="headerlink" href="#01-building-apis" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+<th>When to use it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200 OK</code></td>
+<td>Success</td>
+<td>Successful <code>GET</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code></td>
+</tr>
+<tr>
+<td><code>201 Created</code></td>
+<td>Resource created</td>
+<td>Successful <code>POST</code> that creates something new</td>
+</tr>
+<tr>
+<td><code>204 No Content</code></td>
+<td>Success, no body</td>
+<td>Successful <code>DELETE</code> with nothing to return</td>
+</tr>
+<tr>
+<td><code>400 Bad Request</code></td>
+<td>Malformed request</td>
+<td>Invalid JSON, missing required field</td>
+</tr>
+<tr>
+<td><code>401 Unauthorized</code></td>
+<td>Not authenticated</td>
+<td>Missing or invalid credentials</td>
+</tr>
+<tr>
+<td><code>403 Forbidden</code></td>
+<td>Authenticated, not allowed</td>
+<td>Valid user, insufficient permissions</td>
+</tr>
+<tr>
+<td><code>404 Not Found</code></td>
+<td>No such resource</td>
+<td>Route or record doesn't exist</td>
+</tr>
+<tr>
+<td><code>422 Unprocessable Entity</code></td>
+<td>Semantically invalid</td>
+<td>Well-formed JSON that fails validation rules</td>
+</tr>
+<tr>
+<td><code>500 Internal Server Error</code></td>
+<td>Server bug</td>
+<td>An uncaught exception — never expose the stack trace to the client</td>
+</tr>
+</tbody>
+</table>
+<h3 id="02-design-patterns-in-php"><a href="../level-3/02-design-patterns/">02 · Design Patterns in PHP</a><a class="headerlink" href="#02-design-patterns-in-php" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Problem it solves</th>
+<th>PHP-idiomatic hook</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Singleton</td>
+<td>Exactly one shared instance</td>
+<td>Private constructor + <code>??=</code> in a static method</td>
+</tr>
+<tr>
+<td>Factory Method</td>
+<td>Centralize which concrete class gets built</td>
+<td><code>match</code> returning an interface type</td>
+</tr>
+<tr>
+<td>Strategy</td>
+<td>Swap an algorithm without changing the caller</td>
+<td>Constructor-injected interface</td>
+</tr>
+<tr>
+<td>Observer</td>
+<td>Notify many listeners without coupling to them</td>
+<td>An array of interface instances + <code>foreach</code></td>
+</tr>
+<tr>
+<td>Decorator</td>
+<td>Add behavior by wrapping, not inheriting</td>
+<td>Class implementing the same interface it wraps</td>
+</tr>
+</tbody>
+</table>
+<h3 id="03-security"><a href="../level-3/03-security/">03 · Security</a><a class="headerlink" href="#03-security" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Defense</th>
+<th>PHP function/setting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SQL injection (values)</td>
+<td>Bound parameters</td>
+<td><code>PDO::prepare()</code> + <code>execute([...])</code></td>
+</tr>
+<tr>
+<td>SQL injection (identifiers)</td>
+<td>Allowlist, never bind</td>
+<td><code>in_array($col, $allowed, true)</code></td>
+</tr>
+<tr>
+<td>Stored XSS</td>
+<td>Escape on output, not input</td>
+<td><code>htmlspecialchars()</code></td>
+</tr>
+<tr>
+<td>CSRF</td>
+<td>Per-session token, checked on every write</td>
+<td><code>hash_equals($session, $submitted)</code></td>
+</tr>
+<tr>
+<td>Weak password storage</td>
+<td>Slow, salted, adaptive hash</td>
+<td><code>password_hash()</code> / <code>password_verify()</code></td>
+</tr>
+<tr>
+<td>Timing attack on secrets</td>
+<td>Constant-time comparison</td>
+<td><code>hash_equals()</code></td>
+</tr>
+<tr>
+<td>PHP object injection</td>
+<td>Never unserialize untrusted bytes</td>
+<td><code>unserialize($x, ["allowed_classes" =&gt; [...]])</code> or <code>json_decode()</code></td>
+</tr>
+<tr>
+<td>Clickjacking / MIME sniffing</td>
+<td>Restrictive response headers</td>
+<td><code>header("X-Frame-Options: DENY")</code></td>
+</tr>
+<tr>
+<td>Session/cookie theft</td>
+<td>Restrict cookie scope and transport</td>
+<td><code>session_set_cookie_params([...])</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="04-testing-advanced-mocking"><a href="../level-3/04-testing-advanced-mocking/">04 · Testing Advanced (Mocking)</a><a class="headerlink" href="#04-testing-advanced-mocking" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Call</th>
+<th>What you get</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$this-&gt;createStub(I::class)</code></td>
+<td>Canned answers only — never fails a test on its own</td>
+</tr>
+<tr>
+<td><code>$this-&gt;createMock(I::class)</code></td>
+<td>Stub plus verifiable <code>expects()</code> expectations</td>
+</tr>
+<tr>
+<td><code>-&gt;method("m")-&gt;willReturn($v)</code></td>
+<td>Same answer every call</td>
+</tr>
+<tr>
+<td><code>-&gt;willReturnMap([[$a, $r], ...])</code></td>
+<td>Answer chosen by argument values (last element = return)</td>
+</tr>
+<tr>
+<td><code>-&gt;willReturnOnConsecutiveCalls($a, $b)</code></td>
+<td>A different answer per call, in order</td>
+</tr>
+<tr>
+<td><code>-&gt;willReturnCallback($fn)</code></td>
+<td>Answer computed from the arguments</td>
+</tr>
+<tr>
+<td><code>-&gt;willThrowException(new E())</code></td>
+<td>Simulate the failure path</td>
+</tr>
+<tr>
+<td><code>-&gt;expects($this-&gt;once())</code></td>
+<td>Must be called exactly once</td>
+</tr>
+<tr>
+<td><code>-&gt;expects($this-&gt;never())</code></td>
+<td>Must never be called</td>
+</tr>
+<tr>
+<td><code>-&gt;with($a, $b)</code></td>
+<td>Constrain the arguments (matchers like <code>$this-&gt;stringContains()</code> allowed)</td>
+</tr>
+<tr>
+<td>Hand-written fake</td>
+<td>Working implementation with a shortcut — best for stateful collaborators</td>
+</tr>
+</tbody>
+</table>
+<h3 id="05-performance-caching"><a href="../level-3/05-performance-caching/">05 · Performance &amp; Caching</a><a class="headerlink" href="#05-performance-caching" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Caches</th>
+<th>Scope</th>
+<th>Survives restart?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OPcache</td>
+<td>Compiled bytecode</td>
+<td>Per server</td>
+<td>No (rebuilt on first request)</td>
+</tr>
+<tr>
+<td>APCu</td>
+<td>Arbitrary values</td>
+<td>Per server process</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Redis / Memcached</td>
+<td>Arbitrary values</td>
+<td>Shared across servers</td>
+<td>Yes (Redis, if persistence configured)</td>
+</tr>
+<tr>
+<td>File cache (this module)</td>
+<td>Arbitrary values</td>
+<td>Per filesystem</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>remember($key, $ttl, $fn)</code></td>
+<td>Pattern: check cache, else compute + store</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="06-working-with-queues"><a href="../level-3/06-working-with-queues/">06 · Working with Queues</a><a class="headerlink" href="#06-working-with-queues" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>This module's file queue</th>
+<th>Redis / RabbitMQ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enqueue</td>
+<td><code>push()</code> writes a JSON file to <code>pending/</code></td>
+<td><code>LPUSH</code> / <code>basic_publish</code></td>
+</tr>
+<tr>
+<td>Claim a job</td>
+<td><code>pop()</code> + atomic <code>rename()</code></td>
+<td><code>BRPOP</code> (blocking) / consumer callback</td>
+</tr>
+<tr>
+<td>Acknowledge success</td>
+<td>move to <code>done/</code></td>
+<td><code>basic_ack</code></td>
+</tr>
+<tr>
+<td>Retry</td>
+<td>move back to <code>pending/</code>, increment <code>attempts</code></td>
+<td>requeue / redelivery on nack</td>
+</tr>
+<tr>
+<td>Give up</td>
+<td>move to <code>failed/</code></td>
+<td>dead-letter queue/exchange</td>
+</tr>
+<tr>
+<td>Worker wakes on new job</td>
+<td>polling (must check repeatedly)</td>
+<td>blocking pop / push notification</td>
+</tr>
+</tbody>
+</table>
+<h3 id="07-middleware-patterns"><a href="../level-3/07-middleware-patterns/">07 · Middleware Patterns</a><a class="headerlink" href="#07-middleware-patterns" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>What it means here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Middleware::handle($request, $next)</code></td>
+<td>One layer; decides whether/how to call <code>$next</code></td>
+</tr>
+<tr>
+<td><code>$next($request)</code></td>
+<td>Continue to the next layer (or the controller)</td>
+</tr>
+<tr>
+<td>Not calling <code>$next()</code></td>
+<td>Short-circuit — return a response immediately (auth failure, rate limit)</td>
+</tr>
+<tr>
+<td><code>Pipeline::pipe()</code> order</td>
+<td>First piped = outermost = runs first going in, last coming out</td>
+</tr>
+<tr>
+<td><code>array_reduce</code> + <code>array_reverse</code></td>
+<td>Standard trick for building a nested chain from a flat list</td>
+</tr>
+<tr>
+<td>Mutating <code>$request-&gt;attributes</code></td>
+<td>How inner layers see data set by outer layers (e.g. the authenticated user)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="08-dependency-injection-basics"><a href="../level-3/08-dependency-injection/">08 · Dependency Injection Basics</a><a class="headerlink" href="#08-dependency-injection-basics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Constructor injection</td>
+<td>Dependencies declared as typed constructor parameters</td>
+</tr>
+<tr>
+<td>Depend on interfaces</td>
+<td>Makes the concrete implementation swappable (real vs. fake)</td>
+</tr>
+<tr>
+<td>Manual wiring</td>
+<td><code>new A(new B(), new C())</code> — fine for a handful of classes</td>
+</tr>
+<tr>
+<td>Container</td>
+<td>Centralizes "how to build X"; resolves dependency graphs</td>
+</tr>
+<tr>
+<td><code>bind($abstract, $factory)</code></td>
+<td>Explicit recipe for building an interface/class</td>
+</tr>
+<tr>
+<td>Autowiring</td>
+<td>Container inspects constructors via <code>Reflection</code> and resolves automatically</td>
+</tr>
+<tr>
+<td>Service locator (anti-pattern)</td>
+<td>Injecting the container itself and calling <code>-&gt;get()</code> inside a class</td>
+</tr>
+</tbody>
+</table>
+<h3 id="09-working-with-composer-packages-at-scale"><a href="../level-3/09-composer-at-scale/">09 · Working with Composer Packages at Scale</a><a class="headerlink" href="#09-working-with-composer-packages-at-scale" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>composer install</code></td>
+<td>Install exact versions from <code>composer.lock</code> (reproducible)</td>
+</tr>
+<tr>
+<td><code>composer update [pkg]</code></td>
+<td>Re-resolve constraints, rewrite <code>composer.lock</code></td>
+</tr>
+<tr>
+<td><code>composer require pkg:^1.0</code></td>
+<td>Add a dependency and update <code>composer.json</code> + lock together</td>
+</tr>
+<tr>
+<td><code>composer require --dev pkg</code></td>
+<td>Add a dev-only dependency</td>
+</tr>
+<tr>
+<td><code>composer dump-autoload</code></td>
+<td>Regenerate the autoloader after adding classes manually</td>
+</tr>
+<tr>
+<td><code>composer validate --strict</code></td>
+<td>Catch <code>composer.json</code> schema problems in CI</td>
+</tr>
+<tr>
+<td><code>composer install --no-dev --optimize-autoloader</code></td>
+<td>Production install: no dev deps, static class map</td>
+</tr>
+<tr>
+<td><code>composer show</code></td>
+<td>List installed packages and versions</td>
+</tr>
+</tbody>
+</table>
+<h2 id="level-4-master">Level 4 · Master<a class="headerlink" href="#level-4-master" title="Permanent link">&para;</a></h2>
+<h3 id="01-advanced-framework-patterns"><a href="../level-4/01-advanced-framework-patterns/">01 · Advanced Framework Patterns</a><a class="headerlink" href="#01-advanced-framework-patterns" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Service provider</td>
+<td>Groups related container bindings + boot logic per feature</td>
+</tr>
+<tr>
+<td><code>register()</code></td>
+<td>Declare bindings only — no resolving yet</td>
+</tr>
+<tr>
+<td><code>boot()</code></td>
+<td>Runs after all providers registered — safe to resolve</td>
+</tr>
+<tr>
+<td><code>__get()</code> / <code>__set()</code></td>
+<td>Intercept access to undeclared/inaccessible properties</td>
+</tr>
+<tr>
+<td><code>static::</code> (late static binding)</td>
+<td>Resolves against the calling class, not the defining one</td>
+</tr>
+<tr>
+<td><code>new static()</code></td>
+<td>Instantiate the actual subclass, not the base class</td>
+</tr>
+</tbody>
+</table>
+<h3 id="02-security-at-scale"><a href="../level-4/02-security-at-scale/">02 · Security at Scale</a><a class="headerlink" href="#02-security-at-scale" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concern</th>
+<th>Tool</th>
+<th>Key rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Secrets</td>
+<td><code>.env</code> / platform secret store</td>
+<td>Never commit; access through one central reader</td>
+</tr>
+<tr>
+<td>Missing secret</td>
+<td><code>require()</code>-style loud failure</td>
+<td>Fail at startup, not deep in a request</td>
+</tr>
+<tr>
+<td>CSRF</td>
+<td>Random token per session, checked per state-changing request</td>
+<td><code>hash_equals()</code>, never <code>===</code></td>
+</tr>
+<tr>
+<td>Token/secret comparison</td>
+<td><code>hash_equals($expected, $actual)</code></td>
+<td>Constant-time, avoids timing attacks</td>
+</tr>
+<tr>
+<td>Password storage</td>
+<td><code>password_hash()</code> / <code>password_verify()</code></td>
+<td>Never store or log plaintext</td>
+</tr>
+<tr>
+<td>Aging hashes</td>
+<td><code>password_needs_rehash()</code></td>
+<td>Check and upgrade on successful login</td>
+</tr>
+</tbody>
+</table>
+<h3 id="03-testing-at-scale-ci"><a href="../level-4/03-testing-at-scale-ci/">03 · Testing at Scale &amp; CI</a><a class="headerlink" href="#03-testing-at-scale-ci" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>phpunit.xml</code></td>
+<td>Committed test configuration — bootstrap, suites, group filters</td>
+</tr>
+<tr>
+<td><code>#[Group('slow')]</code></td>
+<td>Marks a test excludable/selectable by name</td>
+</tr>
+<tr>
+<td><code>&lt;groups&gt;&lt;exclude&gt;</code></td>
+<td>Skips a named group by default</td>
+</tr>
+<tr>
+<td><code>--group slow</code></td>
+<td>Runs <em>only</em> the named group</td>
+</tr>
+<tr>
+<td><code>composer install</code> in CI</td>
+<td>Reproducible install from the committed lock file</td>
+</tr>
+<tr>
+<td><code>--coverage-text</code> (needs Xdebug/PCOV)</td>
+<td>Reports which lines the suite actually exercises</td>
+</tr>
+<tr>
+<td>Coverage floor (e.g. 80%)</td>
+<td>A practical CI gate — catches obviously-untested code without chasing 100%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="04-deployment-docker-for-php-fpm-nginx"><a href="../level-4/04-deployment-docker/">04 · Deployment (Docker for PHP-FPM + Nginx)</a><a class="headerlink" href="#04-deployment-docker-for-php-fpm-nginx" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PHP-FPM</td>
+<td>Process pool that actually executes PHP for each request</td>
+</tr>
+<tr>
+<td>Nginx</td>
+<td>Serves static assets directly; proxies <code>.php</code> requests to FPM</td>
+</tr>
+<tr>
+<td><code>fastcgi_pass app:9000</code></td>
+<td>Nginx forwards dynamic requests to the FPM service</td>
+</tr>
+<tr>
+<td>Dockerfile layer ordering</td>
+<td>Dependencies installed before app code copied — cache-friendly</td>
+</tr>
+<tr>
+<td><code>opcache.validate_timestamps=0</code></td>
+<td>Production-only: skip per-request file change checks</td>
+</tr>
+<tr>
+<td><code>USER www-data</code></td>
+<td>Run the PHP process as an unprivileged user, not root</td>
+</tr>
+<tr>
+<td><code>docker compose up --build</code></td>
+<td>Builds and starts both services on one shared network</td>
+</tr>
+</tbody>
+</table>
+<h3 id="05-performance-optimization-at-scale"><a href="../level-4/05-performance-at-scale/">05 · Performance Optimization at Scale</a><a class="headerlink" href="#05-performance-optimization-at-scale" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Symptom</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N+1 queries</td>
+<td>1 query becomes 1+N as a list grows</td>
+<td><code>JOIN</code>, or eager-load related data up front</td>
+</tr>
+<tr>
+<td>Large array in memory</td>
+<td><code>memory_get_usage()</code> spikes with dataset size</td>
+<td>Generator (<code>yield</code>) instead of building an array</td>
+</tr>
+<tr>
+<td>Unbounded <code>SELECT *</code></td>
+<td>Query time and memory both grow with table size</td>
+<td><code>LIMIT</code>/<code>OFFSET</code> pagination, processed via a generator</td>
+</tr>
+<tr>
+<td>Slow <code>JOIN</code></td>
+<td>Fixing N+1 introduces a new slow query</td>
+<td>Check <code>EXPLAIN</code>/<code>EXPLAIN QUERY PLAN</code>; add indexes on join columns</td>
+</tr>
+<tr>
+<td>Generator reused</td>
+<td><code>Cannot rewind a generator</code> exception</td>
+<td>Call the generator function again, or materialize once into an array</td>
+</tr>
+</tbody>
+</table>
+<h3 id="06-api-versioning-documentation"><a href="../level-4/06-api-versioning-docs/">06 · API Versioning &amp; Documentation</a><a class="headerlink" href="#06-api-versioning-documentation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Mechanism</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Header-based versioning</td>
+<td><code>Accept: application/vnd.*.vN+json</code></td>
+<td><code>V1Response</code> vs. <code>V2Response</code></td>
+</tr>
+<tr>
+<td>Version isolation</td>
+<td>Each version has its own pure <code>transform()</code></td>
+<td>Same <code>$data</code>, different shape out</td>
+</tr>
+<tr>
+<td>Unsupported version</td>
+<td>Fail with a clear error, not a silent default</td>
+<td><code>RuntimeException</code> in <code>handle()</code></td>
+</tr>
+<tr>
+<td>Docs as metadata</td>
+<td>PHP 8 attributes (<code>#[RouteDoc(...)]</code>)</td>
+<td>Read via <code>Reflection</code></td>
+</tr>
+<tr>
+<td>Doc generation</td>
+<td><code>getAttributes()</code> + <code>newInstance()</code></td>
+<td><code>generateDocs()</code></td>
+</tr>
+<tr>
+<td>Real-world equivalent</td>
+<td><code>zircote/swagger-php</code>, OpenAPI spec generation</td>
+<td>Attributes -&gt; JSON/YAML spec</td>
+</tr>
+</tbody>
+</table>
+<h3 id="07-background-job-processing"><a href="../level-4/07-background-jobs/">07 · Background Job Processing</a><a class="headerlink" href="#07-background-job-processing" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Job</code> interface</td>
+<td>Each background task is a class: data + <code>handle()</code> logic together</td>
+</tr>
+<tr>
+<td><code>dispatch()</code></td>
+<td>Application-facing entry point; hides sync vs. queued behind one call</td>
+</tr>
+<tr>
+<td><code>runSync()</code></td>
+<td>Bypass the queue — useful for tests/CLI, risky as a request-path default</td>
+</tr>
+<tr>
+<td><code>payload()</code></td>
+<td>How a job serializes itself onto a real transport (Redis, <code>FileQueue</code>)</td>
+</tr>
+<tr>
+<td><code>ScheduledTask::isDue()</code></td>
+<td>Interval check driving cron-style recurring work</td>
+</tr>
+<tr>
+<td>Single cron entry + per-task <code>isDue()</code></td>
+<td>One <code>* * * * *</code> line can drive many independent schedules</td>
+</tr>
+</tbody>
+</table>
+<h3 id="08-working-with-microservices-in-php"><a href="../level-4/08-microservices/">08 · Working with Microservices in PHP</a><a class="headerlink" href="#08-working-with-microservices-in-php" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Service interface (<code>UserService</code>)</td>
+<td>Caller depends on a contract, not a transport (HTTP vs. in-process)</td>
+</tr>
+<tr>
+<td>Each service owns its data</td>
+<td>No service reaches into another's database directly</td>
+</tr>
+<tr>
+<td>Circuit breaker</td>
+<td>Fails fast after repeated failures instead of piling up slow requests</td>
+</tr>
+<tr>
+<td>Closed / open / half-open</td>
+<td>Normal / failing-fast / probing-for-recovery states</td>
+</tr>
+<tr>
+<td>Per-dependency breaker</td>
+<td>One breaker per downstream service, not shared globally</td>
+</tr>
+<tr>
+<td>Client-side timeout</td>
+<td>What actually makes a hung call throw so the breaker can react</td>
+</tr>
+</tbody>
+</table>
+<h3 id="09-code-quality-tools"><a href="../level-4/09-code-quality-tools/">09 · Code Quality Tools</a><a class="headerlink" href="#09-code-quality-tools" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Question it answers</th>
+<th>Command used here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PHPStan</td>
+<td>Do the types actually line up?</td>
+<td><code>phpstan analyse</code></td>
+</tr>
+<tr>
+<td>PHP-CS-Fixer</td>
+<td>Does the code match one consistent style?</td>
+<td><code>php-cs-fixer fix --dry-run --diff</code></td>
+</tr>
+<tr>
+<td>PHPUnit</td>
+<td>Do the behaviors I claim work actually work?</td>
+<td><code>phpunit --testdox</code></td>
+</tr>
+<tr>
+<td>Coverage report</td>
+<td>Which lines did the test suite never reach?</td>
+<td><code>phpunit --coverage-text</code> (needs Xdebug/PCOV)</td>
+</tr>
+<tr>
+<td>Baseline</td>
+<td>How to adopt strict analysis on old code</td>
+<td><code>phpstan analyse --generate-baseline</code></td>
+</tr>
+<tr>
+<td>CI wiring</td>
+<td>What makes any of this non-optional</td>
+<td><code>composer check</code> run in the pipeline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="10-capstone-project"><a href="../level-4/10-capstone-project/">10 · Capstone Project</a><a class="headerlink" href="#10-capstone-project" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Responsibility</th>
+<th>Never does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Task</code></td>
+<td>Hold and shape one record's data</td>
+<td>Talk to the database</td>
+</tr>
+<tr>
+<td><code>TaskRepository</code></td>
+<td>Persist and retrieve via PDO</td>
+<td>Know what "invalid" means</td>
+</tr>
+<tr>
+<td><code>TaskController</code></td>
+<td>Validate input, orchestrate</td>
+<td>Write SQL</td>
+</tr>
+<tr>
+<td><code>Router</code></td>
+<td>Match method + path to a handler</td>
+<td>Know what a task is</td>
+</tr>
+<tr>
+<td><code>handle()</code> in <code>app.php</code></td>
+<td>Map exceptions to HTTP status</td>
+<td>Contain business logic</td>
+</tr>
+<tr>
+<td>Tests</td>
+<td>Exercise each layer through a real SQLite DB</td>
+<td>Mock away the SQL they're proving works</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>Go deeper with the full <a href="../">PHP Mastery Path</a> curriculum or test yourself with the <a href="../interview-questions/">interview questions</a>.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  
+  <nav class="mp-related" aria-label="Related free courses">
+    <h2>Related free courses</h2>
+    <ul>
+      <li><a href="https://learnmasterypath.com/python-mastery-path/">Python</a></li><li><a href="https://learnmasterypath.com/java-mastery-path/">Java</a></li><li><a href="https://learnmasterypath.com/javascript-mastery-path/">JavaScript</a></li><li><a href="https://learnmasterypath.com/typescript-mastery-path/">TypeScript</a></li><li><a href="https://learnmasterypath.com/csharp-mastery-path/">C#</a></li>
+      <li><a href="https://learnmasterypath.com/">All 100+ courses &rarr;</a></li>
+    </ul>
+  </nav>
+  
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../interview-questions/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Interview Questions">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Interview Questions
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../level-1/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Overview
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+  <div class="mp-foot">
+    <div class="mp-foot-inner">
+      <a class="mp-foot-brand" href="https://learnmasterypath.com/"><svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg><span>Mastery Path</span></a>
+      <nav class="mp-sitelinks" aria-label="Site and legal links">
+        <a href="https://learnmasterypath.com/">All courses</a>
+        <a href="https://learnmasterypath.com/about.html">About</a>
+        <a href="https://learnmasterypath.com/contact.html">Contact</a>
+        <a href="https://learnmasterypath.com/php-mastery-path/privacy/">Privacy Policy</a>
+        <a href="https://learnmasterypath.com/terms.html">Terms</a>
+        <a href="https://learnmasterypath.com/php-mastery-path/license/">License</a>
+        <a href="https://learnmasterypath.com/verify/">Verify a certificate</a>
+      </nav>
+    </div>
+    <p class="mp-license-note">
+      © 2026 Vinod Kumar Sigilipelli · Except where otherwise noted, lesson content is licensed under
+      <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> and code examples under the
+      <a href="https://opensource.org/license/mit">MIT License</a>.
+    </p>
+  </div>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.path", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/progress-tracker.js"></script>
+      
+        <script src="../javascripts/final-quiz.js"></script>
+      
+    
+  </body>
+</html>
